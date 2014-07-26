@@ -7,21 +7,20 @@
 # Annarella is a Dell Inspiron 1501 laptop
 # The starting point is a fresh Xubuntu 12.04.4 installation
 
-## Links
-sudo mkdir /media/sf_WinLinShare
-sudo chown mauro /media/sf_WinLinShare/
-ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
-ln -s /home/mauro/utils /media/sf_WinLinShare/utils
-ln -s /home/mauro/WORK12 /media/sf_WinLinShare/WORK12
-ln -s /home/mauro/WORK11 /media/sf_WinLinShare/WORK11
-
 ## System Packages
 ## ===============
 
-### REMOVE UNWANTED SOFTWARE
+### Hardware for Inspiron
+sudo aptitude remove bcmwl-kernel-source
+sudo aptitude install b43-fwcutter firmware-b43-installer
 
-### Revision control
+### Revision control (Git & friends)
 sudo apt-get install git meld
+
+## Editor (Emacs & friends)
+sudo add-apt-repository ppa:cassou/emacs
+sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
+sudo aptitude install fonts-inconsolata aspell-en aspell-fr aspell-it
 
 ### Reference manager (Mendeley)
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
@@ -41,14 +40,32 @@ ln -s utils/Mendeley\ Desktop.conf .config/Mendeley\ Ltd./Mendeley\ Desktop.conf
 ### 3D and OpenGL
 sudo apt-get install mesa-utils
 
+### Web
+# default flash plugin does not always work properly... Adobe one is better
+sudo aptitude install flashplugin-installer
+
+### Email
+# I do not like Thunderbird, Claws Mail is preferred!
+sudo aptitude remove thunderbird thunderbird-globalmenu
+# add more recent PPA for Claws Mail
+sudo add-apt-repository ppa:claws-mail/ppa
+sudo apt-get update
+sudo aptitude install claws-mail claws-mail-extra-plugins
+
+#### alternative (TODO)
+# offlineimap
+# Wander Lust  ???  http://www.emacswiki.org/emacs/WanderLust
+
+
+### TODO ###
+
 ### Utils & generic
 sudo echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" >> /etc/apt/sources.list
 sudo add-apt-repository ppa:libreoffice/ppa
-sudo aptitude install openssh-server emacs emacs-goodies-el fonts-inconsolata inkscape libreoffice git virtualbox-4.2 offlineimap subversion dvipng xclip gftp aspell-en aspell-fr aspell-it dropbox-nautilus
+sudo aptitude install inkscape libreoffice virtualbox-4.2 offlineimap subversion dvipng xclip gftp dropbox-nautilus
 
-### Hardware for Inspiron
-sudo aptitude remove bcmwl-kernel-source
-sudo aptitude install b43-fwcutter firmware-b43-installer
+
+
 
 ### Python & related
 sudo aptitude install ipython ipython-notebook python-mode python-matplotlib python-scipy python-sphinx python-guiqwt python-sqlalchemy python-pandas python-openbabel
@@ -80,25 +97,20 @@ wget http://download.opensuse.org/repositories/home:/dtufys/xUbuntu_12.04/Releas
 sudo apt-get update
 sudo apt-get install python-ase gpaw gpaw-setups pycifrw pymatgen
 
+## ==============
+## Local Packages
+## ==============
 
-## Local Packages (stored in ~/local)
-## ==================================
+# Links
+sudo mkdir /usr/local/maulocal
+sudo chown mauro /usr/local/maulocal
+cd; ln -s /usr/local/maulocal local
 
-### Emacs-related
-ln -s /media/sf_WinLinShare/utils/mydotemacs .emacs
+### Emacs-related (emacs24 installed system-wide via Damien Cassou PPA)
+cd; ln -s utils/software-notes/mydotemacs24U1204 .emacs
 mkdir ~/local/emacs
 cd ~/local/emacs
-
-#### Emacs24
-sudo add-apt-repository ppa:cassou/emacs
-sudo apt-get update
-sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
-##### .emacs -> mydotemacs24
-
-#### Org-mode
-#### ~/local/emacs/org-mode (Git repository)
-git clone git://orgmode.org/org-mode.git
-
+ln -s /media/sf_WinLinShare/utils/mydotemacs .emacs
 #### Naquadah-theme
 #### ~/local/emacs/naquadah-theme (Git repository)
 git clone http://git.naquadah.org/git/naquadah-theme.git
@@ -124,10 +136,6 @@ sudo aptitude install python-qt4 python-qt4-dev libqwt5-qt4 libqwt-dev python-qw
 svn checkout http://svn.code.sf.net/p/pymca/code/ pymca-code
 cd pymca-code
 sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
-
-## BASH VARIABLES
-## ==============
-export PYTHONPATH=$HOME/utils:$PYTHONPATH
 
 ### Larch 
 #Instructions: http://xraypy.github.com/xraylarch/downloads/index.html#source-installation
@@ -156,3 +164,18 @@ cd ~/local
 rsync -avz --delete rovezzi@rnice6-0102:/sware/exp/feff
 # Edit $HOME/local/feff9.6/bin/feff9 with the correct PATH_TO_FEFF9
 sudo ln -s $HOME/local/feff9.6/bin/feff9 /usr/local/bin/feff9
+
+## Workflows
+## =========
+
+## Links
+sudo mkdir /media/sf_WinLinShare
+sudo chown mauro /media/sf_WinLinShare/
+ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
+ln -s /home/mauro/utils /media/sf_WinLinShare/utils
+ln -s /home/mauro/WORK12 /media/sf_WinLinShare/WORK12
+ln -s /home/mauro/WORK11 /media/sf_WinLinShare/WORK11
+
+## BASH VARIABLES
+## ==============
+export PYTHONPATH=$HOME/utils:$PYTHONPATH

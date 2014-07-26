@@ -1,0 +1,57 @@
+;; -*- emacs-lisp -*-
+;; ------------------------------------------------------------
+;; Mauro Rovezzi's EMACS config file <mauro.rovezzi@gmail.com>
+;; MIT License
+;; Current version: optimized for XUbuntu 12.04 (annarella)
+;; Previous version: mydotemacs (ubumaus1204)
+;; ~/.emacs -> ~/utils/software-notes/mydotemacs24U1204
+;; ------------------------------------------------------------
+;; System packages required:
+;; emacs24 emacs24-el emacs24-common-non-dfsg (Damien Cassou PPA)
+;; fonts-inconsolata
+;; aspell-*
+;; ------------------------------------------------------------
+;; Local packages/repositories required:
+;; naquadah-theme (http://git.naquadah.org/git/naquadah-theme.git)
+;; ------------------------------------------------------------
+
+;; local emacs
+(add-to-list 'load-path "~/local/emacs/") ;add current local dir
+
+;; ELPA : Emacs Lisp Package Archive
+;; http://www.emacswiki.org/emacs/ELPA
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")))
+;; Marmalade 
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; MELPA
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+;; Org-mode
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+(unless package-archive-contents    ;; Refresh the packages descriptions
+  (package-refresh-contents))
+(setq package-load-list '(all))     ;; List of packages to load
+(unless (package-installed-p 'org)  ;; Make sure the Org package is
+  (package-install 'org))           ;; installed, install it if not
+(package-initialize) ;; Initialize and install required packages
+
+;; COLOR THEME
+(add-to-list 'load-path "~/local/emacs/naquadah-theme/") ; color theme
+(load-library "naquadah-theme")
+
+;; FONT
+(set-frame-font "Inconsolata-12") ;set default font
+
+;; CUA-mode and rectagular editing (C-RET)
+;;(setq cua-enable-cua-keys nil) ;only for rectangles
+(cua-mode t)
+(setq cua-auto-tabify-rectangles nil) ;; Don't tabify after rectangle commands
+(transient-mark-mode 1) ;; No region when it is not highlighted
+(setq cua-keep-region-after-copy t) ;; Standard Windows behaviour
+
+;; SPELL CHECK
+(setq ispell-program-name "aspell" ispell-extra-args '("--sug-mode=ultra"))
+;; Enables Flyspell in text-modes
+(dolist (hook '(text-mode-hook)) (add-hook hook (lambda () (flyspell-mode 1))))
+(add-hook 'rst-mode-hook (lambda () (flyspell-mode 1))) ;Flyspell in RST
+(setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
