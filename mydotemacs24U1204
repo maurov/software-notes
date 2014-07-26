@@ -15,11 +15,14 @@
 ;; naquadah-theme (http://git.naquadah.org/git/naquadah-theme.git)
 ;; ------------------------------------------------------------
 
-;; local emacs
-(add-to-list 'load-path "~/local/emacs/") ;add current local dir
+;; add current local dir
+(add-to-list 'load-path "~/local/emacs/") ;; 
 
+;; ------------------------------------------------------------
 ;; ELPA : Emacs Lisp Package Archive
 ;; http://www.emacswiki.org/emacs/ELPA
+
+;; *Repositories*
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")))
 ;; Marmalade 
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -28,12 +31,20 @@
 ;; Org-mode
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
 
-(unless package-archive-contents    ;; Refresh the packages descriptions
-  (package-refresh-contents))
-(setq package-load-list '(all))     ;; List of packages to load
-(unless (package-installed-p 'org)  ;; Make sure the Org package is
-  (package-install 'org))           ;; installed, install it if not
-(package-initialize) ;; Initialize and install required packages
+;; Refresh the packages descriptions
+;;(unless package-archive-contents (package-refresh-contents))
+;; List of packages to load
+(setq package-load-list '(all))
+
+;; basic initialization, (require) non-ELPA packages, etc.
+(setq package-enable-at-startup nil)
+(package-initialize)
+;; (require) your ELPA packages, configure them as normal
+
+;; INSTALLED PACKAGES
+;; color-theme
+;; org
+;; ------------------------------------------------------------
 
 ;; COLOR THEME
 (add-to-list 'load-path "~/local/emacs/naquadah-theme/") ; color theme
