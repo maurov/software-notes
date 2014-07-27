@@ -15,12 +15,31 @@ sudo aptitude remove bcmwl-kernel-source
 sudo aptitude install b43-fwcutter firmware-b43-installer
 
 ### Revision control (Git & friends)
-sudo apt-get install git meld
+sudo apt-get install git meld gftp
+#subversion
 
-## Editor (Emacs & friends)
+### Editor (Emacs & friends)
 sudo add-apt-repository ppa:cassou/emacs
 sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
 sudo aptitude install fonts-inconsolata aspell-en aspell-fr aspell-it
+
+### Office (Libreoffice & C)
+sudo apt-get remove abiword gnumeric --purge
+sudo add-apt-repository ppa:libreoffice/libreoffice-4-2
+sudo aptitude install libreoffice
+sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb
+sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
+sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
+
+### Graphics (Inkscape & friends)
+sudo add-apt-repository ppa:inkscape.dev/stable
+sudo aptitude install inkscape xclip
+
+### LaTeX (Texlive 2014)
+#https://github.com/scottkosty/install-tl-ubuntu
+cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
+cd install-tl-ubuntu; sudo ./install-tl-ubuntu
+# restart computer
 
 ### Reference manager (Mendeley)
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
@@ -61,19 +80,12 @@ sudo aptitude install claws-mail claws-mail-extra-plugins
 
 ### Utils & generic
 sudo echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" >> /etc/apt/sources.list
-sudo add-apt-repository ppa:libreoffice/ppa
-sudo aptitude install inkscape libreoffice virtualbox-4.2 offlineimap subversion dvipng xclip gftp dropbox-nautilus
-
-
+sudo aptitude install virtualbox-4.2 dropbox-nautilus
 
 
 ### Python & related
 sudo aptitude install ipython ipython-notebook python-mode python-matplotlib python-scipy python-sphinx python-guiqwt python-sqlalchemy python-pandas python-openbabel
 
-### Latex (+dependencies... huge distribution!) 
-#### the following backport is for TexLive2012 on Ubuntu 12.04
-sudo apt-add-repository ppa:texlive-backports/ppa
-sudo aptitude install texlive latex-beamer biblatex texlive-latex-extra texlive-bibtex-extra texlive-lang-french texlive-lang-italian texlive-fonts-extra texlive-science texlive-publishers
 
 ### Google Chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
