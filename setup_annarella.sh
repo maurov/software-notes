@@ -13,10 +13,17 @@
 ### Hardware for Inspiron
 sudo aptitude remove bcmwl-kernel-source
 sudo aptitude install b43-fwcutter firmware-b43-installer
+# Remove ATI fglrx driver
+sudo apt-get remove fglrx fglrx-amdcccle --purge
 
 ### Revision control (Git & friends)
 sudo apt-get install git meld gftp
 #subversion
+# Dropbox better if downloaded directly
+sudo apt-get remove nautilus-dropbox --purge
+wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
+sudo dpkg -i dropbox_1.6.0_amd64.deb
+#$ dropbox start -i
 
 ### Editor (Emacs & friends)
 sudo add-apt-repository ppa:cassou/emacs
@@ -58,6 +65,9 @@ ln -s utils/Mendeley\ Desktop.conf .config/Mendeley\ Ltd./Mendeley\ Desktop.conf
 
 ### 3D and OpenGL
 sudo apt-get install mesa-utils
+
+### Python Visual
+sudo aptitude install python-visual libgtkglextmm-x11-1.2-dev
 
 ### Web
 # default flash plugin does not always work properly... Adobe one is better
