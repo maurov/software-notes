@@ -25,6 +25,17 @@ wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
 sudo dpkg -i dropbox_1.6.0_amd64.deb
 #$ dropbox start -i
 
+### Python
+sudo apt-get install python-pip python-setuptools
+sudo aptitude install python-matplotlib python-scipy python-sphinx python-lxml python-sqlalchemy python-docutils python-h5py python-sympy python-pandas python-openbabel
+
+### Python modules via PIP (NOTE: better from user)
+#### ipython upgrade
+sudo pip install ipython -U
+#### matplotlib upgrade (NOTE: it will upgrade numpy!)
+sudo easy_install -U distribute
+sudo pip install matplotlib -U
+
 ### Editor (Emacs & friends)
 sudo add-apt-repository ppa:cassou/emacs
 sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
@@ -41,12 +52,6 @@ sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it
 ### Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip
-
-### LaTeX (Texlive 2014)
-#https://github.com/scottkosty/install-tl-ubuntu
-cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
-cd install-tl-ubuntu; sudo ./install-tl-ubuntu
-# restart computer
 
 ### Reference manager (Mendeley)
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
@@ -88,14 +93,18 @@ sudo aptitude install claws-mail claws-mail-extra-plugins
 
 ### TODO ###
 
+### XKCD plots in matplotlib (required version >1.3)
+sudo apt-get install gnome-font-viewer
+cd ~/utils
+wget http://antiyawn.com/uploads/Humor-Sans.ttf
+sudo gnome-font-viewer Humor-Sans.ttf
+# (click on install button, that's all for the fonts!)
+# in matplotlib, any plot can be converted to xkcd via -> plt.xkcd()
+
+
 ### Utils & generic
 sudo echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" >> /etc/apt/sources.list
-sudo aptitude install virtualbox-4.2 dropbox-nautilus
-
-
-### Python & related
-sudo aptitude install ipython ipython-notebook python-mode python-matplotlib python-scipy python-sphinx python-guiqwt python-sqlalchemy python-pandas python-openbabel
-
+sudo aptitude install virtualbox-4.2
 
 ### Google Chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -127,6 +136,19 @@ sudo apt-get install python-ase gpaw gpaw-setups pycifrw pymatgen
 sudo mkdir /usr/local/maulocal
 sudo chown mauro /usr/local/maulocal
 cd; ln -s /usr/local/maulocal local
+
+### LaTeX (Texlive 2014)
+#https://github.com/scottkosty/install-tl-ubuntu
+cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
+cd install-tl-ubuntu; sudo ./install-tl-ubuntu
+# restart computer
+
+### PyMca5
+cd ~/local/
+sudo aptitude install python-qt4 python-qt4-dev
+git clone https://github.com/vasole/pymca.git
+cd pymca
+sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 
 ### Emacs-related (emacs24 installed system-wide via Damien Cassou PPA)
 cd; ln -s utils/software-notes/mydotemacs24U1204 .emacs
