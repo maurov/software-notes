@@ -187,15 +187,15 @@ wget http://ftp.esrf.eu/pub/scisoft/xop2.3/shadowvui1.12_Linux_20140708.tar.gz
 tar xzvf shadowvui1.12_Linux_20140708.tar.gz
 cd $MYLOCAL/xop2.3/extensions
 ln -s $MYLOCAL/xop_extensions/shadowvui shadowvui
+cd shadow3
 # IF YOU WANT TO UPDATE SHADOW3 TO THE LAST VERSION
-# cd shadow3
 # git pull
 # OR if this does not work:
 #    cd ..; rm -rf shadow3;
 #    git clone git://git.epn-campus.eu/repositories/shadow3
 #    cd shadow3
-# make
-# make python
+# THEN BUILD THE PYTHON LIBRARY
+make python
 export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
 export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
 export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
