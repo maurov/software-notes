@@ -17,7 +17,7 @@ sudo aptitude install b43-fwcutter firmware-b43-installer
 sudo apt-get remove fglrx fglrx-amdcccle --purge
 
 ### 3D and OpenGL
-sudo apt-get install mesa-utils
+sudo apt-get install mesa-utils freeglut3 freeglut3-dev binutils-gold
 
 ### Revision control (Git & friends)
 sudo apt-get install git meld gftp
@@ -32,6 +32,8 @@ sudo dpkg -i dropbox_1.6.0_amd64.deb
 sudo aptitude install python-pip python-setuptools
 sudo aptitude install python-matplotlib python-scipy python-sphinx python-docutils python-h5py
 sudo aptitude install python-sympy python-pandas python-openbabel python-sqlalchemy python-lxml
+# Python OpenGL
+sudo apt-get install python-opengl libqt4-opengl libgle3
 # Python Visual (NOT WORKING YET!!!)
 sudo aptitude install python-visual libgtkglextmm-x11-1.2-dev
 
@@ -41,6 +43,8 @@ sudo pip install ipython -U
 #### matplotlib upgrade (NOTE: it will upgrade numpy!)
 sudo easy_install -U distribute
 sudo pip install matplotlib -U
+### brewer2mpl
+pip install brewer2mpl --user
 
 #### XKCD plots in matplotlib (required version >1.3)
 sudo apt-get install gnome-font-viewer
