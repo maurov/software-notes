@@ -247,12 +247,18 @@ sudo make install
 #Instructions: http://xraypy.github.com/xraylarch/downloads/index.html#source-installation
 #### Deps:
 sudo aptitude install python-wxgtk2.8 python-wxtools python-setuptools python-docutils python-h5py python-sqlalchemy
-sudo easy_install wxmplot
+#sudo easy_install wxmplot
+pip install --user -U wxmplot wxutils termcolor
 cd ~/local
 git clone http://github.com/xraypy/xraylarch.git
 cd xraylarch
 python setup.py build
+## local install not working!!!
+##nano lib/site_configdata.py
+## unix_installdir = '/home/mauro/.local/share/larch'
+# 
 sudo python setup.py install
+#sudo python setup.py install
 #### Link larch plugins directory
 cd ~/.larch/
 rm -rf plugins
