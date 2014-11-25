@@ -88,6 +88,13 @@ mkdir .config/Mendeley\ Ltd.
 # Mendely does not like to work with a link, for some strange reason one has to copy the configuration file!
 cp utils/Mendeley\ Desktop.conf .config/Mendeley\ Ltd./Mendeley\ Desktop.conf
 
+### Moving to Zotero!
+### http://research.coquipr.com/archives/492
+### https://forums.zotero.org/discussion/25317/install-zotero-standalone-from-ubuntu-linux-mint-ppa/
+sudo add-apt-repository ppa:smathot/cogscinl
+sudo apt-get update
+sudo apt-get install zotero-standalone qnotero
+
 ### Web
 # default flash plugin does not always work properly... Adobe one is better
 sudo aptitude install flashplugin-installer
@@ -104,6 +111,8 @@ sudo aptitude install claws-mail claws-mail-extra-plugins
 # offlineimap
 # Wander Lust  ???  http://www.emacswiki.org/emacs/WanderLust
 
+# Multimedia
+sudo apt-get install vlc
 
 ### TODO ###
 
