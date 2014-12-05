@@ -157,6 +157,15 @@
 (add-hook 'rst-mode-hook (lambda () (flyspell-mode 1))) ;Flyspell in RST
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
+;; WORD WRAP AT SPECIFIC COLUMN NUMBER
+;; from: http://stackoverflow.com/questions/8772488/emacs-word-wrap-at-specific-column-number
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'text-mode-hook
+  '(lambda() (set-fill-column 80)))
+(add-hook 'latex-mode-hook 'turn-on-auto-fill)
+(add-hook 'latex-mode-hook
+  '(lambda() (set-fill-column 80)))
+
 ;; ------------------------------------------------------------
 ;; ORG-MODE
 ;; ------------------------------------------------------------
