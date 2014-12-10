@@ -62,14 +62,14 @@ sudo aptitude install fonts-inconsolata aspell-en aspell-fr aspell-it
 ### Office (Libreoffice & friends)
 sudo apt-get remove abiword gnumeric --purge
 sudo add-apt-repository ppa:libreoffice/libreoffice-4-2
-sudo aptitude install libreoffice
+sudo aptitude install libreoffice libreoffice-pdfimport
 sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb
 sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
 sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
 
 ### Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
-sudo aptitude install inkscape xclip
+sudo aptitude install inkscape xclip graphviz
 
 ### Reference manager (Mendeley)
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
