@@ -28,6 +28,9 @@ wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
 sudo dpkg -i dropbox_1.6.0_amd64.deb
 #$ dropbox start -i
 
+### Qt
+sudo aptitude install qt4-dev-tools qt4-designer
+
 ### Python
 sudo aptitude install python-pip python-setuptools
 sudo aptitude install python-matplotlib python-scipy python-sphinx python-docutils python-h5py
@@ -43,6 +46,8 @@ sudo pip install ipython -U
 #### matplotlib upgrade (NOTE: it will upgrade numpy!)
 sudo easy_install -U distribute
 sudo pip install matplotlib -U
+### pandas upgrade
+sudo pip install pandas -U
 ### brewer2mpl
 pip install brewer2mpl --user
 
@@ -58,6 +63,9 @@ sudo gnome-font-viewer Humor-Sans.ttf
 sudo add-apt-repository ppa:cassou/emacs
 sudo apt-get install emacs24 emacs24-el emacs24-common-non-dfsg
 sudo aptitude install fonts-inconsolata aspell-en aspell-fr aspell-it
+
+#### LaTeX editor (for LaTeX distribution see in local)
+sudo aptitude install texworks
 
 ### Office (Libreoffice & friends)
 sudo apt-get remove abiword gnumeric --purge
@@ -112,7 +120,7 @@ sudo aptitude install claws-mail claws-mail-extra-plugins
 # Wander Lust  ???  http://www.emacswiki.org/emacs/WanderLust
 
 # Multimedia
-sudo apt-get install vlc
+sudo apt-get install vlc avidemux openshot
 
 ### TODO ###
 
