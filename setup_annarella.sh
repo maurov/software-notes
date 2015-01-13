@@ -31,7 +31,7 @@ sudo dpkg -i dropbox_1.6.0_amd64.deb
 ### Qt
 sudo aptitude install qt4-dev-tools qt4-designer
 
-### Python
+### Python 2
 sudo aptitude install python-pip python-setuptools
 sudo aptitude install python-matplotlib python-scipy python-sphinx python-docutils python-h5py
 sudo aptitude install python-sympy python-pandas python-openbabel python-sqlalchemy python-lxml
@@ -40,7 +40,7 @@ sudo apt-get install python-opengl libqt4-opengl libgle3
 # Python Visual (NOT WORKING YET!!!)
 sudo aptitude install python-visual libgtkglextmm-x11-1.2-dev
 
-### Python modules via PIP (NOTE: better from user)
+### Python 2 modules via PIP (NOTE: better from user)
 #### ipython upgrade
 sudo pip install ipython -U
 #### matplotlib upgrade (NOTE: it will upgrade numpy!)
@@ -50,6 +50,20 @@ sudo pip install matplotlib -U
 sudo pip install pandas -U
 ### brewer2mpl
 pip install brewer2mpl --user
+
+### Python 3 (currently 3.2 on Ubuntu 12.04)
+sudo aptitude install python3-setuptools python3-numpy python3-scipy
+sudo aptitude install python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev
+sudo aptitude install ipython3 ipython3-qtconsole python3-sphinx python3-jinja2
+
+### Python 3 local virtual environment
+cd; cd local
+virtualenv -p python3 --system-site-packages --distribute py3env
+source py3env/bin/activate
+easy_install -U distribute
+#NOTE: ipython and sphinx require python 2.7 or 3.3
+install -U numpy scipy scikit-learn matplotlib bottlechest nose mock pandas h5py sympy
+pip install -U numpy scipy scikit-learn matplotlib bottlechest nose mock pandas h5py sympy
 
 #### XKCD plots in matplotlib (required version >1.3)
 sudo apt-get install gnome-font-viewer
