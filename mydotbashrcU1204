@@ -137,16 +137,23 @@ export PYTHONPATH=$HOME/local/pyquante_lib:$PYTHONPATH
 # Added by CCP4 package manager:
 source /home/mauro/local/ccp4/ccp4-6.4.0/bin/ccp4.setup-sh
 
+# ATLAS/BLAS director
+export ATLAS=/usr/lib/atlas-base/atlas
+export BLAS=/usr/lib/openblas-base
+
 # XOP/SHADOW3
 export XOP_HOME=$MYLOCAL/xop2.3
 export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
-export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
 export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
-export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+
+# not good idea, conficts with python 3.x -> use virtualenv!
+#export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
+#export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
 # SLOTH
 export SLOTHOME=$HOME/utils/xraysloth/sloth
 export PYTHONPATH=$SLOTHOME:$PYTHONPATH
-alias sloth='source $MYLOCAL/py3env/bin/activate; python $SLOTHOME/sloth_gui.py'
+alias sloth='python $SLOTHOME/sloth_gui.py'
 alias ipylarch='python $SLOTHOME/ipylarch.py'

@@ -28,6 +28,18 @@ wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
 sudo dpkg -i dropbox_1.6.0_amd64.deb
 #$ dropbox start -i
 
+### BLAS/ATLAS
+sudo aptitude install libopenblas-base libopenblas-dev libatlas3gf-base
+#may not work with Numpy (try to fix with the following)
+sudo update-alternatives --config libblas.so.3gf
+# check it is setted to libopenblas
+sudo update-alternatives --config liblapack.so.3gf
+# check it is setted to atlas-base
+export ATLAS=/usr/lib/atlas-base
+export BLAS=/usr/lib/openblas-base
+# then build/install numpy!
+# python -c 'import numpy' # if not working, revert back liblapack.so.3gf to /usr/lib/lapack
+
 ### Qt
 sudo aptitude install qt4-dev-tools qt4-designer
 
@@ -51,19 +63,37 @@ sudo pip install pandas -U
 ### brewer2mpl
 pip install brewer2mpl --user
 
-### Python 3 (currently 3.2 on Ubuntu 12.04)
+### Python 3.2 (on Ubuntu 12.04)
 sudo aptitude install python3-setuptools python3-numpy python3-scipy
+sudo aptitude install python3-nose python3-mock
 sudo aptitude install python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev
 sudo aptitude install ipython3 ipython3-qtconsole python3-sphinx python3-jinja2
 
-### Python 3 local virtual environment
+### Python 3.2 local virtual environment
 cd; cd local
 virtualenv -p python3 --system-site-packages --distribute py3env
 source py3env/bin/activate
 easy_install -U distribute
-#NOTE: ipython and sphinx require python 2.7 or 3.3
-install -U numpy scipy scikit-learn matplotlib bottlechest nose mock pandas h5py sympy
-pip install -U numpy scipy scikit-learn matplotlib bottlechest nose mock pandas h5py sympy
+#NOTE: ipython and sphinx last versions require python >=2.7 or >=3.3
+pip install -U numpy==1.9.1
+pip install -U scipy==0.15.0
+pip install -U scikit-learn
+pip install -U bottlechest==0.7.0
+pip install -U nose mock
+pip install -U ipython==0.12.1 #newer versions work only with >=3.3
+pandas h5py sympy
+pip install -U six python-dateutil pyparsing matplotlib
+
+### Python 3.4 (on Ubuntu 12.04)
+sudo add-apt-repository ppa:fkrull/deadsnakes
+sudo apt-get install python3.4 libpython3.4-dev
+sudo pip install -U virtualenv
+virtualenv-2.7 -p python3.4 py34
+virtualenv -p python3.4 py34
+easy_install -U distribute
+# install one-by-one works better!!!
+pip install -U numpy
+pip install -U scipy
 
 #### XKCD plots in matplotlib (required version >1.3)
 sudo apt-get install gnome-font-viewer
@@ -184,10 +214,13 @@ cd ~/local/
 sudo aptitude install python-qt4 python-qt4-dev
 git clone https://github.com/vasole/pymca.git
 cd pymca
+# SYSTEM-WIDE INSTALL: not recommended, better user install within a virt env (see below)
 #sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #
-# make USER INSTALL (TODO: not yet working!!!)
-#SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# USER INSTALL (TODO: not yet working!!!)
+# activate a virtual environment
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
 # use sys.path.append('/home/mauro/local/pymca/build/lib.linux-x86_64-2.7/PyMca5/') in scripts
 #
 # make CLEAN:
