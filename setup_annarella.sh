@@ -30,7 +30,7 @@ sudo dpkg -i dropbox_1.6.0_amd64.deb
 
 ### BLAS/ATLAS
 sudo aptitude install libopenblas-base libopenblas-dev libatlas3gf-base
-#may not work with Numpy (try to fix with the following)
+# may not work with Numpy (try to fix with the following)
 sudo update-alternatives --config libblas.so.3gf
 # check it is setted to libopenblas
 sudo update-alternatives --config liblapack.so.3gf
@@ -77,12 +77,22 @@ easy_install -U distribute
 #NOTE: ipython and sphinx last versions require python >=2.7 or >=3.3
 pip install -U numpy==1.9.1
 pip install -U scipy==0.15.0
-pip install -U scikit-learn
+pip install -U scikit-learn==0.15.2
 pip install -U bottlechest==0.7.0
-pip install -U nose mock
-pip install -U ipython==0.12.1 #newer versions work only with >=3.3
-pandas h5py sympy
-pip install -U six python-dateutil pyparsing matplotlib
+pip install -U nose==1.3.4 mock==1.0.1
+pip install -U ipython==0.13.2
+#newer versions work only with >=3.3 and 0.12.1 has a bug in the --gui threads
+pip install -U matplotlib==1.4.2
+# deps 'six python-dateutil pyparsing' should be installed by default
+pip install -U pandas==0.15.2
+sudo apt-get install libhdf5-serial-dev
+pip install -U h5py==2.4.0
+pip install -U sympy
+#pymca: see local install
+#shadow3: see local install
+#shadow3: after make; make python; run as user and within virt_env 'python setup.py install'
+#orange-shadow
+#xraylib: TODO
 
 ### Python 3.4 (on Ubuntu 12.04)
 sudo add-apt-repository ppa:fkrull/deadsnakes
