@@ -27,73 +27,22 @@
 ;; add current local dir
 (add-to-list 'load-path "~/local/emacs/") ;; 
 
-;; ------------------------------------------------------------
-;; ELPA : Emacs Lisp Package Archive
-;; http://www.emacswiki.org/emacs/ELPA
-(load "package")
-(package-initialize)
-;; *Additional Repositories*
-;; Marmalade 
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
-;; MELPA
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-;; Org-mode
-(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-
-(setq package-archive-enable-alist '(("melpa" deft magit)))
-
-(defvar mauro/packages '(ac-math
-			 ac-octave
-			 ac-python
-			 auctex
-			 auto-complete
-			 autopair
-			 color-theme
-			 flycheck
-			 gist
-			 htmlize
-			 magit
-			 markdown-mode
-			 matlab-mode
-			 mmm-mode
-			 org
-			 python
-			 sphinx-doc
-			 web-mode
-			 writegood-mode
-			 yaml-mode)
-  "Default packages")
-
-
-
-;; When Emacs boots, check to make sure all of the packages defined in
-;; mauro/packages are installed. If not, have ELPA take care of it.
-;; (defun mauro/packages-installed-p ()
-;;   (loop for pkg in mauro/packages
-;;         when (not (package-installed-p pkg)) do (return nil)
-;;         finally (return t)))
-
-;; (unless (mauro/packages-installed-p)
-;;   (message "%s" "Refreshing package database...")
-;;   (package-refresh-contents)
-;;   (dolist (pkg mauro/packages)
-;;     (when (not (package-installed-p pkg))
-;;       (package-install pkg))))
-
-;; ------------------------------------------------------------
 ;; Start-up options
 ;; Splash Screen
 (setq inhibit-splash-screen t
       initial-scratch-message nil
       initial-major-mode 'org-mode)
+
 ;; Scroll bar, Tool bar, Menu bar
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
+
 ;;Marking text
 (delete-selection-mode t)
 (transient-mark-mode t)
 (setq x-select-enable-clipboard t)
+
 ;;Key bindings
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "C-;") 'comment-or-uncomment-region)
@@ -102,33 +51,13 @@
 (global-set-key (kbd "C--") 'text-scale-decrease)
 (global-set-key (kbd "C-c C-k") 'compile)
 (global-set-key (kbd "C-x g") 'magit-status)
+
 ;; Misc
 (setq echo-keystrokes 0.1
       use-dialog-box nil
       visible-bell t)
 (show-paren-mode t)
 (setq column-number-mode t)
-;; This makes sure that brace structures (), [], {}, etc. are closed
-;; as soon as the opening character is typed.
-(require 'autopair)
-;; turn on auto complete
-(require 'auto-complete-config)
-(ac-config-default)
-
-;; ALLOW MULTIPLE MAJOR MODES
-;; From: http://stackoverflow.com/questions/15493342/have-emacs-edit-python-docstrings-using-rst-mode
-;; NOTE: not using it yet... not really helpful!!!
-;; (require 'mmm-mode)
-;; (setq mmm-global-mode 'maybe)
-;; (mmm-add-classes
-;;  '((python-rst
-;;     :submode sphinx-doc-mode
-;;     :front "^ *[ru]?\"\"\"[^\"]*$"
-;;     :back "^ *\"\"\""
-;;     :include-front t
-;;     :include-back t
-;;     :end-not-begin t)))
-;; (mmm-add-mode-ext-class 'python-mode nil 'python-rst)
 
 ;; ------------------------------------------------------------
 ;; COLOR THEME
@@ -161,10 +90,11 @@
 ;; from: http://stackoverflow.com/questions/8772488/emacs-word-wrap-at-specific-column-number
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'text-mode-hook
-  '(lambda() (set-fill-column 80)))
+	  '(lambda() (set-fill-column 80)))
 (add-hook 'latex-mode-hook 'turn-on-auto-fill)
 (add-hook 'latex-mode-hook
-  '(lambda() (set-fill-column 80)))
+	  '(lambda() (set-fill-column 80)))
+
 
 ;; ------------------------------------------------------------
 ;; ORG-MODE
@@ -176,16 +106,6 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (writegood-mode)))
-;; org-babel
-(require 'ob)
-
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)
-   (ditaa . t)
-   (python . t)
-   (dot . t)
-   (latex . t)))
 
 ;; ------------------------------------------------------------
 ;; MARKDOWN
@@ -208,3 +128,113 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+
+;; ------------------------------------------------------------
+;; #### EMACS24 ####
+;; ------------------------------------------------------------
+
+(if (>= emacs-major-version 24)
+    (progn
+      ;; Do something for Emacs 24 or later
+      
+      ;; ------------------------------------------------------------
+      ;; ELPA : Emacs Lisp Package Archive
+      ;; http://www.emacswiki.org/emacs/ELPA
+      (load "package")
+      (package-initialize)
+      ;; *Additional Repositories*
+      ;; Marmalade 
+      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+      ;; MELPA
+      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+      ;; Org-mode
+      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+      
+      (setq package-archive-enable-alist '(("melpa" deft magit)))
+      
+      (defvar mauro/packages '(ac-math
+			       ac-octave
+			       ac-python
+			       auctex
+			       auto-complete
+			       autopair
+			       color-theme
+			       flycheck
+			       gist
+			       htmlize
+			       magit
+			       markdown-mode
+			       matlab-mode
+			       mmm-mode
+			       org
+			       python
+			       sphinx-doc
+			       web-mode
+			       writegood-mode
+			       yaml-mode)
+	"Default packages")
+      
+      
+      
+      ;; When Emacs boots, check to make sure all of the packages defined in
+      ;; mauro/packages are installed. If not, have ELPA take care of it.
+      ;; (defun mauro/packages-installed-p ()
+      ;;   (loop for pkg in mauro/packages
+      ;;         when (not (package-installed-p pkg)) do (return nil)
+      ;;         finally (return t)))
+      
+      ;; (unless (mauro/packages-installed-p)
+      ;;   (message "%s" "Refreshing package database...")
+      ;;   (package-refresh-contents)
+      ;;   (dolist (pkg mauro/packages)
+      ;;     (when (not (package-installed-p pkg))
+      ;;       (package-install pkg))))
+      
+      ;; ------------------------------------------------------------
+
+
+      ;; This makes sure that brace structures (), [], {}, etc. are closed
+      ;; as soon as the opening character is typed.
+      (require 'autopair)
+      ;; turn on auto complete
+      (require 'auto-complete-config)
+      (ac-config-default)
+      
+      ;; ALLOW MULTIPLE MAJOR MODES
+      ;; From: http://stackoverflow.com/questions/15493342/have-emacs-edit-python-docstrings-using-rst-mode
+      ;; NOTE: not using it yet... not really helpful!!!
+      ;; (require 'mmm-mode)
+      ;; (setq mmm-global-mode 'maybe)
+      ;; (mmm-add-classes
+      ;;  '((python-rst
+      ;;     :submode sphinx-doc-mode
+      ;;     :front "^ *[ru]?\"\"\"[^\"]*$"
+      ;;     :back "^ *\"\"\""
+      ;;     :include-front t
+      ;;     :include-back t
+      ;;     :end-not-begin t)))
+      ;; (mmm-add-mode-ext-class 'python-mode nil 'python-rst)
+
+
+      ;; org-babel
+      (require 'ob)
+      
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((sh . t)
+	 (ditaa . t)
+	 (python . t)
+	 (dot . t)
+	 (latex . t))
+       )
+      
+      
+      )
+  ;; Do something else for Emacs 23 or less
+
+;; ------------------------------------------------------------
+;; #### EMACS23 ####
+;; ------------------------------------------------------------
+)
