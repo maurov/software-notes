@@ -135,7 +135,9 @@ export PYTHONPATH=$HOME/local/pyquante_lib:$PYTHONPATH
 #not need[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 # Added by CCP4 package manager:
-source /home/mauro/local/ccp4/ccp4-6.4.0/bin/ccp4.setup-sh
+if [ -f ~/local/ccp4/ccp4-6.4.0/bin/ccp4.setup-sh ]; then
+    source /home/mauro/local/ccp4/ccp4-6.4.0/bin/ccp4.setup-sh
+fi
 
 # ATLAS/BLAS director
 export ATLAS=/usr/lib/atlas-base/atlas

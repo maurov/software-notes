@@ -222,20 +222,30 @@ cd install-tl-ubuntu; sudo ./install-tl-ubuntu
 ### PyMca5
 cd ~/local/
 sudo aptitude install python-qt4 python-qt4-dev
+# fisx
+git clone https://github.com/vasole/fisx.git
+cd fisx
+python setup.py install --user
+
 git clone https://github.com/vasole/pymca.git
 cd pymca
-# SYSTEM-WIDE INSTALL: not recommended, better user install within a virt env (see below)
+
+# SYSTEM-WIDE INSTALL
+#not recommended, better user install (see below)
 #sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
-#
-# USER INSTALL (TODO: not yet working!!!)
-# activate a virtual environment
-# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
-# (in_your_virt_env) python setup.py install
-# use sys.path.append('/home/mauro/local/pymca/build/lib.linux-x86_64-2.7/PyMca5/') in scripts
-#
 # make CLEAN:
 #(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
 #(sudo) rm -rf ~/local/pymca/build/
+#
+# USER INSTALL: standard (in .local/lib/python2.7/site-packages/)
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
+
+# USER INSTALL: virtual environment
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
+
+# documentation
+python setup.py build_doc
 
 ### PyMca 4.7
 cd ~/local/
