@@ -176,6 +176,13 @@ sudo aptitude install claws-mail claws-mail-extra-plugins
 # Multimedia
 sudo apt-get install vlc avidemux openshot
 
+### Ifeffit & Friends
+# better to use old version until Demeter will fully work with Larch
+sudo aptitude install horae ifeffit
+
+### VESTA
+
+
 ### TODO ###
 
 ### Utils & generic
