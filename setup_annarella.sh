@@ -63,6 +63,23 @@ sudo pip install pandas -U
 ### brewer2mpl
 pip install brewer2mpl --user
 
+### Python 2.7 local virtual environment
+easy_install --user -U virtualenv
+cd; cd local
+virtualenv --system-site-packages --distribute py2env
+source py2env/bin/activate
+easy_install -U distribute
+### larch
+pip install -U wxutils
+pip install -U termcolor
+pip install -U wxmplot
+pip install -U sqlalchemy
+cd xraylarch
+##nano lib/site_configdata.py
+## unix_installdir = '$HOME/.local/share/larch'
+python setup.py build
+python setup.py install
+
 ### Python 3.2 (on Ubuntu 12.04)
 sudo aptitude install python3-setuptools python3-numpy python3-scipy
 sudo aptitude install python3-nose python3-mock
@@ -79,7 +96,7 @@ pip install -U numpy==1.9.1
 pip install -U scipy==0.15.0
 pip install -U scikit-learn==0.15.2
 pip install -U bottlechest==0.7.0
-pip install -U nose==1.3.4 mock==1.0.1
+pip install -U nose==1.2.1 mock==1.0.1
 pip install -U ipython==0.13.2
 #newer versions work only with >=3.3 and 0.12.1 has a bug in the --gui threads
 pip install -U matplotlib==1.4.2
@@ -88,6 +105,9 @@ pip install -U pandas==0.15.2
 sudo apt-get install libhdf5-serial-dev
 pip install -U h5py==2.4.0
 pip install -U sympy
+# cd to pymca local distrib
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
 #pymca: see local install
 #shadow3: see local install
 #shadow3: after make; make python; run as user and within virt_env 'python setup.py install'
@@ -104,6 +124,17 @@ easy_install -U distribute
 # install one-by-one works better!!!
 pip install -U numpy
 pip install -U scipy
+
+### Python 3.4 (on Debian 8 - scisoft12)
+cd; cd local
+python3.4 -m venv py34env --clear --without-pip --system-site-packages
+source py34env/bin/activate
+cd py34env; wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+cd; cd local/OASYS
+python setup.py develop
+#to test: cd; python -m Orange.canvas
+#ALL THE REST IS AS THE PREVIOUS VIRTUAL ENVIRONMENTS!!!
 
 #### XKCD plots in matplotlib (required version >1.3)
 sudo apt-get install gnome-font-viewer
@@ -227,30 +258,26 @@ cd install-tl-ubuntu; sudo ./install-tl-ubuntu
 # restart computer
 
 ### PyMca5
+# USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
 cd ~/local/
 sudo aptitude install python-qt4 python-qt4-dev
 # fisx
 git clone https://github.com/vasole/fisx.git
 cd fisx
 python setup.py install --user
-
+#pymca
 git clone https://github.com/vasole/pymca.git
 cd pymca
-
-# SYSTEM-WIDE INSTALL
-#not recommended, better user install (see below)
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
+# USER INSTALL: alternative (within a virtual environment)
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
+# SYSTEM-WIDE INSTALL: not recommended
 #sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 # make CLEAN:
 #(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
 #(sudo) rm -rf ~/local/pymca/build/
 #
-# USER INSTALL: standard (in .local/lib/python2.7/site-packages/)
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
-
-# USER INSTALL: virtual environment
-# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
-# (in_your_virt_env) python setup.py install
-
 # documentation
 python setup.py build_doc
 
@@ -335,7 +362,7 @@ cd ~/local
 git clone http://github.com/xraypy/xraylarch.git
 cd xraylarch
 python setup.py build
-## local install not working!!!
+## local install working only within a virtualenv (see above!!!)
 ##nano lib/site_configdata.py
 ## unix_installdir = '/home/mauro/.local/share/larch'
 # 
