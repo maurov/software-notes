@@ -160,3 +160,6 @@ export PYTHONPATH=$SLOTHOME:$PYTHONPATH
 alias sloth='python $SLOTHOME/sloth_gui.py'
 #alias sloth3='source $MYLOCAL/py3env/bin/activate; python $SLOTHOME/sloth_gui.py' #ipy 0.13 no RichIpythonWidget
 alias ipylarch='python $SLOTHOME/ipylarch.py'
+
+#add .local/bin to PATH
+export PATH=$HOME/.local/bin:$PATH

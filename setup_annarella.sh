@@ -1,11 +1,25 @@
 #!/bin/bash
 
+# TODO: re-structure (organize!) the whole thing!
+echo -n "Do you want to run this buggy script (y/n)? "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    echo "OK, then modify it!"
+    exit
+else
+    echo "OK, read it!"
+    exit
+fi
+
 # +++++++++++++++
 # Annarella setup
 # +++++++++++++++
 
 # Annarella is a Dell Inspiron 1501 laptop
 # The starting point is a fresh Xubuntu 12.04.4 installation
+# Annarella is also a Windows machine running virtual OSs (virtualbox):
+# - Xubuntu 12.04
+# - Debian 8
 
 ## System Packages
 ## ===============
@@ -26,8 +40,8 @@ sudo apt-get remove fglrx fglrx-amdcccle --purge
 sudo apt-get install mesa-utils freeglut3 freeglut3-dev binutils-gold
 
 ### Revision control (Git & friends)
-sudo apt-get install git meld gftp
-#subversion
+sudo apt-get install git meld gftp subversion
+
 # Dropbox better if downloaded directly
 sudo apt-get remove nautilus-dropbox --purge
 wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
@@ -219,7 +233,10 @@ sudo apt-get install vlc avidemux openshot
 sudo aptitude install horae ifeffit
 
 ### VESTA
-
+cd; cd local
+wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
+tar xjvf VESTA-x86_64.tar.bz2
+ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
 
 ### TODO ###
 
@@ -241,9 +258,10 @@ curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
 sudo apt-get update
 sudo apt-get install xraylib libxrl3-dev libxrlf03-3
 
-
 ### ASE and friends
-# Instructions here: https://wiki.fysik.dtu.dk/ase/download.html#installation-with-package-manager-on-linux
+# REPOSITORY (SYSTEM APPROACH) -- NOT RECOMMENDED
+# Instructions here:
+# https://wiki.fysik.dtu.dk/ase/download.html#installation-with-package-manager-on-linux
 sudo bash -c 'echo "deb http://download.opensuse.org/repositories/home:/dtufys/xUbuntu_12.04 /" > /etc/apt/sources.list.d/home_dtufys.sources.list'
 wget http://download.opensuse.org/repositories/home:/dtufys/xUbuntu_12.04/Release.key && sudo apt-key add Release.key && rm Release.key
 sudo apt-get update
