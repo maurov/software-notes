@@ -10,6 +10,12 @@
 ## System Packages
 ## ===============
 
+### VIRTUALBOX
+# To install Guest Additions on a fresh linux virtual machine
+sudo apt-get install build-essential module-assistant
+sudo m-a prepare
+# mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
+
 ### Hardware for Inspiron
 sudo aptitude remove bcmwl-kernel-source
 sudo aptitude install b43-fwcutter firmware-b43-installer
@@ -91,6 +97,7 @@ cd; cd local
 virtualenv -p python3 --system-site-packages --distribute py3env
 source py3env/bin/activate
 easy_install -U distribute
+pip install --upgrade pip
 #NOTE: ipython and sphinx last versions require python >=2.7 or >=3.3
 pip install -U numpy==1.9.1
 pip install -U scipy==0.15.0
