@@ -387,34 +387,31 @@ cd ~/local
 git clone http://github.com/xraypy/xraylarch.git
 cd xraylarch
 python setup.py build
-## local install working only within a virtualenv (see above!!!)
-##nano lib/site_configdata.py
-## unix_installdir = '/home/mauro/.local/share/larch'
-# 
-sudo python setup.py install
+## local install working within a virtualenv (see above!!!)
+python setup.py install --user
 #sudo python setup.py install
 #### Link larch plugins directory
 cd ~/.larch/
 rm -rf plugins
-ln -s /home/mauro/utils/pymaus/larch_plugins plugins
+ln -s your_larch_plugins_dir plugins
 
 ### FDMNES
 # Simply local copy of /sware/exp/fdmnes on NICE/ESRF
-cd ~/local
-rsync -avz --delete rovezzi@rnice6-0102:/sware/exp/fdmnes
-sudo ln -s $HOME/local/fdmnes/bin/debian6/fdmnes /usr/local/bin/fdmnes
+#cd ~/local
+#rsync -avz --delete rovezzi@rnice6-0102:/sware/exp/fdmnes
+#sudo ln -s $HOME/local/fdmnes/bin/debian6/fdmnes /usr/local/bin/fdmnes
 
 ### FEFF9
 # Simply local copy of /sware/exp/feff on NICE/ESRF
-cd ~/local
-rsync -avz --delete rovezzi@rnice6-0102:/sware/exp/feff
+#cd ~/local
+#rsync -avz --delete rovezzi@rnice6-0102:/sware/exp/feff
 # Edit $HOME/local/feff9.6/bin/feff9 with the correct PATH_TO_FEFF9
-sudo ln -s $HOME/local/feff9.6/bin/feff9 /usr/local/bin/feff9
+#sudo ln -s $HOME/local/feff9.6/bin/feff9 /usr/local/bin/feff9
 
 ## Workflows
 ## =========
 
-## Links
+## Links with VirtualBox shared folders
 sudo mkdir /media/sf_WinLinShare
 sudo chown mauro /media/sf_WinLinShare/
 ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
