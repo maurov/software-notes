@@ -29,6 +29,7 @@ fi
 sudo apt-get install build-essential module-assistant
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
+#sudo sh /path/to/VobLinuxAdditions.run
 
 ### Hardware for Inspiron
 sudo aptitude remove bcmwl-kernel-source
