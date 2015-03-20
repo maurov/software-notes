@@ -31,6 +31,13 @@ sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
 
+# dual-monitor under XFCE <4.12
+# first enable dual monitor in virtualbox
+sudo aptitude install x11-server-utils
+#identify your monitor names via 'xrandr -q' (here VBOX0 and VBOX1)
+xrandr --auto --output VBOX0 --mode 1680x956 --right-of VBOX1
+# then put this command in the starting applications
+
 ### Hardware for Inspiron
 sudo aptitude remove bcmwl-kernel-source
 sudo aptitude install b43-fwcutter firmware-b43-installer
