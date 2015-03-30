@@ -21,7 +21,11 @@ projects (usually hosted on Github), so here I write down some notes.
 
   git branch your_branch_name
   git checkout your_branch_name
-  git branch #(this will show you all the branches)
+  git branch #(this will show all the branches and put * on working one)
+
+- push your local changes to a remote branch
+
+  git push origin your_branch_name
 
 - go to your fork's webpage on Github and click 'pull-request' button give
   pull-request a name, fill in details of what changes you made, click submit
