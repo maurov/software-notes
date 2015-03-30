@@ -1,0 +1,33 @@
+
+* Git(hub) raw notes
+
+I do not use Git so often to remember all the steps to contribute to open-source
+projects (usually hosted on Github), so here I write down some notes.
+
+** My Github workflow
+
+- click 'fork' button on the repo you want to contribute to
+- clone it locally to your machine
+- add upstream track for updates (example on 'pymca' repo)
+
+  git remote add --track master vasole git://github.com/vasole/pymca.git
+
+- to fetch and merge updates from the master original project
+
+  git fetch vasole
+  git merge vasole/master
+
+- make a working branch and switch to it
+
+  git branch your_branch_name
+  git checkout your_branch_name
+  git branch #(this will show you all the branches)
+
+- go to your fork's webpage on Github and click 'pull-request' button give
+  pull-request a name, fill in details of what changes you made, click submit
+  button.  you're done!!
+
+** Useful links
+
+- [[https://gun.io/blog/how-to-github-fork-branch-and-pull-request/][Tutorial at gun.io]]
+- [[http://stackoverflow.com/questions/14680711/how-to-do-a-github-pull-request][Pull request made easy at StackOverflow]]
