@@ -88,8 +88,8 @@ sudo easy_install -U distribute
 sudo pip install matplotlib -U
 ### pandas upgrade
 sudo pip install pandas -U
-### brewer2mpl
-pip install brewer2mpl --user
+### brewer2mpl -> palettable (https://jiffyclub.github.io/palettable/)
+pip install palettable --user
 
 ### Python 2.7 local virtual environment
 easy_install --user -U virtualenv
