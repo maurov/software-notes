@@ -102,9 +102,23 @@
 
 ;; SPELL CHECK
 (setq ispell-program-name "aspell" ispell-extra-args '("--sug-mode=ultra"))
+(setq ispell-list-command "--list")
+(setq ispell-dictionary "english")
+
 ;; Enables Flyspell in text-modes
-(dolist (hook '(text-mode-hook)) (add-hook hook (lambda () (flyspell-mode 1))))
-(add-hook 'rst-mode-hook (lambda () (flyspell-mode 1))) ;Flyspell in RST
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
+(add-hook 'rst-mode-hook
+	  (lambda () (flyspell-mode 1))) ;Flyspell in RST
+
+;flyspell in LaTeX
+(add-hook 'LaTeX-mode-hook
+	  (lambda () (flyspell-mode 1)))
+(add-hook 'LaTeX-mode-hook
+	  (lambda () (flyspell-buffer 1)))
+
+
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
 ;; WORD WRAP AT SPECIFIC COLUMN NUMBER
@@ -120,15 +134,33 @@
 (add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))
 
 ;; ------------------------------------------------------------
+;; LATEX-AUCTEX
+;; http://emacswiki.org/emacs/AUCTeX
+;; ------------------------------------------------------------
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+;;(setq TeX-PDF-mode t)
+(setq-default TeX-master nil)
+
+;;(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+
+;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+;;(setq reftex-plug-into-AUCTeX t)
+
+;; ------------------------------------------------------------
 ;; ORG-MODE
 ;; ------------------------------------------------------------
 ;; spell check
 (add-hook 'org-mode-hook
           (lambda ()
             (flyspell-mode)))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (writegood-mode)))
+
+; error in emacs23
+;(add-hook 'org-mode-hook
+;          (lambda ()
+;            (writegood-mode)))
 
 (setq org-CUA-compatible t) ;just if CUA-mode enabled!
 
