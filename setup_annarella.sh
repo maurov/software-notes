@@ -88,8 +88,8 @@ sudo easy_install -U distribute
 sudo pip install matplotlib -U
 ### pandas upgrade
 sudo pip install pandas -U
-### brewer2mpl
-pip install brewer2mpl --user
+### brewer2mpl -> palettable (https://jiffyclub.github.io/palettable/)
+pip install palettable --user
 
 ### Python 2.7 local virtual environment
 easy_install --user -U virtualenv
@@ -222,12 +222,13 @@ sudo apt-get install zotero-standalone qnotero
 sudo aptitude install flashplugin-installer
 
 ### Email
-# I do not like Thunderbird, Claws Mail is preferred!
-sudo aptitude remove thunderbird thunderbird-globalmenu
+# Thunderbird is fine
+sudo aptitude install thunderbird thunderbird-globalmenu
+# Claws Mail is a nice alternative, but very arcaic!!!
 # add more recent PPA for Claws Mail
-sudo add-apt-repository ppa:claws-mail/ppa
-sudo apt-get update
-sudo aptitude install claws-mail claws-mail-extra-plugins
+#sudo add-apt-repository ppa:claws-mail/ppa
+#sudo apt-get update
+#sudo aptitude install claws-mail claws-mail-extra-plugins
 
 #### alternative (TODO)
 # offlineimap
@@ -245,6 +246,20 @@ cd; cd local
 wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
 tar xjvf VESTA-x86_64.tar.bz2
 ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
+
+### WINE ###
+sudo aptitude install wine winetricks
+
+
+# Viper
+cd; cd local
+wget https://intranet.cells.es/Beamlines/CLAESS/software/Viper_Xanda_XAFSmass_20130226.zip
+mkdir Viper; cd Viper
+unzip ../Viper_Xanda_XAFSmass_20130226.zip
+
+
+
+
 
 ### TODO ###
 
