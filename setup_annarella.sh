@@ -31,6 +31,24 @@ sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
 
+# PROXY SETTINGS: IN CASE YOU ARE INSTALLING BEHIND A PROXY
+# http://askubuntu.com/questions/150210/how-do-i-set-systemwide-proxy-servers-in-xubuntu-lubuntu-or-ubuntu-studio
+# set some env variables (add them in your .bashrc)
+#export http_proxy=http://myproxy.server.com:8080/
+#export https_proxy=http://myproxy.server.com:8080/
+#export ftp_proxy=http://myproxy.server.com:8080/
+#export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+#export HTTP_PROXY=http://myproxy.server.com:8080/
+#export HTTPS_PROXY=http://myproxy.server.com:8080/
+#export FTP_PROXY=http://myproxy.server.com:8080/
+#export NO_PROXY="localhost,127.0.0.1,localaddress,.localdomain.com"
+# notify APT of proxy settings:
+# - create a file called 95proxies in /etc/apt/apt.conf.d/
+# - include the following:
+#Acquire::http::proxy "http://myproxy.server.com:8080/";
+#Acquire::ftp::proxy "ftp://myproxy.server.com:8080/";
+#Acquire::https::proxy "https://myproxy.server.com:8080/";
+
 # dual-monitor under XFCE <4.12
 # first enable dual monitor in virtualbox
 sudo aptitude install x11-server-utils
