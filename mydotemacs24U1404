@@ -83,10 +83,9 @@
 ;; ------------------------------------------------------------
 ;; COLOR THEME
 ;; ------------------------------------------------------------
-;; (if window-system
-;;     (load-theme 'solarized-dark t)
-;;     ;;(load-theme 'wombat t)
-;;   (load-theme 'wombat t))
+(if window-system
+    (load-theme 'wombat t)
+  (load-theme 'wombat t))
 
 ;; FONT
 (set-frame-font "Inconsolata-12") ;set default font
@@ -215,41 +214,41 @@
       
       (setq package-archive-enable-alist '(("melpa" deft magit)))
       
-      (defvar mauro/packages '(ac-math
-			       ac-octave
-			       ac-python
-			       auctex
-			       auto-complete
-			       autopair
-			       color-theme
-			       flycheck
-			       gist
-			       htmlize
-			       magit
-			       markdown-mode
-			       matlab-mode
-			       mmm-mode
-			       org
-			       python
-			       sphinx-doc
-			       web-mode
-			       writegood-mode
-			       yaml-mode)
-	"Default packages")
+      (defvar mau_packages '(ac-math
+			     ac-octave
+			     ac-python
+			     auctex
+			     auto-complete
+			     autopair
+			     color-theme
+			     flycheck
+			     gist
+			     htmlize
+			     magit
+			     markdown-mode
+			     matlab-mode
+			     mmm-mode
+			     org
+			     python
+			     sphinx-doc
+			     web-mode
+			     writegood-mode
+			     yaml-mode)
+	"My default packages")
       
       
       
       ;; When Emacs boots, check to make sure all of the packages defined in
-      ;; mauro/packages are installed. If not, have ELPA take care of it.
-      (defun maupackages-installed-p ()
-        (loop for pkg in mauro/packages
-              when (not (package-installed-p pkg)) do (return nil)
-              finally (return t)))
+      ;; mau_packages are installed. If not, have ELPA take care of it.
+      ;; (defun maupackages-installed-p ()
+      ;;   (loop for pkg in mau_packages
+      ;;         when (not (package-installed-p pkg)) do (return nil)
+      ;;         finally (return t)))
       
       ;; (unless (maupackages-installed-p)
       ;;   (message "%s" "Refreshing package database...")
       ;;   (package-refresh-contents)
-      ;;   (dolist (pkg mauro/packages)
+      ;;   (dolist (pkg mau_packages)
       ;;     (when (not (package-installed-p pkg))
       ;;       (package-install pkg))))
       
