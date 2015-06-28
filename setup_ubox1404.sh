@@ -60,7 +60,7 @@ sudo chown mauro /media/sf_WinLinShare/
 cd; mkdir local
 
 # Package manager: aptitude
-sudo apt-get install aptitude
+sudo apt-get install aptitude synaptic gdebi-core
 
 # Revision control (Git & friends)
 sudo apt-get install git meld gftp subversion rsync
@@ -73,10 +73,34 @@ cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
 cd; mkdir ~/local/emacs
 cd ~/local/emacs
 
+# Web
+# default flash plugin does not always work properly... Adobe one is
+# better
+sudo aptitude install flashplugin-installer
+
+# Email
+# Thunderbird is fine
+sudo aptitude install thunderbird thunderbird-globalmenu
+# to keep local config, link .thunderbird -> utils/dotThunderbird
+
+# Office (Libreoffice & friends)
+sudo apt-get remove abiword gnumeric --purge
+sudo add-apt-repository ppa:libreoffice/libreoffice-4-2
+sudo aptitude install libreoffice libreoffice-pdfimport
+sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb
+sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
+sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
+
+
 # Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
 
+# Multimedia
+sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec-extra 
+# to play encrypted DVDs
+sudo aptitude install libdvdread4
+#sudo /usr/share/doc/libdvdread4/install-css.sh
 
 #=====================================================================#
 ### OLD ###
@@ -232,16 +256,6 @@ sudo gnome-font-viewer Humor-Sans.ttf
 # in matplotlib, any plot can be converted to xkcd via -> plt.xkcd()
 
 
-#### LaTeX editor (for LaTeX distribution see in local)
-sudo aptitude install texworks
-
-### Office (Libreoffice & friends)
-sudo apt-get remove abiword gnumeric --purge
-sudo add-apt-repository ppa:libreoffice/libreoffice-4-2
-sudo aptitude install libreoffice libreoffice-pdfimport
-sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb
-sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
-sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
 
 
 ### Reference manager (Mendeley)
@@ -268,25 +282,7 @@ sudo add-apt-repository ppa:smathot/cogscinl
 sudo apt-get update
 sudo apt-get install zotero-standalone qnotero
 
-### Web
-# default flash plugin does not always work properly... Adobe one is better
-sudo aptitude install flashplugin-installer
 
-### Email
-# Thunderbird is fine
-sudo aptitude install thunderbird thunderbird-globalmenu
-# Claws Mail is a nice alternative, but very arcaic!!!
-# add more recent PPA for Claws Mail
-#sudo add-apt-repository ppa:claws-mail/ppa
-#sudo apt-get update
-#sudo aptitude install claws-mail claws-mail-extra-plugins
-
-#### alternative (TODO)
-# offlineimap
-# Wander Lust  ???  http://www.emacswiki.org/emacs/WanderLust
-
-# Multimedia
-sudo apt-get install vlc avidemux openshot
 
 ### Ifeffit & Friends
 # better to use old version until Demeter will fully work with Larch
