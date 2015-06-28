@@ -21,6 +21,10 @@ fi
 
 ### FRESH ###
 
+## BASH VARIABLES
+## ==============
+## see: mydotbashrcU1404
+
 # PROXY SETTINGS: IN CASE YOU ARE INSTALLING BEHIND A PROXY (ESRF CASE HERE)
 # http://askubuntu.com/questions/150210/how-do-i-set-systemwide-proxy-servers-in-xubuntu-lubuntu-or-ubuntu-studio
 # set some env variables (add them in your .bashrc)
@@ -43,24 +47,33 @@ fi
 ## System & Local Packages
 ## =======================
 
-# local
+## Workflows
+## Links with VirtualBox shared folders
+# sudo mkdir /media/sf_WinLinShare
+sudo chown mauro /media/sf_WinLinShare/
+# symbolic link everything in $HOME
+#ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
+#ln -s /home/mauro/utils /media/sf_WinLinShare/utils
+#ln -s /home/mauro/WORK* /media/sf_WinLinShare/WORK*
+
+# local directory
 cd; mkdir local
 
-#aptitude
+# Package manager: aptitude
 sudo apt-get install aptitude
 
-### Revision control (Git & friends)
+# Revision control (Git & friends)
 sudo apt-get install git meld gftp subversion rsync
 
-### Editor (Emacs & friends)
+# Editor (Emacs & friends)
 sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it
-### EMACS conf
+## conf
 cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
-### EMACS local
+## local
 cd; mkdir ~/local/emacs
 cd ~/local/emacs
 
-### Graphics (Inkscape & friends)
+# Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
 
@@ -462,18 +475,4 @@ ln -s your_larch_plugins_dir plugins
 # Edit $HOME/local/feff9.6/bin/feff9 with the correct PATH_TO_FEFF9
 #sudo ln -s $HOME/local/feff9.6/bin/feff9 /usr/local/bin/feff9
 
-## Workflows
-## =========
-
-## Links with VirtualBox shared folders
-sudo mkdir /media/sf_WinLinShare
-sudo chown mauro /media/sf_WinLinShare/
-ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
-ln -s /home/mauro/utils /media/sf_WinLinShare/utils
-ln -s /home/mauro/WORK12 /media/sf_WinLinShare/WORK12
-ln -s /home/mauro/WORK11 /media/sf_WinLinShare/WORK11
-
-## BASH VARIABLES
-## ==============
-## see: mydotbashrcU1204
 
