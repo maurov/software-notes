@@ -60,6 +60,10 @@ cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
 cd; mkdir ~/local/emacs
 cd ~/local/emacs
 
+### Graphics (Inkscape & friends)
+sudo add-apt-repository ppa:inkscape.dev/stable
+sudo aptitude install inkscape xclip graphviz
+
 
 #=====================================================================#
 ### OLD ###
@@ -226,9 +230,6 @@ sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-e
 sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
 sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
 
-### Graphics (Inkscape & friends)
-sudo add-apt-repository ppa:inkscape.dev/stable
-sudo aptitude install inkscape xclip graphviz
 
 ### Reference manager (Mendeley)
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
