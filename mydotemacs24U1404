@@ -206,13 +206,16 @@
       (package-initialize)
       ;; *Additional Repositories*
       ;; Marmalade 
-      (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+      (add-to-list 'package-archives
+		   '("marmalade" . "http://marmalade-repo.org/packages/") t)
       ;; MELPA
-      (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+      (add-to-list 'package-archives
+		   '("melpa" . "http://melpa.milkbox.net/packages/") t)
       ;; Org-mode
-      (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+      (add-to-list 'package-archives
+		   '("org" . "http://orgmode.org/elpa/") t)
       
-      (setq package-archive-enable-alist '(("melpa" deft magit)))
+      ;; (setq package-archive-enable-alist '(("melpa" deft magit)))
       
       (defvar mau_packages '(ac-math
 			     ac-octave
