@@ -43,12 +43,28 @@ fi
 #Acquire::ftp::proxy "ftp://proxy.esrf.fr:3128/";
 #Acquire::https::proxy "https://proxy.esrf.fr:3128/";
 
+# *NOTE*: use 'sudo -E <command>' to export the proxy variables also to root!!!
+
 ## =======================
 ## System & Local Packages
 ## =======================
 
-## Workflows
-## Links with VirtualBox shared folders
+# VIRTUALBOX
+# To install Guest Additions on a fresh linux virtual machine
+sudo apt-get install build-essential module-assistant
+sudo m-a prepare
+# mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
+#sudo sh /path/to/VobLinuxAdditions.run
+
+# dual-monitor under XFCE <4.12
+# first enable dual monitor in virtualbox
+sudo aptitude install x11-server-utils
+#identify your monitor names via 'xrandr -q' (here VBOX0 and VBOX1)
+xrandr --auto --output VBOX0 --mode 1680x956 --right-of VBOX1
+# then put this command in the starting applications
+
+# Workflows
+# Links with VirtualBox shared folders
 # sudo mkdir /media/sf_WinLinShare
 sudo chown mauro /media/sf_WinLinShare/
 # symbolic link everything in $HOME
@@ -85,12 +101,8 @@ sudo aptitude install thunderbird thunderbird-globalmenu
 
 # Office (Libreoffice & friends)
 sudo apt-get remove abiword gnumeric --purge
-sudo add-apt-repository ppa:libreoffice/libreoffice-4-2
-sudo aptitude install libreoffice libreoffice-pdfimport
-sudo aptitude install libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb
-sudo aptitude install libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr
-sudo aptitude install libreoffice-l10n-it myspell-it hyphen-it mythes-it 
-
+sudo apt-add-repository ppa:libreoffice/ppa
+sudo aptitude install libreoffice libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice pstoedit imagemagick libpaper-utils
 
 # Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
@@ -102,25 +114,56 @@ sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec
 sudo aptitude install libdvdread4
 #sudo /usr/share/doc/libdvdread4/install-css.sh
 
+#QT
+sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
+
+# PYTHON
+sudo aptitude install python-dev python-pip python-setuptools python-numpy python-matplotlib python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas
+#TODO: ipython-notebook python-sphinx python-docutils  python-sympy python-pandas python-openbabel python-sqlalchemy python-lxml
+
+# PYTHON3
+sudo aptitude install python3-dev python3-pip python3-setuptools python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas
+#TODO: python3-nose python3-mock python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev ipython3-qtconsole python3-sphinx python3-jinja2
+
+### PyMca5
+# USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
+cd ~/local/
+# fisx
+git clone https://github.com/vasole/fisx.git
+cd fisx
+python3 setup.py install --user
+#pymca
+git clone https://github.com/vasole/pymca.git
+cd pymca
+SPECFILE_USE_GNU_SOURCE=1 python3 setup.py install --user
+# USER INSTALL: alternative (within a virtual environment)
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
+# SYSTEM-WIDE INSTALL: not recommended
+#sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+# make CLEAN:
+#(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
+#(sudo) rm -rf ~/local/pymca/build/
+#
+# documentation
+python3 setup.py build_doc
+
+
+
 #=====================================================================#
 ### OLD ###
 #=====================================================================#
 
 
-### VIRTUALBOX
-# To install Guest Additions on a fresh linux virtual machine
-sudo apt-get install build-essential module-assistant
-sudo m-a prepare
-# mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
-#sudo sh /path/to/VobLinuxAdditions.run
 
 
-# dual-monitor under XFCE <4.12
-# first enable dual monitor in virtualbox
-sudo aptitude install x11-server-utils
-#identify your monitor names via 'xrandr -q' (here VBOX0 and VBOX1)
-xrandr --auto --output VBOX0 --mode 1680x956 --right-of VBOX1
-# then put this command in the starting applications
+
+
+
+
+
+
+
 
 ### Hardware for Inspiron
 sudo aptitude remove bcmwl-kernel-source
@@ -150,13 +193,7 @@ export BLAS=/usr/lib/openblas-base
 # then build/install numpy!
 # python -c 'import numpy' # if not working, revert back liblapack.so.3gf to /usr/lib/lapack
 
-### Qt
-sudo aptitude install qt4-dev-tools qt4-designer
 
-### Python 2
-sudo aptitude install python-pip python-setuptools
-sudo aptitude install python-matplotlib python-scipy python-sphinx python-docutils python-h5py
-sudo aptitude install python-sympy python-pandas python-openbabel python-sqlalchemy python-lxml
 # Python OpenGL
 sudo apt-get install python-opengl libqt4-opengl libgle3
 # Python Visual (NOT WORKING YET!!!)
@@ -190,11 +227,6 @@ cd xraylarch
 python setup.py build
 python setup.py install
 
-### Python 3.2 (on Ubuntu 12.04)
-sudo aptitude install python3-setuptools python3-numpy python3-scipy
-sudo aptitude install python3-nose python3-mock
-sudo aptitude install python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev
-sudo aptitude install ipython3 ipython3-qtconsole python3-sphinx python3-jinja2
 
 ### Python 3.2 local virtual environment
 cd; cd local
@@ -351,37 +383,6 @@ cd; ln -s /usr/local/maulocal local
 cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
 cd install-tl-ubuntu; sudo ./install-tl-ubuntu
 # restart computer
-
-### PyMca5
-# USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
-cd ~/local/
-sudo aptitude install python-qt4 python-qt4-dev
-# fisx
-git clone https://github.com/vasole/fisx.git
-cd fisx
-python setup.py install --user
-#pymca
-git clone https://github.com/vasole/pymca.git
-cd pymca
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
-# USER INSTALL: alternative (within a virtual environment)
-# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
-# (in_your_virt_env) python setup.py install
-# SYSTEM-WIDE INSTALL: not recommended
-#sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
-# make CLEAN:
-#(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
-#(sudo) rm -rf ~/local/pymca/build/
-#
-# documentation
-python setup.py build_doc
-
-### PyMca 4.7
-cd ~/local/
-sudo aptitude install libqwt5-qt4 libqwt-dev python-qwt5-qt4
-svn checkout http://svn.code.sf.net/p/pymca/code/ pymca-code
-cd pymca-code
-sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 
 
 ### XRT
