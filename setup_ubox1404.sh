@@ -125,6 +125,16 @@ sudo aptitude install python-dev python-pip python-setuptools python-numpy pytho
 sudo aptitude install python3-dev python3-pip python3-setuptools python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas
 #TODO: python3-nose python3-mock python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev ipython3-qtconsole python3-sphinx python3-jinja2
 
+# PYTHON PACKAGES (UPGRADE) VIA PIP
+# Matplotlib
+sudo apt-get install libfreetype6-dev libxft-dev
+# this is to solve a known bug in building matplolib from pip
+# 2
+pip install -U matplotlib
+# 3
+pip3 install -U matplotlib
+pip3 install pygments pyzmq ipython -U --user
+
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
 cd ~/local/
@@ -268,16 +278,25 @@ easy_install -U distribute
 pip install -U numpy
 pip install -U scipy
 
-### Python 3.4 (on Debian 8 - scisoft12)
+
+# Python 3.4 VIRTUAL ENV
 cd; cd local
 python3.4 -m venv py34env --clear --without-pip --system-site-packages
 source py34env/bin/activate
 cd py34env; wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
+pip install -U setuptools
+pip install distribute
+# PACKAGES FROM SOURCE // DEV (SEE ALSO BELOW IF NOT EXPERT)
+# PyMca5 in virtenv w Py3.4 and Qt5
+
+####
 cd; cd local/OASYS
 python setup.py develop
 #to test: cd; python -m Orange.canvas
 #ALL THE REST IS AS THE PREVIOUS VIRTUAL ENVIRONMENTS!!!
+
+
 
 #### XKCD plots in matplotlib (required version >1.3)
 sudo apt-get install gnome-font-viewer
