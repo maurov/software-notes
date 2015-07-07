@@ -158,21 +158,38 @@ SPECFILE_USE_GNU_SOURCE=1 python3 setup.py install --user
 # documentation
 python3 setup.py build_doc
 
+# Mendeley Reference manager (TODO: move to Zotero!)
+sudo apt-get install libqtwebkit4 libqtsvg4-perl
+wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
+sudo dpkg -i mendeleydesktop-latest
+mendeleydesktop
+# Mendeley does not like to work with a link, have to make a copy!
+# configure your account, then enable your local version by the following
+cd; cd .local/share/data/Mendeley\ Ltd.
+rm -rf Mendeley\ Desktop
+# assuming your database directory is 'MendeleyDB'
+cp -r /path/to/MendeleyDB Mendeley\ Desktop
+# assuming your configuration file is 'Mendeley\ Desktop.conf'
+cd; cd .config/Mendeley\ Ltd.
+cp /path/to/Mendeley\ Desktop.conf .
+# start Mendeley and everything should be in place!
 
+# VESTA
+cd; cd local
+wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
+tar xjvf VESTA-x86_64.tar.bz2
+ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
+
+# LaTeX / TeX Live distribution (current 2015)
+# https://github.com/scottkosty/install-tl-ubuntu
+cd; cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
+cd install-tl-ubuntu; sudo -E ./install-tl-ubuntu -m
+# restart computer or source /etc/environment
+# /opt/texbin (the install dir) is added to PATH
 
 #=====================================================================#
 ### OLD ###
 #=====================================================================#
-
-
-
-
-
-
-
-
-
-
 
 
 ### Hardware for Inspiron
@@ -307,25 +324,6 @@ sudo gnome-font-viewer Humor-Sans.ttf
 # in matplotlib, any plot can be converted to xkcd via -> plt.xkcd()
 
 
-
-
-### Reference manager (Mendeley)
-wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
-sudo dpkg -i mendeleydesktop_1.11-stable_amd64.deb
-sudo apt-get install libqtwebkit4 libqtsvg4-perl
-mendeleydesktop
-# configure your account, then enable your local version by the following
-cd
-mkdir .local/share/data
-mkdir .local/share/data/Mendeley\ Ltd.
-# assuming your Mendeley database is MendeleyDB
-ln -s MendeleyDB .local/share/data/Mendeley\ Ltd./Mendeley\ Desktop
-# assuming your Mendely configuration file is utils/Mendeley\ Desktop.conf
-mkdir .config/Mendeley\ Ltd.
-#ln -s utils/Mendeley\ Desktop.conf .config/Mendeley\ Ltd./Mendeley\ Desktop.conf
-# Mendely does not like to work with a link, for some strange reason one has to copy the configuration file!
-cp utils/Mendeley\ Desktop.conf .config/Mendeley\ Ltd./Mendeley\ Desktop.conf
-
 ### Moving to Zotero!
 ### http://research.coquipr.com/archives/492
 ### https://forums.zotero.org/discussion/25317/install-zotero-standalone-from-ubuntu-linux-mint-ppa/
@@ -339,11 +337,6 @@ sudo apt-get install zotero-standalone qnotero
 # better to use old version until Demeter will fully work with Larch
 sudo aptitude install horae ifeffit
 
-### VESTA
-cd; cd local
-wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
-tar xjvf VESTA-x86_64.tar.bz2
-ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
 
 ### WINE ###
 sudo aptitude install wine winetricks
@@ -397,11 +390,7 @@ sudo mkdir /usr/local/maulocal
 sudo chown mauro /usr/local/maulocal
 cd; ln -s /usr/local/maulocal local
 
-### LaTeX (Texlive 2014)
-# https://github.com/scottkosty/install-tl-ubuntu
-cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
-cd install-tl-ubuntu; sudo ./install-tl-ubuntu
-# restart computer
+
 
 
 ### XRT
