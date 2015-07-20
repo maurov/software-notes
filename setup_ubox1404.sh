@@ -19,11 +19,21 @@ fi
 # Ubox1404 is also a Windows machine running virtual OSs (virtualbox):
 # - Xubuntu 14.04
 
-### FRESH ###
+#####################
+### FRESH INSTALL ###
+#####################
 
-## BASH VARIABLES
-## ==============
-## see: mydotbashrcU1404
+# BASH VARIABLES
+# ==============
+# see: mydotbashrcU1404
+
+# SSH WITHOUT PASSWORD
+# ====================
+ssh-keygen -t rsa
+#(do not enter passphrase)
+ssh-copy-id -i <file.pub generated before> user@host
+## or if your server uses custom port no:
+ssh-copy-id -i <file.pub generated before> "user@host -p 1234"
 
 # PROXY SETTINGS: IN CASE YOU ARE INSTALLING BEHIND A PROXY (ESRF CASE HERE)
 # http://askubuntu.com/questions/150210/how-do-i-set-systemwide-proxy-servers-in-xubuntu-lubuntu-or-ubuntu-studio
@@ -45,9 +55,9 @@ fi
 
 # *NOTE*: use 'sudo -E <command>' to export the proxy variables also to root!!!
 
-## =======================
-## System & Local Packages
-## =======================
+# =======================
+# System & Local Packages
+# =======================
 
 # VIRTUALBOX
 # To install Guest Additions on a fresh linux virtual machine
@@ -60,7 +70,8 @@ sudo m-a prepare
 # first enable dual monitor in virtualbox
 sudo aptitude install x11-server-utils
 #identify your monitor names via 'xrandr -q' (here VBOX0 and VBOX1)
-xrandr --auto --output VBOX0 --mode 1680x956 --right-of VBOX1
+#xrandr --auto --output VBOX0 --mode 1680x956 --right-of VBOX1
+xrandr --auto --output VGA-0 --mode 1680x956 --right-of VGA-1
 # then put this command in the starting applications
 
 # Workflows
@@ -131,9 +142,11 @@ sudo apt-get install libfreetype6-dev libxft-dev
 # this is to solve a known bug in building matplolib from pip
 # 2
 pip install -U matplotlib
+pip install palettable --user
 # 3
 pip3 install -U matplotlib
 pip3 install pygments pyzmq ipython -U --user
+pip3 install palettable --user
 
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
@@ -186,6 +199,13 @@ cd; cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
 cd install-tl-ubuntu; sudo -E ./install-tl-ubuntu -m
 # restart computer or source /etc/environment
 # /opt/texbin (the install dir) is added to PATH
+
+# Ifeffit & Friends
+# better to use old version until Demeter will fully work with Larch
+sudo aptitude install horae ifeffit
+
+# LARCH
+
 
 #=====================================================================#
 ### OLD ###
@@ -333,9 +353,6 @@ sudo apt-get install zotero-standalone qnotero
 
 
 
-### Ifeffit & Friends
-# better to use old version until Demeter will fully work with Larch
-sudo aptitude install horae ifeffit
 
 
 ### WINE ###
