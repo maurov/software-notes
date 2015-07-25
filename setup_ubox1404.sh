@@ -33,7 +33,10 @@ ssh-keygen -t rsa
 #(do not enter passphrase)
 ssh-copy-id -i <file.pub generated before> user@host
 ## or if your server uses custom port no:
-ssh-copy-id -i <file.pub generated before> "user@host -p 1234"
+ssh-copy-id -i <file.pub generated before> -p 1234 user@host
+#keep alive ssh connections from client side:
+#put the following in ~/.ssh/config (send null package every 100 sec)
+#ServerAliveInterval 100
 
 # PROXY SETTINGS: IN CASE YOU ARE INSTALLING BEHIND A PROXY (ESRF CASE HERE)
 # http://askubuntu.com/questions/150210/how-do-i-set-systemwide-proxy-servers-in-xubuntu-lubuntu-or-ubuntu-studio
