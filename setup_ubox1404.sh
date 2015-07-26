@@ -132,12 +132,10 @@ sudo aptitude install libdvdread4
 sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
 # PYTHON
-sudo aptitude install python-dev python-pip python-setuptools python-numpy python-matplotlib python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas
-#TODO: ipython-notebook python-sphinx python-docutils  python-sympy python-pandas python-openbabel python-sqlalchemy python-lxml
+sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy 
 
 # PYTHON3
-sudo aptitude install python3-dev python3-pip python3-setuptools python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas
-#TODO: python3-nose python3-mock python3-pyqt4 python-qt4-dev python3-sip-dev libqt4-dev ipython3-qtconsole python3-sphinx python3-jinja2
+sudo aptitude install python3-dev python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas python3-sqlalchemy 
 
 # PYTHON PACKAGES (UPGRADE) VIA PIP
 # Matplotlib
@@ -214,7 +212,25 @@ getnonfreefonts -a
 sudo aptitude install horae ifeffit
 
 # LARCH
-
+# http://xraypy.github.io/xraylarch
+# (assuming previous Python packages installed)
+# Wx:
+sudo aptitude install python-wxgtk2.8 python-wxtools
+pip install --user -U wxmplot wxutils termcolor
+cd ~/local
+git clone http://github.com/xraypy/xraylarch.git
+cd xraylarch
+python setup.py build
+python setup.py install --user
+# build/install for python3
+#NOTE: wxPython is not supported for python3 (plotting functionalities
+#      will not be available in Larch, this is to use it as library)
+python3 setup.py build
+python3 setup.py install --user
+# Link larch plugins directory
+cd ~/.larch/
+rm -rf plugins
+ln -s your_larch_plugins_dir plugins
 
 #=====================================================================#
 ### OLD ###
@@ -475,23 +491,6 @@ sudo aptitude install libxml2-dev
 make
 sudo make install
 
-### Larch 
-#Instructions: http://xraypy.github.com/xraylarch/downloads/index.html#source-installation
-#### Deps:
-sudo aptitude install python-wxgtk2.8 python-wxtools python-setuptools python-docutils python-h5py python-sqlalchemy
-#sudo easy_install wxmplot
-pip install --user -U wxmplot wxutils termcolor
-cd ~/local
-git clone http://github.com/xraypy/xraylarch.git
-cd xraylarch
-python setup.py build
-## local install working within a virtualenv (see above!!!)
-python setup.py install --user
-#sudo python setup.py install
-#### Link larch plugins directory
-cd ~/.larch/
-rm -rf plugins
-ln -s your_larch_plugins_dir plugins
 
 ### FDMNES
 # Simply local copy of /sware/exp/fdmnes on NICE/ESRF
