@@ -202,6 +202,12 @@ cd; cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
 cd install-tl-ubuntu; sudo -E ./install-tl-ubuntu -m
 # restart computer or source /etc/environment
 # /opt/texbin (the install dir) is added to PATH
+# give you the rights on texlive
+sudo chown -R mauro.users /usr/local/texlive
+# install non free fonts
+wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+texlua ./install-getnonfreefonts -a
+getnonfreefonts -a
 
 # Ifeffit & Friends
 # better to use old version until Demeter will fully work with Larch
