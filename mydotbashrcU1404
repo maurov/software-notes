@@ -153,7 +153,7 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 # SLOTH & FRIENDS
 export SLOTHOME=$HOME/utils/xraysloth/sloth
 export PYTHONPATH=$SLOTHOME:$PYTHONPATH
-#alias sloth='python $SLOTHOME/sloth_gui.py'
+alias sloth2='python $SLOTHOME/sloth_gui.py'
 alias sloth='python3 $SLOTHOME/sloth_gui.py'
 #ipy 0.13 no RichIpythonWidget
 alias ipylarch='python $SLOTHOME/ipylarch.py'

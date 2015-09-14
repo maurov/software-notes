@@ -132,7 +132,7 @@ sudo aptitude install libdvdread4
 sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
 # PYTHON
-sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy 
+sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy 
 
 # PYTHON3
 sudo aptitude install python3-dev python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas python3-sqlalchemy 

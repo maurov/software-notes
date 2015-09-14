@@ -73,6 +73,15 @@
 (show-paren-mode t)
 (setq column-number-mode t)
 
+;; disable file changed on disk
+;; http://stackoverflow.com/questions/2284703/emacs-how-to-disable-file-changed-on-disk-checking
+(defun ask-user-about-supersession-threat (fn)
+  "blatantly ignore files that changed on disk"
+  )
+(defun ask-user-about-lock (file opponent)
+  "always grab lock"
+   t)
+
 ;; -----------------------------------------------------------------------------
 ;; DEFAUTL ENCODING: utf8
 ;; -----------------------------------------------------------------------------
