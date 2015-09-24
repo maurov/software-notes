@@ -43,3 +43,12 @@ projects (usually hosted on Github), so here I write down some notes.
 
     : git fetch --all
     : git reset --hard origin/master
+
+*** Clone all remote branches
+
+    [[http://stackoverflow.com/questions/67699/clone-all-remote-branches-with-git][From StackOverflow]]
+
+    : git clone git://example.com/myproject
+    : cd myproject
+    : git branch -a # to show all branches
+    : git checkout -b experimental origin/experimental  #to create a local tracking branch
