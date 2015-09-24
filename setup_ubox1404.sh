@@ -123,7 +123,7 @@ sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
 
 # Multimedia
-sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec-extra 
+sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec-extra handbrake
 # to play encrypted DVDs
 sudo aptitude install libdvdread4
 #sudo /usr/share/doc/libdvdread4/install-css.sh
@@ -231,6 +231,44 @@ python3 setup.py install --user
 cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
+
+### XOP2.3 / SHADOW3 (with python 3.4)
+# NOTE: xop2.4 is the currently supported version, but I did not get a
+# 'license' yet, so I stick to xop2.3
+export MYLOCAL=~/local/
+cd $MYLOCAL
+wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
+tar xzvf xop2.3_Linux_20140616.tar.gz
+export XOP_HOME=$MYLOCAL/xop2.3
+cd $MYLOCAL
+mkdir xop_extensions
+cd xop_extensions
+wget http://ftp.esrf.eu/pub/scisoft/xop2.3/shadowvui1.12_Linux_xop2.3.tar.gz
+tar xzvf shadowvui1.12_Linux_xop2.3.tar.gz
+cd $MYLOCAL/xop2.3/extensions
+ln -s $MYLOCAL/xop_extensions/shadowvui shadowvui
+# IF YOU WANT TO UPDATE SHADOW3 TO THE LAST VERSION
+cd shadowvui/shadow3
+# git pull
+# OR if this does not work:
+#    cd ..; rm -rf shadow3;
+#    git clone git://git.epn-campus.eu/repositories/shadow3
+#    cd shadow3
+# THEN BUILD THE PYTHON LIBRARY
+make python
+export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
+export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
+export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
+export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+
+# TIPS:
+# run shadow with 'xop shadowvui'
+# put all previous environment variables in .bashrc
+sudo ln -s $MYLOCAL/xop2.3/xop /usr/local/bin/xop
+
+
+
+
 
 #=====================================================================#
 ### OLD ###
@@ -442,37 +480,6 @@ wget https://pypi.python.org/packages/source/x/xrt/xrt-0.9.4.zip#md5=53f89fe6d94
 unzip xrt-0.9.4.zip
 # use sys.path.append('~/local/xrt-0.9.4/xrt') in your scripts
 
-### XOP/SHADOW3
-export MYLOCAL=~/local/
-cd $MYLOCAL
-wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
-tar xzvf xop2.3_Linux_20140616.tar.gz
-export XOP_HOME=$MYLOCAL/xop2.3
-cd $MYLOCAL
-mkdir xop_extensions
-cd xop_extensions
-wget http://ftp.esrf.eu/pub/scisoft/xop2.3/shadowvui1.12_Linux_20140708.tar.gz
-tar xzvf shadowvui1.12_Linux_20140708.tar.gz
-cd $MYLOCAL/xop2.3/extensions
-ln -s $MYLOCAL/xop_extensions/shadowvui shadowvui
-cd shadow3
-# IF YOU WANT TO UPDATE SHADOW3 TO THE LAST VERSION
-# git pull
-# OR if this does not work:
-#    cd ..; rm -rf shadow3;
-#    git clone git://git.epn-campus.eu/repositories/shadow3
-#    cd shadow3
-# THEN BUILD THE PYTHON LIBRARY
-make python
-export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
-export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
-export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
-export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
-
-# TIPS:
-# run shadow with 'xop shadowvui'
-# put all previous environment variables in .bashrc
-sudo ln -s $MYLOCAL/xop2.3/xop /usr/local/bin/xop
 
 ### Emacs-related (emacs24 installed system-wide via Damien Cassou PPA)
 
