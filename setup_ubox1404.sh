@@ -127,7 +127,7 @@ sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec
 # to play encrypted DVDs
 sudo aptitude install libdvdread4
 #sudo /usr/share/doc/libdvdread4/install-css.sh
-
+sudo aptitude install mencoder 
 #QT
 sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
