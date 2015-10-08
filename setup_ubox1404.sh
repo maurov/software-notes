@@ -95,6 +95,9 @@ sudo apt-get install aptitude synaptic gdebi-core
 # Revision control (Git & friends)
 sudo apt-get install git meld gftp subversion rsync
 
+# Build tools
+sudo aptitude install gfortran
+
 # Editor (Emacs & friends)
 sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it
 ## conf
@@ -262,7 +265,8 @@ cd shadowvui/shadow3
 # THEN BUILD THE PYTHON LIBRARY
 make python
 export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
-export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
+#export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
+export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
 export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
 export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
 
@@ -272,6 +276,13 @@ export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
 sudo ln -s $MYLOCAL/xop2.3/xop /usr/local/bin/xop
 
 
+### Xraylib
+curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
+# add the following two lines /etc/apt/sources.list file (as root, without comment!):
+# deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu precise stable
+# deb-src http://lvserver.ugent.be/apt/ubuntu precise stable
+sudo apt-get update
+sudo apt-get install xraylib libxrl3-dev libxrlf03-3
 
 
 
@@ -448,14 +459,6 @@ wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-ke
 sudo sh -c 'echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
 sudo aptitude update
 sudo aptitude install google-chrome-stable
-
-### Xraylib
-curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
-# add the following two lines /etc/apt/sources.list file (as root, without comment!):
-# deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu precise stable
-# deb-src http://lvserver.ugent.be/apt/ubuntu precise stable
-sudo apt-get update
-sudo apt-get install xraylib libxrl3-dev libxrlf03-3
 
 ### ASE and friends
 # REPOSITORY (SYSTEM APPROACH) -- NOT RECOMMENDED

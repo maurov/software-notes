@@ -147,6 +147,9 @@ export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
 # not good idea, conficts with python 3.x -> use virtualenv!
 #export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
 #export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+# waiting to find a clean solution with virtualenv
+export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
+export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
 
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
