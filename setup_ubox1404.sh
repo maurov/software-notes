@@ -64,7 +64,7 @@ ssh-copy-id -i <file.pub generated before> -p 1234 user@host
 
 # VIRTUALBOX
 # To install Guest Additions on a fresh linux virtual machine
-sudo apt-get install build-essential module-assistant
+sudo apt-get install build-essential module-assistant autoconf shtool libtool
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
@@ -140,10 +140,10 @@ sudo aptitude install ffmpeg
 sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
 # PYTHON
-sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy 
+sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy cython
 
 # PYTHON3
-sudo aptitude install python3-dev python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas python3-sqlalchemy 
+sudo aptitude install python3-dev python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas python3-sqlalchemy cython3
 
 # PYTHON PACKAGES (UPGRADE) VIA PIP
 # Matplotlib
@@ -240,7 +240,7 @@ cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
-### XOP2.3 / SHADOW3 (with python 3.4)
+### XOP2.3
 # NOTE: xop2.4 is the currently supported version, but I did not get a
 # 'license' yet, so I stick to xop2.3
 export MYLOCAL=~/local/
@@ -248,43 +248,87 @@ cd $MYLOCAL
 wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
 tar xzvf xop2.3_Linux_20140616.tar.gz
 export XOP_HOME=$MYLOCAL/xop2.3
+
+### SHADOW3 (with python 3.4)
 cd $MYLOCAL
-mkdir xop_extensions
-cd xop_extensions
-wget http://ftp.esrf.eu/pub/scisoft/xop2.3/shadowvui1.12_Linux_xop2.3.tar.gz
-tar xzvf shadowvui1.12_Linux_xop2.3.tar.gz
-cd $MYLOCAL/xop2.3/extensions
-ln -s $MYLOCAL/xop_extensions/shadowvui shadowvui
-# IF YOU WANT TO UPDATE SHADOW3 TO THE LAST VERSION
-cd shadowvui/shadow3
-# git pull
-# OR if this does not work:
-#    cd ..; rm -rf shadow3;
-#    git clone git://git.epn-campus.eu/repositories/shadow3
-#    cd shadow3
-# THEN BUILD THE PYTHON LIBRARY
+git clone git://git.epn-campus.eu/repositories/shadow3
+cd shadow3
+make
 make python
-export SHADOW3_HOME=$MYLOCAL/xop_extensions/shadowvui/shadow3
+# set global variables (not very elegant, but works!)
+export SHADOW3_HOME=$MYLOCAL/shadow3
 #export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
 export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
 export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
 export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
 
+# to link SHADOW3 with XOP
+cd $MYLOCAL/xop2.3/extensions
+wget http://ftp.esrf.eu/pub/scisoft/xop2.3/shadowvui1.12_Linux_xop2.3.tar.gz
+tar xzvf shadowvui1.12_Linux_xop2.3.tar.gz
+cd shadowvui
+rm -rf shadow3
+ln -s $MYLOCAL/shadow3 shadow3
+
 # TIPS:
 # run shadow with 'xop shadowvui'
 # put all previous environment variables in .bashrc
-sudo ln -s $MYLOCAL/xop2.3/xop /usr/local/bin/xop
+cd; ln -s $MYLOCAL/xop2.3/xop .local/bin/xop
 
+### CRYSTAL
+cd $MYLOCAL
+git clone https://github.com/srio/CRYSTAL.git
+cd CRYSTAL
+make
+export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
-### Xraylib
+### Xraylib // built from source (NOT WORKING!!!)
+# https://github.com/tschoonj/xraylib/wiki/Installation-instructions
+cd $MYLOCAL
+git clone clone https://github.com/tschoonj/xraylib.git
+cd xraylib
+# required: sudo aptitude install autoconf shtool libtool cython3
+export PYTHON_VERSION=3.4
+autoreconf -i
+./configure
+# ./configure --prefix=$HOME/.local #user install still not working!!!
+make
+make check
+# user install still not working!!!
+sudo make install
+
+### Xraylib // from binary package (WORKING!!!)
 curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
-# add the following two lines /etc/apt/sources.list file (as root, without comment!):
-# deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu precise stable
-# deb-src http://lvserver.ugent.be/apt/ubuntu precise stable
+sudo nano /etc/apt/sources.list.d/xraylib.list
+###XRAYLIB
+##deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu trusty stable
+##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
 sudo apt-get update
-sudo apt-get install xraylib libxrl3-dev libxrlf03-3
+sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
 
+#------------------------------------------------------------------#
+### Python 3.4 VIRTUAL ENV
+cd $MYLOCAL
+python3.4 -m venv py34 --clear --without-pip --system-site-packages
+source py34/bin/activate
+cd py34; wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip --upgrade pip
+pip install -U setuptools
+pip install distribute
+# PACKAGES FROM SOURCE // DEV (SEE ALSO BELOW IF NOT EXPERT)
+# PyMca5 in virtenv w Py3.4 and Qt5
+pip install -U numpy
 
+### ORANGE3 (inside py34 virtual env!) STILL NOT WORKING!!!
+# https://github.com/biolab/orange3
+cd $MYLOCAL
+git clone https://github.com/biolab/orange3.git
+cd orange3
+pip install -r requirements.txt
+pip install -r requirements-gui.txt
+python setup.py develop
+#------------------------------------------------------------------#
 
 #=====================================================================#
 ### OLD ###
@@ -395,16 +439,6 @@ pip install -U numpy
 pip install -U scipy
 
 
-# Python 3.4 VIRTUAL ENV
-cd; cd local
-python3.4 -m venv py34env --clear --without-pip --system-site-packages
-source py34env/bin/activate
-cd py34env; wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
-pip install -U setuptools
-pip install distribute
-# PACKAGES FROM SOURCE // DEV (SEE ALSO BELOW IF NOT EXPERT)
-# PyMca5 in virtenv w Py3.4 and Qt5
 
 ####
 cd; cd local/OASYS
