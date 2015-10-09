@@ -93,7 +93,7 @@ cd; mkdir local
 sudo apt-get install aptitude synaptic gdebi-core
 
 # Revision control (Git & friends)
-sudo apt-get install git meld gftp subversion rsync
+sudo apt-get install git meld gftp subversion rsync curl
 
 # Build tools
 sudo aptitude install gfortran
@@ -160,14 +160,15 @@ pip3 install palettable --user
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
 cd ~/local/
-# fisx
-git clone https://github.com/vasole/fisx.git
-cd fisx
-python3 setup.py install --user
+# fisx (not required, can be done at pymca setup!)
+#git clone https://github.com/vasole/fisx.git 
+#cd fisx
+#python3 setup.py install --user
 #pymca
 git clone https://github.com/vasole/pymca.git
 cd pymca
-SPECFILE_USE_GNU_SOURCE=1 python3 setup.py install --user
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
+SPECFILE_USE_GNU_SOURCE=1 python3 setup.py install --user --fisx
 # USER INSTALL: alternative (within a virtual environment)
 # (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
 # (in_your_virt_env) python setup.py install
@@ -241,8 +242,9 @@ rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
 ### XOP2.3
-# NOTE: xop2.4 is the currently supported version, but I did not get a
-# 'license' yet, so I stick to xop2.3
+# NOTE: xop2.4 is the currently supported version, but a license
+# request has to be completed befor downloading it. Here I still do
+# the case for xop2.3
 export MYLOCAL=~/local/
 cd $MYLOCAL
 wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
@@ -284,18 +286,18 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
 ### Xraylib // built from source (NOT WORKING!!!)
 # https://github.com/tschoonj/xraylib/wiki/Installation-instructions
-cd $MYLOCAL
-git clone clone https://github.com/tschoonj/xraylib.git
-cd xraylib
+#cd $MYLOCAL
+#git clone clone https://github.com/tschoonj/xraylib.git
+#cd xraylib
 # required: sudo aptitude install autoconf shtool libtool cython3
-export PYTHON_VERSION=3.4
-autoreconf -i
-./configure
+#export PYTHON_VERSION=3.4
+#autoreconf -i
+#./configure
 # ./configure --prefix=$HOME/.local #user install still not working!!!
-make
-make check
+#make
+#make check
 # user install still not working!!!
-sudo make install
+#sudo make install
 
 ### Xraylib // from binary package (WORKING!!!)
 curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
@@ -305,6 +307,21 @@ sudo nano /etc/apt/sources.list.d/xraylib.list
 ##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
 sudo apt-get update
 sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
+
+#=====================================================================#
+### WORK IN PROGRESS ###
+#=====================================================================#
+
+
+### ORANGE3
+# https://github.com/biolab/orange3
+cd $MYLOCAL
+git clone https://github.com/biolab/orange3.git
+cd orange3
+# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
+#python3 >>> import numpy >>> numpy.version.version
+
+
 
 #------------------------------------------------------------------#
 ### Python 3.4 VIRTUAL ENV
@@ -320,11 +337,6 @@ pip install distribute
 # PyMca5 in virtenv w Py3.4 and Qt5
 pip install -U numpy
 
-### ORANGE3 (inside py34 virtual env!) STILL NOT WORKING!!!
-# https://github.com/biolab/orange3
-cd $MYLOCAL
-git clone https://github.com/biolab/orange3.git
-cd orange3
 pip install -r requirements.txt
 pip install -r requirements-gui.txt
 python setup.py develop
@@ -351,7 +363,9 @@ wget https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_1.6.0_amd64.deb
 sudo dpkg -i dropbox_1.6.0_amd64.deb
 #$ dropbox start -i
 
-### BLAS/ATLAS
+### BLAS/ATLAS/LAPACK
+sudo apt-get install -qq libblas-dev liblapack-dev
+#
 sudo aptitude install libopenblas-base libopenblas-dev libatlas3gf-base
 # may not work with Numpy (try to fix with the following)
 sudo update-alternatives --config libblas.so.3gf
