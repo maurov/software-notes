@@ -128,13 +128,14 @@
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
 ;; WORD WRAP AT SPECIFIC COLUMN NUMBER
+;; NO! THIS IS A PAIN!!!
 ;; from: http://stackoverflow.com/questions/8772488/emacs-word-wrap-at-specific-column-number
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-(add-hook 'text-mode-hook
-	  '(lambda() (set-fill-column 80)))
-(add-hook 'latex-mode-hook 'turn-on-auto-fill)
-(add-hook 'latex-mode-hook
-	  '(lambda() (set-fill-column 80)))
+;; (add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'text-mode-hook
+;; 	  '(lambda() (set-fill-column 80)))
+;; (add-hook 'latex-mode-hook 'turn-on-auto-fill)
+;; (add-hook 'latex-mode-hook
+;; 	  '(lambda() (set-fill-column 80)))
 
 ;;; Use Python mode with LARCH files
 (add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))

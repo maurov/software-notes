@@ -312,17 +312,6 @@ sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-
 ### WORK IN PROGRESS ###
 #=====================================================================#
 
-
-### ORANGE3
-# https://github.com/biolab/orange3
-cd $MYLOCAL
-git clone https://github.com/biolab/orange3.git
-cd orange3
-# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
-#python3 >>> import numpy >>> numpy.version.version
-
-
-
 #------------------------------------------------------------------#
 ### Python 3.4 VIRTUAL ENV
 cd $MYLOCAL
@@ -335,11 +324,19 @@ pip install -U setuptools
 pip install distribute
 # PACKAGES FROM SOURCE // DEV (SEE ALSO BELOW IF NOT EXPERT)
 # PyMca5 in virtenv w Py3.4 and Qt5
-pip install -U numpy
-
+### ORANGE3
+# https://github.com/biolab/orange3
+cd $MYLOCAL
+git clone https://github.com/biolab/orange3.git
+cd orange3
+# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
+#python3 >>> import numpy >>> numpy.version.version
+#pip install -U numpy
 pip install -r requirements.txt
 pip install -r requirements-gui.txt
-python setup.py develop
+python setup.py build
+python setup.py install
+#python setup.py install --user # workaround to install outside venv
 #------------------------------------------------------------------#
 
 #=====================================================================#
