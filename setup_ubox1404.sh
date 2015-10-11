@@ -136,50 +136,15 @@ sudo sudo add-apt-repository ppa:mc3man/trusty-media
 sudo aptitude update
 sudo aptitude upgrade
 sudo aptitude install ffmpeg
-#QT
-sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
-# PYTHON
-sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy cython
-
-# PYTHON3
-sudo aptitude install python3-dev python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-pyqt4 pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-h5py python3-pandas python3-sqlalchemy cython3
-
-# PYTHON PACKAGES (UPGRADE) VIA PIP
-# Matplotlib
-sudo apt-get install libfreetype6-dev libxft-dev
-# this is to solve a known bug in building matplolib from pip
-# 2
-pip install -U matplotlib
-pip install palettable --user
-# 3
-pip3 install -U matplotlib
-pip3 install pygments pyzmq ipython -U --user
-pip3 install palettable --user
-
-### PyMca5
-# USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
-cd ~/local/
-# fisx (not required, can be done at pymca setup!)
-#git clone https://github.com/vasole/fisx.git 
-#cd fisx
-#python3 setup.py install --user
-#pymca
-git clone https://github.com/vasole/pymca.git
-cd pymca
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
-SPECFILE_USE_GNU_SOURCE=1 python3 setup.py install --user --fisx
-# USER INSTALL: alternative (within a virtual environment)
-# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
-# (in_your_virt_env) python setup.py install
-# SYSTEM-WIDE INSTALL: not recommended
-#sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
-# make CLEAN:
-#(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
-#(sudo) rm -rf ~/local/pymca/build/
-#
-# documentation
-python3 setup.py build_doc
+### Xraylib // from binary package (WORKING!!!)
+curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
+sudo nano /etc/apt/sources.list.d/xraylib.list
+###XRAYLIB
+##deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu trusty stable
+##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
+sudo apt-get update
+sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
 
 # Mendeley Reference manager (TODO: move to Zotero!)
 sudo apt-get install libqtwebkit4 libqtsvg4-perl
@@ -219,6 +184,73 @@ getnonfreefonts -a
 # Ifeffit & Friends
 # better to use old version until Demeter will fully work with Larch
 sudo aptitude install horae ifeffit
+
+#QT
+sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
+
+# PYTHON2
+sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy cython
+
+# User upgrades for python2 modules via pip
+# Matplotlib
+sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
+# this is to solve a known bug in building matplolib from pip
+pip install -U matplotlib --user
+pip install palettable --user
+
+# PYTHON3
+sudo aptitude install python3-dev python3-pyqt4 cython3
+
+# NOTE: qt5 may interfere with qt4
+sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5
+
+# python3-related packages are installed within a virtual environment
+sudo apt-get remove python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-h5py python3-pandas python3-sqlalchemy
+
+#------------------------------------------------------------------#
+### Python 3.4 VIRTUAL ENV
+cd $MYLOCAL
+python3.4 -m venv py34 --clear --without-pip --system-site-packages
+source py34/bin/activate
+cd py34; wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip --upgrade pip
+pip install -U setuptools
+pip install distribute
+
+# Numpy
+sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
+pip install -U numpy 
+
+# Matplotlib
+sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
+# this is to solve a known bug in building matplolib from pip
+pip install -U matplotlib
+pip install -U pygments pyzmq ipython
+pip install -U palettable
+
+### PyMca5
+# USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
+cd ~/local/
+# fisx (not required, can be done at pymca setup!)
+#git clone https://github.com/vasole/fisx.git 
+#cd fisx
+#python3 setup.py install --user
+#pymca
+git clone https://github.com/vasole/pymca.git
+cd pymca
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
+# USER INSTALL: alternative (within a virtual environment)
+# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
+# (in_your_virt_env) python setup.py install
+# SYSTEM-WIDE INSTALL: not recommended
+#sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+# make CLEAN:
+#(sudo) rm -rf /usr/local/lib/python2.7/dist-packages/PyMca*
+#(sudo) rm -rf ~/local/pymca/build/
+#
+# documentation
+python setup.py build_doc
 
 # LARCH
 # http://xraypy.github.io/xraylarch
@@ -298,32 +330,16 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 #make check
 # user install still not working!!!
 #sudo make install
+#------------------------------------------------------------------#
+# to deactivate the 'py34' virtual environment
+deactivate
+#------------------------------------------------------------------#
 
-### Xraylib // from binary package (WORKING!!!)
-curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
-sudo nano /etc/apt/sources.list.d/xraylib.list
-###XRAYLIB
-##deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu trusty stable
-##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
-sudo apt-get update
-sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
 
 #=====================================================================#
 ### WORK IN PROGRESS ###
 #=====================================================================#
 
-#------------------------------------------------------------------#
-### Python 3.4 VIRTUAL ENV
-cd $MYLOCAL
-python3.4 -m venv py34 --clear --without-pip --system-site-packages
-source py34/bin/activate
-cd py34; wget https://bootstrap.pypa.io/get-pip.py
-python get-pip.py
-pip --upgrade pip
-pip install -U setuptools
-pip install distribute
-# PACKAGES FROM SOURCE // DEV (SEE ALSO BELOW IF NOT EXPERT)
-# PyMca5 in virtenv w Py3.4 and Qt5
 ### ORANGE3
 # https://github.com/biolab/orange3
 cd $MYLOCAL
