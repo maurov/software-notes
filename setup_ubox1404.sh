@@ -99,7 +99,7 @@ sudo apt-get install git meld gftp subversion rsync curl
 sudo aptitude install gfortran
 
 # Editor (Emacs & friends)
-sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it
+sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it gedit
 ## conf
 cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
 ## local
@@ -243,7 +243,11 @@ pip install -U h5py
 sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
 # this is to solve a known bug in building matplolib from pip
 pip install -U matplotlib
-pip install -U pygments pyzmq ipython
+
+# IPython
+pip install -U pygments pyzmq ipython qtconsole
+
+# Utils
 pip install -U palettable
 pip install termcolor
 
