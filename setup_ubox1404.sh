@@ -198,6 +198,19 @@ sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
 pip install -U matplotlib --user
 pip install palettable --user
 
+# LARCH (python2, for py34 see below virtual env)
+# http://xraypy.github.io/xraylarch
+# (assuming previous Python packages installed)
+# Wx:
+sudo aptitude install python-wxgtk2.8 python-wxtools
+pip install --user -U wxmplot wxutils termcolor
+cd ~/local
+git clone http://github.com/xraypy/xraylarch.git
+cd xraylarch
+python setup.py build
+python setup.py install --user
+
+
 # PYTHON3
 sudo aptitude install python3-dev python3-pyqt4 cython3
 
@@ -222,12 +235,17 @@ pip install distribute
 sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
 pip install -U numpy 
 
+# H5py
+sudo apt-get install libhdf5-dev
+pip install -U h5py
+
 # Matplotlib
 sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
 # this is to solve a known bug in building matplolib from pip
 pip install -U matplotlib
 pip install -U pygments pyzmq ipython
 pip install -U palettable
+pip install termcolor
 
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
@@ -253,21 +271,11 @@ SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
 python setup.py build_doc
 
 # LARCH
-# http://xraypy.github.io/xraylarch
-# (assuming previous Python packages installed)
-# Wx:
-sudo aptitude install python-wxgtk2.8 python-wxtools
-pip install --user -U wxmplot wxutils termcolor
-cd ~/local
-git clone http://github.com/xraypy/xraylarch.git
-cd xraylarch
-python setup.py build
-python setup.py install --user
 # build/install for python3
 #NOTE: wxPython is not supported for python3 (plotting functionalities
 #      will not be available in Larch, this is to use it as library)
-python3 setup.py build
-python3 setup.py install --user
+python setup.py build
+python setup.py install
 # Link larch plugins directory
 cd ~/.larch/
 rm -rf plugins
@@ -330,6 +338,18 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 #make check
 # user install still not working!!!
 #sudo make install
+
+### ORANGE3 (inside py34 venv)
+# https://github.com/biolab/orange3
+cd $MYLOCAL
+git clone https://github.com/biolab/orange3.git
+cd orange3
+# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
+#python >>> import numpy >>> numpy.version.version
+pip install -r requirements.txt
+python setup.py build
+python setup.py install
+
 #------------------------------------------------------------------#
 # to deactivate the 'py34' virtual environment
 deactivate
@@ -340,19 +360,6 @@ deactivate
 ### WORK IN PROGRESS ###
 #=====================================================================#
 
-### ORANGE3
-# https://github.com/biolab/orange3
-cd $MYLOCAL
-git clone https://github.com/biolab/orange3.git
-cd orange3
-# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
-#python3 >>> import numpy >>> numpy.version.version
-#pip install -U numpy
-pip install -r requirements.txt
-pip install -r requirements-gui.txt
-python setup.py build
-python setup.py install
-#python setup.py install --user # workaround to install outside venv
 #------------------------------------------------------------------#
 
 #=====================================================================#
