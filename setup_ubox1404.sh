@@ -247,6 +247,10 @@ pip install -U matplotlib
 # IPython
 pip install -U pygments pyzmq ipython qtconsole
 
+#pyqtconsole (only for evaluation... better to use qtconsole!)
+#https://github.com/marcus-oscarsson/pyqtconsole
+pip install -U gevent pyqtconsole
+
 # Utils
 pip install -U palettable
 pip install termcolor
@@ -261,10 +265,10 @@ cd ~/local/
 #pymca
 git clone https://github.com/vasole/pymca.git
 cd pymca
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
+#SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user --fisx
 # USER INSTALL: alternative (within a virtual environment)
-# (in_your_virt_env) SPECFILE_USE_GNU_SOURCE=1 python setup.py build
-# (in_your_virt_env) python setup.py install
+# (in_your_virt_env)
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --fisx
 # SYSTEM-WIDE INSTALL: not recommended
 #sudo SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 # make CLEAN:
