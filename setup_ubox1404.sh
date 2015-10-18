@@ -347,16 +347,33 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 # user install still not working!!!
 #sudo make install
 
-### ORANGE3 (inside py34 venv)
-# https://github.com/biolab/orange3
+### OASYS (inside py34 venv)
+#http://www.elettra.eu/lightsources/labs-and-services/hard-soft-x-ray-optical-engineering/oasys.html
 cd $MYLOCAL
 git clone https://github.com/biolab/orange3.git
 cd orange3
-# check numpy version >=1.9.0 (if not, UPGRADE NUMPY FIRST!)
+# check deps (if not, UPGRADE NUMPY FIRST!)
+#numpy >= 1.9.2, scipy >= 0.15.1, matplotlib >= 1.4.3
 #python >>> import numpy >>> numpy.version.version
-pip install -r requirements.txt
-python setup.py build
-python setup.py install
+#python >>> import scipy >>> scipy.version.version
+#python >>> import matplotlib >>> matplotlib.__version__
+#
+#xraylib
+#PyMca5 (5.1.0)
+#Shadow (it can now be installed via: pip install pykern, pip install shadow3)
+pip install oasys
+#python -m oasys.canvas
+#go to the add-on form (directly from the welcome form) e install ShadowOui
+
+#---workaround in case behind proxy and setting 'http_proxy' and
+#---'https_proxy' environmental variables does not help
+#The working procedure to install ShadowOui add-on in case of behind a
+#proxy (once the GUI is correctly installed, check with python -m
+#oasys.canvas):
+#git clone ShadowOui repository somewhere
+#(within a virtual environment or with superuser rights, with
+#python3.4) python setup.py sdist develop
+
 
 #------------------------------------------------------------------#
 # to deactivate the 'py34' virtual environment
