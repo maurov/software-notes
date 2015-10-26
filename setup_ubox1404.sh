@@ -227,9 +227,7 @@ python3.4 -m venv py34 --clear --without-pip --system-site-packages
 source py34/bin/activate
 cd py34; wget https://bootstrap.pypa.io/get-pip.py
 python get-pip.py
-pip --upgrade pip
-pip install -U setuptools
-pip install distribute
+pip install --upgrade pip setuptools distribute
 
 # Numpy
 sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
@@ -249,11 +247,10 @@ pip install -U pygments pyzmq ipython qtconsole
 
 #pyqtconsole (only for evaluation... better to use qtconsole!)
 #https://github.com/marcus-oscarsson/pyqtconsole
-pip install -U gevent pyqtconsole
+#pip install -U gevent pyqtconsole
 
 # Utils
-pip install -U palettable
-pip install termcolor
+pip install -U palettable termcolor
 
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
@@ -301,7 +298,7 @@ export XOP_HOME=$MYLOCAL/xop2.3
 
 ### SHADOW3 (with python 3.4)
 cd $MYLOCAL
-git clone git://git.epn-campus.eu/repositories/shadow3
+git clone https://github.com/srio/shadow3.git
 cd shadow3
 make
 make python
@@ -340,12 +337,11 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 # required: sudo aptitude install autoconf shtool libtool cython3
 #export PYTHON_VERSION=3.4
 #autoreconf -i
-#./configure
-# ./configure --prefix=$HOME/.local #user install still not working!!!
+# ./configure --prefix=$HOME/.local --enable-python-integration
 #make
 #make check
-# user install still not working!!!
-#sudo make install
+#make install
+#working but not fully tested yet!
 
 ### OASYS (inside py34 venv)
 #http://www.elettra.eu/lightsources/labs-and-services/hard-soft-x-ray-optical-engineering/oasys.html
