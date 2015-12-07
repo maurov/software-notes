@@ -138,6 +138,7 @@ sudo aptitude upgrade
 sudo aptitude install ffmpeg
 
 ### Xraylib // from binary package (WORKING!!!)
+###            see within virtual environment for source (below)
 curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
 sudo nano /etc/apt/sources.list.d/xraylib.list
 ###XRAYLIB
@@ -329,19 +330,19 @@ cd CRYSTAL
 make
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
-### Xraylib // built from source (NOT WORKING!!!)
+### Xraylib // built from source
 # https://github.com/tschoonj/xraylib/wiki/Installation-instructions
-#cd $MYLOCAL
-#git clone clone https://github.com/tschoonj/xraylib.git
-#cd xraylib
+cd $MYLOCAL
+git clone clone https://github.com/tschoonj/xraylib.git
+cd xraylib
 # required: sudo aptitude install autoconf shtool libtool cython3
 #export PYTHON_VERSION=3.4
-#autoreconf -i
-# ./configure --prefix=$HOME/.local --enable-python-integration
-#make
-#make check
-#make install
-#working but not fully tested yet!
+autoreconf -i
+./configure --prefix=$HOME/.local --enable-python --enable-python-integration
+PYTHON=/full/path/to/your/virtualenv/bin/python3.4
+make
+make check
+make install
 
 ### OASYS (inside py34 venv)
 #http://www.elettra.eu/lightsources/labs-and-services/hard-soft-x-ray-optical-engineering/oasys.html
