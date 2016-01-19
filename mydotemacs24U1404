@@ -38,6 +38,22 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
+;; Frame title
+;;http://www.emacswiki.org/emacs/FrameTitle
+(setq frame-title-format
+      '((:eval (if (buffer-file-name)
+		   (file-name-nondirectory (abbreviate-file-name (buffer-file-name)))
+		 "%b"))
+	(:eval (if (buffer-modified-p) 
+		   " *"))
+	("  [")
+	(:eval (if (buffer-file-name)
+		   (file-name-directory (abbreviate-file-name (buffer-file-name)))
+		 " %b"))
+	("]  ")
+)
+      )
+
 ;;Marking text
 (delete-selection-mode t)
 (transient-mark-mode t)
@@ -171,8 +187,9 @@
 
 (setq org-CUA-compatible t) ;just if CUA-mode enabled!
 
-(add-to-list 'auto-mode-alist '("\\.\\(org\\|txt\\)$" . org-mode))
-(add-to-list 'auto-mode-alist '("README$" . org-mode))
+;(add-to-list 'auto-mode-alist '("\\.\\(org\\|txt\\)$" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.org" . org-mode))
+;(add-to-list 'auto-mode-alist '("README$" . org-mode))
 
 ;; minor modes in non-org buffers
 (add-hook 'mail-mode-hook 'turn-on-orgtbl)    ;instead M-x orgtbl-mode
