@@ -121,6 +121,19 @@ sudo apt-get remove abiword gnumeric --purge
 sudo apt-add-repository ppa:libreoffice/ppa
 sudo aptitude install libreoffice libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice pstoedit imagemagick libpaper-utils
 
+# Diff-pdf
+# https://github.com/vslavik/diff-pdf
+cd $MYLOCAL
+git clone https://github.com/vslavik/diff-pdf
+cd diff-pdf
+sudo apt-get install make automake g++
+sudo apt-get install libpoppler-glib-dev poppler-utils wxgtk2.8-dev
+./bootstrap
+./configure
+make
+sudo make install
+#=> diff-pdf
+
 # Graphics (Inkscape & friends)
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
