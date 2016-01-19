@@ -27,11 +27,19 @@
 ;; add current local dir
 (add-to-list 'load-path "~/local/emacs/") ;; 
 
-;; Start-up options
+;; Start-up options // MISC
+(global-visual-line-mode 1); Proper line wrapping
+;;(global-hl-line-mode 1); Highlight current row
+(show-paren-mode 1); Matches parentheses and such in every mode
+(setq calendar-week-start-day 1); Calender should start on Monday
+(add-to-list 'default-frame-alist '(height . 50)); Default frame height.
+(setq echo-keystrokes 0.1)
+(setq visible-bell t); Flashes on error
+(setq column-number-mode t)
+
 ;; Splash Screen
-(setq inhibit-splash-screen t
-      initial-scratch-message nil
-      initial-major-mode 'org-mode)
+(setq inhibit-splash-screen t); Disable splash screen
+(setq initial-scratch-message nil)
 
 ;; Scroll bar, Tool bar, Menu bar
 (scroll-bar-mode -1)
@@ -51,7 +59,7 @@
 		   (file-name-directory (abbreviate-file-name (buffer-file-name)))
 		 " %b"))
 	("]  ")
-)
+	)
       )
 
 ;;Marking text
@@ -82,12 +90,6 @@
 (global-set-key (kbd "C-c C-k") 'compile)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-;; Misc
-(setq echo-keystrokes 0.1
-      use-dialog-box nil
-      visible-bell t)
-(show-paren-mode t)
-(setq column-number-mode t)
 
 ;; disable file changed on disk
 ;; http://stackoverflow.com/questions/2284703/emacs-how-to-disable-file-changed-on-disk-checking
@@ -160,17 +162,107 @@
 ;; LATEX-AUCTEX
 ;; http://emacswiki.org/emacs/AUCTeX
 ;; ------------------------------------------------------------
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
+;; Customary Customization, p. 1 and 16 in the manual, and http://www.emacswiki.org/emacs/AUCTeX#toc2
+(setq TeX-auto-save t); Enable parse on save
+(setq TeX-parse-self t); Enable parse on load
 (setq TeX-save-query nil)
-;;(setq TeX-PDF-mode t)
+;;(setq TeX-PDF-mode t); PDF mode (rather than DVI-mode)
 (setq-default TeX-master nil)
 
-;;(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;;(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'TeX-mode-hook 'flyspell-mode); Enable Flyspell mode for TeX modes such as AUCTeX. Highlights all misspelled words.
+(add-hook 'emacs-lisp-mode-hook 'flyspell-prog-mode); Enable Flyspell program mode for emacs lisp mode, which highlights all misspelled words in comments and strings.
+(setq ispell-dictionary "english"); Default dictionary. To change do M-x ispell-change-dictionary RET.
+(add-hook 'TeX-mode-hook
+          (lambda () (TeX-fold-mode 1))); Automatically activate TeX-fold-mode.
+(setq LaTeX-babel-hyphen nil); Disable language-specific hyphen insertion.
 
-;;(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-;;(setq reftex-plug-into-AUCTeX t)
+;; " expands into csquotes macros (for this to work babel must be loaded after csquotes).
+(setq LaTeX-csquotes-close-quote "}"
+      LaTeX-csquotes-open-quote "\\enquote{")
+
+;; LaTeX-math-mode http://www.gnu.org/s/auctex/manual/auctex/Mathematics.html
+(add-hook 'TeX-mode-hook 'LaTeX-math-mode)
+
+;;; RefTeX
+;; Turn on RefTeX for AUCTeX http://www.gnu.org/s/auctex/manual/reftex/reftex_5.html
+(add-hook 'TeX-mode-hook 'turn-on-reftex)
+
+;; Fontification (remove unnecessary entries as you notice them) http://lists.gnu.org/archive/html/emacs-orgmode/2009-05/msg00236.html http://www.gnu.org/software/auctex/manual/auctex/Fontification-of-macros.html
+(setq font-latex-match-reference-keywords
+      '(
+        ;; biblatex
+        ("printbibliography" "[{")
+        ("addbibresource" "[{")
+        ;; Standard commands
+        ;; ("cite" "[{")
+        ("Cite" "[{")
+        ("parencite" "[{")
+        ("Parencite" "[{")
+        ("footcite" "[{")
+        ("footcitetext" "[{")
+        ;; ;; Style-specific commands
+        ("textcite" "[{")
+        ("Textcite" "[{")
+        ("smartcite" "[{")
+        ("Smartcite" "[{")
+        ("cite*" "[{")
+        ("parencite*" "[{")
+        ("supercite" "[{")
+        ; Qualified citation lists
+        ("cites" "[{")
+        ("Cites" "[{")
+        ("parencites" "[{")
+        ("Parencites" "[{")
+        ("footcites" "[{")
+        ("footcitetexts" "[{")
+        ("smartcites" "[{")
+        ("Smartcites" "[{")
+        ("textcites" "[{")
+        ("Textcites" "[{")
+        ("supercites" "[{")
+        ;; Style-independent commands
+        ("autocite" "[{")
+        ("Autocite" "[{")
+        ("autocite*" "[{")
+        ("Autocite*" "[{")
+        ("autocites" "[{")
+        ("Autocites" "[{")
+        ;; Text commands
+        ("citeauthor" "[{")
+        ("Citeauthor" "[{")
+        ("citetitle" "[{")
+        ("citetitle*" "[{")
+        ("citeyear" "[{")
+        ("citedate" "[{")
+        ("citeurl" "[{")
+        ;; Special commands
+        ("fullcite" "[{")))
+
+(setq font-latex-match-textual-keywords
+      '(
+        ;; biblatex brackets
+        ("parentext" "{")
+        ("brackettext" "{")
+        ("hybridblockquote" "[{")
+        ;; Auxiliary Commands
+        ("textelp" "{")
+        ("textelp*" "{")
+        ("textins" "{")
+        ("textins*" "{")
+        ;; supcaption
+        ("subcaption" "[{")))
+
+(setq font-latex-match-variable-keywords
+      '(
+        ;; amsmath
+        ("numberwithin" "{")
+        ;; enumitem
+        ("setlist" "[{")
+        ("setlist*" "[{")
+        ("newlist" "{")
+        ("renewlist" "{")
+        ("setlistdepth" "{")
+        ("restartlist" "{")))
 
 ;; ------------------------------------------------------------
 ;; ORG-MODE
