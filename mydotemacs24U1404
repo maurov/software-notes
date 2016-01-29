@@ -33,6 +33,7 @@
 (show-paren-mode 1); Matches parentheses and such in every mode
 (setq calendar-week-start-day 1); Calender should start on Monday
 (add-to-list 'default-frame-alist '(height . 50)); Default frame height.
+(add-to-list 'default-frame-alist '(width . 200)); Default frame height.
 (setq echo-keystrokes 0.1)
 (setq visible-bell t); Flashes on error
 (setq column-number-mode t)
