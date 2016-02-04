@@ -98,6 +98,9 @@ sudo apt-get install git meld gftp subversion rsync curl
 # Build tools
 sudo aptitude install gfortran
 
+# Disk utilities
+sudo aptitude install gnome-disk-utility testdisk
+
 # Editor (Emacs & friends)
 sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it gedit
 ## conf
