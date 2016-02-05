@@ -64,10 +64,15 @@ ssh-copy-id -i <file.pub generated before> -p 1234 user@host
 
 # VIRTUALBOX
 # To install Guest Additions on a fresh linux virtual machine
-sudo apt-get install build-essential module-assistant autoconf shtool libtool
+sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
+
+#Virtualbox for Linux Host
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add -
+sudo apt-get update
+sudo apt-get install virtualbox-5.0
 
 # dual-monitor under XFCE <4.12
 # first enable dual monitor in virtualbox
@@ -100,6 +105,9 @@ sudo aptitude install gfortran
 
 # Disk utilities
 sudo aptitude install gnome-disk-utility testdisk
+
+# Power utilities
+sudo aptitude install powerstat
 
 # Editor (Emacs & friends)
 sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it gedit
