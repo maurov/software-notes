@@ -167,6 +167,9 @@ alias ipylarch='python $SLOTHOME/ipylarch.py'
 # oasys
 alias oasys='source $MYLOCAL/py34/bin/activate; python -m oasys.canvas'
 
+#pymca within virtualenv
+alias pymca='source $MYLOCAL/py34/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
+
 #add .local/bin to PATH
 export PATH=$HOME/.local/bin:$PATH
 
