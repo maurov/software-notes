@@ -165,7 +165,7 @@ alias sloth='python3 $SLOTHOME/sloth_gui.py'
 alias ipylarch='python $SLOTHOME/ipylarch.py'
 
 # oasys
-alias oasys='source $MYLOCAL/py34/bin/activate; python -m oasys.canvas'
+alias oasys='source $MYLOCAL/py34/bin/activate; python -m oasys.canvas -l4 --force-discovery'
 
 #pymca within virtualenv
 alias pymca='source $MYLOCAL/py34/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'

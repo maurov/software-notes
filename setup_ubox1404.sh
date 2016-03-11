@@ -235,14 +235,17 @@ cd xraylarch
 python setup.py build
 python setup.py install --user
 
+#####################################
+### PYTHON3 : VIRTUAL ENVIRONMENT ###
+#####################################
 
-# PYTHON3
+# Python3 system-wide required packages
 sudo aptitude install python3-dev python3-pyqt4 cython3
 
 # NOTE: qt5 may interfere with qt4
-sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5
+#sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5
 
-# python3-related packages are installed within a virtual environment
+# REMOVE python3-related packages that will be installed within a virtual environment
 sudo apt-get remove python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-h5py python3-pandas python3-sqlalchemy
 
 #------------------------------------------------------------------#
@@ -258,24 +261,39 @@ pip install --upgrade pip setuptools distribute
 sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
 pip install -U numpy 
 
-# H5py
-sudo apt-get install libhdf5-dev
-pip install -U h5py
+# Scipy
+pip install -U scipy
+
+# Bottlechest
+# NOTE: better to install from sources to avoid problems (with numpy version?) 
+# pip install --upgrade bottlechest>=0.7.0
+git clone https://github.com/biolab/bottlechest
+cd bottlechest
+python setup.py install
+cd ..
 
 # Matplotlib
 sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
 # this is to solve a known bug in building matplolib from pip
 pip install -U matplotlib
 
-# IPython
-pip install -U pygments pyzmq ipython qtconsole
+# IPython & friends
+pip install -U pygments pyzmq ipython qtconsole jupyter
 
 #pyqtconsole (only for evaluation... better to use qtconsole!)
 #https://github.com/marcus-oscarsson/pyqtconsole
 #pip install -U gevent pyqtconsole
 
 # Utils
-pip install -U palettable termcolor
+pip install -U palettable termcolor seaborn
+
+# H5py
+sudo apt-get install libhdf5-dev
+pip install -U h5py
+
+# Orange
+pip install -U chardet nose Jinja2 Sphinx recommonmark numpydoc beautifulsoup4 xlrd
+pip install -U orange-canvas-core orange-widget-core
 
 ### PyMca5
 # USER-LOCAL INSTALL: recommended (in .local/lib/pythonX.Y/site-packages/)
@@ -325,14 +343,21 @@ export XOP_HOME=$MYLOCAL/xop2.3
 cd $MYLOCAL
 git clone https://github.com/srio/shadow3.git
 cd shadow3
+cd src
 make
-make python
+make all
+make install
+cd ..
+python setup.py build
+python setup.py install 
 # set global variables (not very elegant, but works!)
 export SHADOW3_HOME=$MYLOCAL/shadow3
-#export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
-export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
 export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
-export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+
+#not required anymore
+#export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
+#export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
+#export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
 
 # to link SHADOW3 with XOP
 cd $MYLOCAL/xop2.3/extensions
@@ -354,12 +379,45 @@ cd CRYSTAL
 make
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
-### Xraylib // built from source
+
+# xraylib (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+echo "Installing Oasys dependency xraylib"
+curl -O http://lvserver.ugent.be/xraylib/xraylib-3.1.0.tar.gz
+tar xvfz xraylib-3.1.0.tar.gz
+cd xraylib-3.1.0
+./configure --enable-python --enable-python-integration PYTHON=`which python`
+make
+export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
+cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
+cp python/xraylib.py $PYTHON_SITE_PACKAGES 
+cp python/.libs/xraylib_np.so  $PYTHON_SITE_PACKAGES
+cp python/.libs/_xraylib.so  $PYTHON_SITE_PACKAGES
+cp python/xraymessages.py  $PYTHON_SITE_PACKAGES 
+cd ..
+
+#SRxraylib
+echo "Installing Oasys dependency SRxraylib"
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+python setup.py install
+cd ..
+
+# oasys and shadowOui (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+git clone https://github.com/lucarebuffi/oasys1
+cd oasys1
+python setup.py develop
+cd ..
+git clone https://github.com/lucarebuffi/shadowOui
+cd shadowOui
+python setup.py develop
+cd ..
+
+### !!!DEPRECATED!!! Xraylib // built from source [see install notes before]
 # https://github.com/tschoonj/xraylib/wiki/Installation-instructions
 cd $MYLOCAL
 git clone clone https://github.com/tschoonj/xraylib.git
 cd xraylib
-# required: sudo aptitude install autoconf shtool libtool cython3
+# required: sudo aptitude install autoconf shtool libtool cython3 swig
 #export PYTHON_VERSION=3.4
 autoreconf -i
 ./configure --prefix=$HOME/.local --enable-python --enable-python-integration
@@ -368,7 +426,7 @@ make
 make check
 make install
 
-### OASYS (inside py34 venv)
+### !!!DEPRECATED!!! OASYS (inside py34 venv) [see install notes before]
 #http://www.elettra.eu/lightsources/labs-and-services/hard-soft-x-ray-optical-engineering/oasys.html
 cd $MYLOCAL
 git clone https://github.com/biolab/orange3.git
