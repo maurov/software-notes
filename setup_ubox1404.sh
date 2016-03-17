@@ -318,27 +318,6 @@ SPECFILE_USE_GNU_SOURCE=1 python setup.py install --fisx
 # documentation
 python setup.py build_doc
 
-# LARCH
-# build/install for python3
-#NOTE: wxPython is not supported for python3 (plotting functionalities
-#      will not be available in Larch, this is to use it as library)
-python setup.py build
-python setup.py install
-# Link larch plugins directory
-cd ~/.larch/
-rm -rf plugins
-ln -s your_larch_plugins_dir plugins
-
-### XOP2.3
-# NOTE: xop2.4 is the currently supported version, but a license
-# request has to be completed befor downloading it. Here I still do
-# the case for xop2.3
-export MYLOCAL=~/local/
-cd $MYLOCAL
-wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
-tar xzvf xop2.3_Linux_20140616.tar.gz
-export XOP_HOME=$MYLOCAL/xop2.3
-
 ### SHADOW3 (with python 3.4)
 cd $MYLOCAL
 git clone https://github.com/srio/shadow3.git
@@ -358,6 +337,48 @@ export LD_LIBRARY_PATH=$SHADOW3_HOME:$LD_LIBRARY_PATH
 #export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-2.7
 #export SHADOW3_BUILD=$SHADOW3_HOME/build/lib.linux-x86_64-3.4
 #export PYTHONPATH=$SHADOW3_BUILD:$PYTHONPATH
+
+# Xraylib (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+sudo aptitude install swig
+curl -O https://github.com/tschoonj/xraylib/archive/xraylib-3.1.0.tar.gz
+tar xvfz xraylib-3.1.0.tar.gz
+cd xraylib-3.1.0
+autoreconf -i
+./configure --enable-python --enable-python-integration PYTHON=`which python`
+make
+export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
+cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
+cp python/xraylib.py $PYTHON_SITE_PACKAGES 
+cp python/.libs/xraylib_np.so  $PYTHON_SITE_PACKAGES
+cp python/.libs/_xraylib.so  $PYTHON_SITE_PACKAGES
+cp python/xraymessages.py  $PYTHON_SITE_PACKAGES 
+cd ..
+
+#SRxraylib
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+python setup.py install
+cd ..
+
+# oasys and shadowOui (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+git clone https://github.com/lucarebuffi/oasys1
+cd oasys1
+python setup.py develop
+cd ..
+git clone https://github.com/lucarebuffi/shadowOui
+cd shadowOui
+python setup.py develop
+cd ..
+
+### XOP2.3
+# NOTE: xop2.4 is the currently supported version, but a license
+# request has to be completed befor downloading it. Here I still do
+# the case for xop2.3
+export MYLOCAL=~/local/
+cd $MYLOCAL
+wget http://ftp.esrf.eu/pub/scisoft/xop2.3/xop2.3_Linux_20140616.tar.gz
+tar xzvf xop2.3_Linux_20140616.tar.gz
+export XOP_HOME=$MYLOCAL/xop2.3
 
 # to link SHADOW3 with XOP
 cd $MYLOCAL/xop2.3/extensions
@@ -379,38 +400,16 @@ cd CRYSTAL
 make
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
-
-# xraylib (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
-echo "Installing Oasys dependency xraylib"
-curl -O http://lvserver.ugent.be/xraylib/xraylib-3.1.0.tar.gz
-tar xvfz xraylib-3.1.0.tar.gz
-cd xraylib-3.1.0
-./configure --enable-python --enable-python-integration PYTHON=`which python`
-make
-export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
-cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
-cp python/xraylib.py $PYTHON_SITE_PACKAGES 
-cp python/.libs/xraylib_np.so  $PYTHON_SITE_PACKAGES
-cp python/.libs/_xraylib.so  $PYTHON_SITE_PACKAGES
-cp python/xraymessages.py  $PYTHON_SITE_PACKAGES 
-cd ..
-
-#SRxraylib
-echo "Installing Oasys dependency SRxraylib"
-git clone https://github.com/lucarebuffi/srxraylib
-cd srxraylib
+# LARCH
+# build/install for python3
+#NOTE: wxPython is not supported for python3 (plotting functionalities
+#      will not be available in Larch, this is to use it as library)
+python setup.py build
 python setup.py install
-cd ..
-
-# oasys and shadowOui (https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
-git clone https://github.com/lucarebuffi/oasys1
-cd oasys1
-python setup.py develop
-cd ..
-git clone https://github.com/lucarebuffi/shadowOui
-cd shadowOui
-python setup.py develop
-cd ..
+# Link larch plugins directory
+cd ~/.larch/
+rm -rf plugins
+ln -s your_larch_plugins_dir plugins
 
 ### !!!DEPRECATED!!! Xraylib // built from source [see install notes before]
 # https://github.com/tschoonj/xraylib/wiki/Installation-instructions
