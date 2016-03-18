@@ -243,7 +243,7 @@ python setup.py install --user
 sudo aptitude install python3-dev python3-pyqt4 cython3
 
 # NOTE: qt5 may interfere with qt4
-#sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5
+sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-pyqt5.qtsvg
 
 # REMOVE python3-related packages that will be installed within a virtual environment
 sudo apt-get remove python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-h5py python3-pandas python3-sqlalchemy
