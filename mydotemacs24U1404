@@ -25,7 +25,10 @@
 (setq user-mail-address "mauro.rovezzi@gmail.com")
 
 ;; add current local dir
-(add-to-list 'load-path "~/local/emacs/") ;; 
+(add-to-list 'load-path "~/local/emacs/") ;;
+
+;; DOCONCE
+(load-file "~/local/emacs/.doconce-mode.el")
 
 ;; Start-up options // MISC
 (global-visual-line-mode 1); Proper line wrapping

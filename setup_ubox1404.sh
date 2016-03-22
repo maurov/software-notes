@@ -193,7 +193,10 @@ wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
 tar xjvf VESTA-x86_64.tar.bz2
 ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
 
-# LaTeX / TeX Live distribution (current 2015)
+####################################################
+### LaTeX / TeX Live distribution (current 2015) ###
+####################################################
+
 # https://github.com/scottkosty/install-tl-ubuntu
 cd; cd local; git clone https://github.com/scottkosty/install-tl-ubuntu.git
 cd install-tl-ubuntu; sudo -E ./install-tl-ubuntu -m
@@ -205,6 +208,15 @@ sudo chown -R mauro.users /usr/local/texlive
 wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
 texlua ./install-getnonfreefonts -a
 getnonfreefonts -a
+
+###############
+### DOCONCE ###
+###############
+# https://github.com/hplgit/doconce
+# NOTE: doconce is python2.7 based
+cd; cd local; git clone https://github.com/hplgit/doconce.git
+cd doconce
+python setup.py install --user
 
 # Ifeffit & Friends
 # better to use old version until Demeter will fully work with Larch
