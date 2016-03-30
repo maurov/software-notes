@@ -214,9 +214,85 @@ getnonfreefonts -a
 ###############
 # https://github.com/hplgit/doconce
 # NOTE: doconce is python2.7 based
-cd; cd local; git clone https://github.com/hplgit/doconce.git
+
+# ------------ #
+# DocOnce DEPS #
+# ------------ #
+cd; cd local;
+
+# Version control systems
+sudo apt-get install mercurial git subversion
+
+# --- Python-based packages and tools ---
+sudo apt-get install python-pip idle python-dev python-setuptools
+# upgrade
+sudo pip install -U setuptools
+sudo pip install -U pdftools
+sudo pip install -U ipython
+sudo pip install -U tornado
+sudo pip install -U pyzmq
+sudo pip install -U traitlets
+sudo pip install -U pickleshare
+sudo pip install -U jsonschema
+# If problems with IPython.nbformat.v4: clone ipython and run setup.py
+# to get the latest version
+
+# Preprocessors
+sudo pip install -U future
+sudo pip install -U mako
+sudo pip install -U -e git+https://github.com/hplgit/preprocess#egg=preprocess# Version control systems
+
+# Publish for handling bibliography
+sudo pip install -U python-Levenshtein
+sudo apt-get install python-lxml
+sudo pip install -U -e hg+https://bitbucket.org/logg/publish#egg=publish
+
+# Sphinx (with additional third/party themes)
+sudo pip install -U sphinx
+sudo pip install -U alabaster
+sudo pip install -U sphinx_rtd_theme
+sudo pip install -U -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme
+sudo pip install -U -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme
+sudo pip install -U -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized
+sudo pip install -U -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs
+sudo pip install -U -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell
+sudo pip install -U tinkerer
+
+# Runestone sphinx books
+sudo pip install -U sphinxcontrib-paverutils
+sudo pip install -U paver
+sudo pip install -U cogapp
+sudo pip install -U -e git+https://bitbucket.org/hplbit/pygments-ipython-console#egg=pygments-ipython-console
+sudo pip install -U -e -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
+sudo pip install -U -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
+
+# XHTML
+sudo pip install -U beautifulsoup4
+sudo pip install -U html5lib
+
+# ptex2tex is not needed if --latex_code_style= option is used
+cd srclib
+svn checkout http://ptex2tex.googlecode.com/svn/trunk/ ptex2tex
+cd ptex2tex
+sudo python setup.py install
+cd latex
+sh cp2texmf.sh
+cd ../../..
+
+# LaTeX
+# assume installed via install_tl_ubuntu
+
+# Image manipulation
+sudo apt-get install imagemagick netpbm mjpegtools pdftk giftrans gv evince smpeg-plaympeg mplayer totem libav-tools
+
+# Misc
+sudo apt-get install ispell pandoc unoconv libreoffice libreoffice-dmaths
+sudo apt-get install curl a2ps wdiff meld diffpdf diffuse
+
+#... and DocOnce itself!
+git clone https://github.com/hplgit/doconce.git
 cd doconce
-python setup.py install --user
+sudo python setup.py install
 
 # Ifeffit & Friends
 # better to use old version until Demeter will fully work with Larch
