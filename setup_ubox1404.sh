@@ -62,7 +62,10 @@ ssh-copy-id -i <file.pub generated before> -p 1234 user@host
 # System & Local Packages
 # =======================
 
-# VIRTUALBOX
+##################
+### VIRTUALBOX ###
+##################
+
 # To install Guest Additions on a fresh linux virtual machine
 sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool
 sudo m-a prepare
@@ -109,14 +112,6 @@ sudo aptitude install gnome-disk-utility testdisk
 # Power utilities
 sudo aptitude install powerstat
 
-# Editor (Emacs & friends)
-sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it gedit
-## conf
-cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
-## local
-cd; mkdir ~/local/emacs
-cd ~/local/emacs
-
 # Web
 # default flash plugin does not always work properly... Adobe one is
 # better
@@ -127,10 +122,17 @@ sudo aptitude install flashplugin-installer
 sudo aptitude install thunderbird thunderbird-globalmenu
 # to keep local config, link .thunderbird -> utils/dotThunderbird
 
-# Office (Libreoffice & friends)
-sudo apt-get remove abiword gnumeric --purge
-sudo apt-add-repository ppa:libreoffice/ppa
-sudo aptitude install libreoffice libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice pstoedit imagemagick libpaper-utils
+
+#########################################
+### TEXT EDITORS/CONVERTERS/UTILITIES ###
+#########################################
+#EMACS
+sudo aptitude install emacs emacs-goodies-el emacs-goodies-extra-el emacs-intl-fonts fonts-inconsolata aspell-en aspell-fr aspell-it gedit
+## conf
+cd; ln -s /media/sf_WinLinShare/utils/mydotemacs24U1404 .emacs
+## local
+cd; mkdir ~/local/emacs
+cd ~/local/emacs
 
 # Diff-pdf
 # https://github.com/vslavik/diff-pdf
@@ -145,11 +147,29 @@ make
 sudo make install
 #=> diff-pdf
 
-# Graphics (Inkscape & friends)
+#PANDOC
+sudo apt-get install pandoc
+# the update conficts with pandoc-citeproc
+wget https://github.com/jgm/pandoc/releases/download/1.17.0.2/pandoc-1.17.0.2-1-amd64.deb
+sudo apt-get remove pandoc-citeproc
+sudo dpkg -i pandoc-1.17.0.2-1-amd64.deb
+
+#####################################
+### OFFICE: LIBREOFFICE & FRIENDS ###
+#####################################
+sudo apt-get remove abiword gnumeric --purge
+sudo apt-add-repository ppa:libreoffice/ppa
+sudo aptitude install libreoffice libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice pstoedit imagemagick libpaper-utils
+
+####################################
+### GRAPHICS: INKSCAPE & FRIENDS ###
+####################################
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
 
-# Multimedia
+#################################
+### MULTIMEDIA: VLC & FRIENDS ###
+#################################
 sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec-extra handbrake
 # to play encrypted DVDs
 sudo aptitude install libdvdread4
@@ -161,17 +181,10 @@ sudo aptitude update
 sudo aptitude upgrade
 sudo aptitude install ffmpeg
 
-### Xraylib // from binary package (WORKING!!!)
-###            see within virtual environment for source (below)
-curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
-sudo nano /etc/apt/sources.list.d/xraylib.list
-###XRAYLIB
-##deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu trusty stable
-##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
-sudo apt-get update
-sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
-
-# Mendeley Reference manager (TODO: move to Zotero!)
+##########################################
+### REFERENCE MANAGER: MENDELEY/ZOTERO ###
+##########################################
+# Mendeley
 sudo apt-get install libqtwebkit4 libqtsvg4-perl
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
 sudo dpkg -i mendeleydesktop-latest
@@ -186,12 +199,6 @@ cp -r /path/to/MendeleyDB Mendeley\ Desktop
 cd; cd .config/Mendeley\ Ltd.
 cp /path/to/Mendeley\ Desktop.conf .
 # start Mendeley and everything should be in place!
-
-# VESTA
-cd; cd local
-wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
-tar xjvf VESTA-x86_64.tar.bz2
-ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
 
 ####################################################
 ### LaTeX / TeX Live distribution (current 2015) ###
@@ -209,99 +216,15 @@ wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
 texlua ./install-getnonfreefonts -a
 getnonfreefonts -a
 
-###############
-### DOCONCE ###
-###############
-# https://github.com/hplgit/doconce
-# NOTE: doconce is python2.7 based
-
-# ------------ #
-# DocOnce DEPS #
-# ------------ #
-cd; cd local;
-
-# Version control systems
-sudo apt-get install mercurial git subversion
-
-# --- Python-based packages and tools ---
-sudo apt-get install python-pip idle python-dev python-setuptools
-# upgrade
-sudo pip install -U setuptools
-sudo pip install -U pdftools
-sudo pip install -U ipython
-sudo pip install -U tornado
-sudo pip install -U pyzmq
-sudo pip install -U traitlets
-sudo pip install -U pickleshare
-sudo pip install -U jsonschema
-# If problems with IPython.nbformat.v4: clone ipython and run setup.py
-# to get the latest version
-
-# Preprocessors
-sudo pip install -U future
-sudo pip install -U mako
-sudo pip install -U -e git+https://github.com/hplgit/preprocess#egg=preprocess# Version control systems
-
-# Publish for handling bibliography
-sudo pip install -U python-Levenshtein
-sudo apt-get install python-lxml
-sudo pip install -U -e hg+https://bitbucket.org/logg/publish#egg=publish
-
-# Sphinx (with additional third/party themes)
-sudo pip install -U sphinx
-sudo pip install -U alabaster
-sudo pip install -U sphinx_rtd_theme
-sudo pip install -U -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme
-sudo pip install -U -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme
-sudo pip install -U -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized
-sudo pip install -U -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs
-sudo pip install -U -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell
-sudo pip install -U tinkerer
-
-# Runestone sphinx books
-sudo pip install -U sphinxcontrib-paverutils
-sudo pip install -U paver
-sudo pip install -U cogapp
-sudo pip install -U -e git+https://bitbucket.org/hplbit/pygments-ipython-console#egg=pygments-ipython-console
-sudo pip install -U -e -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
-sudo pip install -U -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
-
-# XHTML
-sudo pip install -U beautifulsoup4
-sudo pip install -U html5lib
-
-# ptex2tex is not needed if --latex_code_style= option is used
-cd srclib
-svn checkout http://ptex2tex.googlecode.com/svn/trunk/ ptex2tex
-cd ptex2tex
-sudo python setup.py install
-cd latex
-sh cp2texmf.sh
-cd ../../..
-
-# LaTeX
-# assume installed via install_tl_ubuntu
-
-# Image manipulation
-sudo apt-get install imagemagick netpbm mjpegtools pdftk giftrans gv evince smpeg-plaympeg mplayer totem libav-tools
-
-# Misc
-sudo apt-get install ispell pandoc unoconv libreoffice libreoffice-dmaths
-sudo apt-get install curl a2ps wdiff meld diffpdf diffuse
-
-#... and DocOnce itself!
-git clone https://github.com/hplgit/doconce.git
-cd doconce
-sudo python setup.py install
-
-# Ifeffit & Friends
-# better to use old version until Demeter will fully work with Larch
-sudo aptitude install horae ifeffit
-
-#QT
+##########
+### QT ###
+##########
+#QT4
 sudo aptitude install qt4-dev-tools qt4-designer libqt4-dev libqt4-opengl
 
-# PYTHON2
+###############
+### PYTHON2 ###
+###############
 sudo aptitude install python-dev python-pip python-setuptools python-docutils python-numpy python-matplotlib python-mpltoolkits.basemap python-scipy ipython python-qt4 python-qt4-dev python-h5py python-pandas python-sqlalchemy cython
 
 # User upgrades for python2 modules via pip
@@ -310,6 +233,20 @@ sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
 # this is to solve a known bug in building matplolib from pip
 pip install -U matplotlib --user
 pip install palettable --user
+
+###############
+### SCIENCE ###
+###############
+
+# VESTA
+cd; cd local
+wget http://www.geocities.jp/kmo_mma/crystal/download/VESTA-x86_64.tar.bz2
+tar xjvf VESTA-x86_64.tar.bz2
+ln -s VESTA-x86_64/VESTA $HOME/.local/bin/vesta
+
+# Ifeffit & Friends
+# better to use old version until Demeter will fully work with Larch
+sudo aptitude install horae ifeffit
 
 # LARCH (python2, for py34 see below virtual env)
 # http://xraypy.github.io/xraylarch
@@ -323,9 +260,19 @@ cd xraylarch
 python setup.py build
 python setup.py install --user
 
-#####################################
-### PYTHON3 : VIRTUAL ENVIRONMENT ###
-#####################################
+### Xraylib // from binary package (WORKING!!!)
+###            see within virtual environment for source (below)
+curl http://lvserver.ugent.be/apt/xmi.packages.key | sudo apt-key add -
+sudo nano /etc/apt/sources.list.d/xraylib.list
+###XRAYLIB
+##deb [arch=amd64] http://lvserver.ugent.be/apt/ubuntu trusty stable
+##deb-src http://lvserver.ugent.be/apt/ubuntu trusty stable
+sudo apt-get update
+sudo apt-get install libxrl7 xraylib libxrl7-dev libxrlf03-7 libxrl-perl python-libxrl7
+
+#######################################
+### PYTHON3.4 : VIRTUAL ENVIRONMENT ###
+#######################################
 
 # Python3 system-wide required packages
 sudo aptitude install python3-dev python3-pyqt4 cython3
@@ -336,8 +283,6 @@ sudo aptitude install pyqt5-dev pyqt5-dev-tools python3-pyqt5 python3-pyqt5.qtsv
 # REMOVE python3-related packages that will be installed within a virtual environment
 sudo apt-get remove python3-pip python3-setuptools python3-docutils python3-numpy python3-matplotlib python3-scipy ipython3 python3-h5py python3-pandas python3-sqlalchemy
 
-#------------------------------------------------------------------#
-### Python 3.4 VIRTUAL ENV
 cd $MYLOCAL
 python3.4 -m venv py34 --clear --without-pip --system-site-packages
 source py34/bin/activate
@@ -499,7 +444,7 @@ cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
-### !!!DEPRECATED!!! Xraylib // built from source [see install notes before]
+### /!\ DEPRECATED /!\ Xraylib // built from source [see install notes before]
 # https://github.com/tschoonj/xraylib/wiki/Installation-instructions
 cd $MYLOCAL
 git clone clone https://github.com/tschoonj/xraylib.git
@@ -513,7 +458,7 @@ make
 make check
 make install
 
-### !!!DEPRECATED!!! OASYS (inside py34 venv) [see install notes before]
+### /!\ DEPRECATED /!\ OASYS (inside py34 venv) [see install notes before]
 #http://www.elettra.eu/lightsources/labs-and-services/hard-soft-x-ray-optical-engineering/oasys.html
 cd $MYLOCAL
 git clone https://github.com/biolab/orange3.git
@@ -545,6 +490,91 @@ pip install oasys
 # to deactivate the 'py34' virtual environment
 deactivate
 #------------------------------------------------------------------#
+
+#######################################################
+### DOCONCE /!\ DEPRECATED /!\ BETTER USE PANDOC!!! ###
+#######################################################
+# https://github.com/hplgit/doconce
+# NOTE: doconce is python2.7 based
+
+# ------------ #
+# DocOnce DEPS #
+# ------------ #
+cd; cd local;
+
+# Version control systems
+sudo apt-get install mercurial git subversion
+
+# --- Python-based packages and tools ---
+sudo apt-get install python-pip idle python-dev python-setuptools
+# upgrade
+sudo pip install -U setuptools
+sudo pip install -U pdftools
+sudo pip install -U ipython
+sudo pip install -U tornado
+sudo pip install -U pyzmq
+sudo pip install -U traitlets
+sudo pip install -U pickleshare
+sudo pip install -U jsonschema
+# If problems with IPython.nbformat.v4: clone ipython and run setup.py
+# to get the latest version
+
+# Preprocessors
+sudo pip install -U future
+sudo pip install -U mako
+sudo pip install -U -e git+https://github.com/hplgit/preprocess#egg=preprocess# Version control systems
+
+# Publish for handling bibliography
+sudo pip install -U python-Levenshtein
+sudo apt-get install python-lxml
+sudo pip install -U -e hg+https://bitbucket.org/logg/publish#egg=publish
+
+# Sphinx (with additional third/party themes)
+sudo pip install -U sphinx
+sudo pip install -U alabaster
+sudo pip install -U sphinx_rtd_theme
+sudo pip install -U -e hg+https://bitbucket.org/ecollins/cloud_sptheme#egg=cloud_sptheme
+sudo pip install -U -e git+https://github.com/ryan-roemer/sphinx-bootstrap-theme#egg=sphinx-bootstrap-theme
+sudo pip install -U -e hg+https://bitbucket.org/miiton/sphinxjp.themes.solarized#egg=sphinxjp.themes.solarized
+sudo pip install -U -e git+https://github.com/shkumagai/sphinxjp.themes.impressjs#egg=sphinxjp.themes.impressjs
+sudo pip install -U -e git+https://github.com/kriskda/sphinx-sagecell#egg=sphinx-sagecell
+sudo pip install -U tinkerer
+
+# Runestone sphinx books
+sudo pip install -U sphinxcontrib-paverutils
+sudo pip install -U paver
+sudo pip install -U cogapp
+sudo pip install -U -e git+https://bitbucket.org/hplbit/pygments-ipython-console#egg=pygments-ipython-console
+sudo pip install -U -e -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
+sudo pip install -U -e git+https://github.com/hplgit/pygments-doconce#egg=pygments-doconce
+
+# XHTML
+sudo pip install -U beautifulsoup4
+sudo pip install -U html5lib
+
+# ptex2tex is not needed if --latex_code_style= option is used
+cd srclib
+svn checkout http://ptex2tex.googlecode.com/svn/trunk/ ptex2tex
+cd ptex2tex
+sudo python setup.py install
+cd latex
+sh cp2texmf.sh
+cd ../../..
+
+# LaTeX
+# assume installed via install_tl_ubuntu
+
+# Image manipulation
+sudo apt-get install imagemagick netpbm mjpegtools pdftk giftrans gv evince smpeg-plaympeg mplayer totem libav-tools
+
+# Misc
+sudo apt-get install ispell pandoc unoconv libreoffice libreoffice-dmaths
+sudo apt-get install curl a2ps wdiff meld diffpdf diffuse
+
+#... and DocOnce itself!
+git clone https://github.com/hplgit/doconce.git
+cd doconce
+sudo python setup.py install
 
 
 #=====================================================================#
