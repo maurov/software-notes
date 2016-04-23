@@ -167,9 +167,11 @@ sudo aptitude install libreoffice libreoffice-pdfimport libreoffice-l10n-en-gb m
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo aptitude install inkscape xclip graphviz
 
-#################################
-### MULTIMEDIA: VLC & FRIENDS ###
-#################################
+##################
+### MULTIMEDIA ###
+##################
+#
+#VLC & FRIENDS ###
 sudo aptitude install vlc avidemux openshot xubuntu-restricted-extras libavcodec-extra handbrake
 # to play encrypted DVDs
 sudo aptitude install libdvdread4
@@ -180,6 +182,11 @@ sudo sudo add-apt-repository ppa:mc3man/trusty-media
 sudo aptitude update
 sudo aptitude upgrade
 sudo aptitude install ffmpeg
+#jdownloader: http://jdownloader.org/
+#https://launchpad.net/~jd-team/+archive/ubuntu/jdownloader
+sudo add-apt-repository ppa:jd-team/jdownloader
+sudo apt-get update
+sudo apt-get install jdownloader-installer
 
 ##########################################
 ### REFERENCE MANAGER: MENDELEY/ZOTERO ###
