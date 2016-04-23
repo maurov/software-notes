@@ -149,6 +149,11 @@
 
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
+;;VISUAL-LINE MODE
+;;(setq visual-line-mode t)
+(global-visual-line-mode 0)
+(setq adaptive-wrap-prefix-mode t)
+
 ;; WORD WRAP AT SPECIFIC COLUMN NUMBER
 ;; NO! THIS IS A PAIN!!!
 ;; from: http://stackoverflow.com/questions/8772488/emacs-word-wrap-at-specific-column-number
@@ -343,6 +348,7 @@
       (defvar mau_packages '(ac-math
 			     ac-octave
 			     ac-python
+			     adaptive-wrap
 			     auctex
 			     auto-complete
 			     autopair
@@ -379,7 +385,6 @@
       ;;       (package-install pkg))))
       
       ;; ------------------------------------------------------------
-
 
       ;; This makes sure that brace structures (), [], {}, etc. are closed
       ;; as soon as the opening character is typed.
