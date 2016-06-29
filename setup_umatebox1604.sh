@@ -126,3 +126,15 @@ cd; cd .config/Mendeley\ Ltd.
 cp /path/to/Mendeley\ Desktop.conf .
 # start Mendeley and everything should be in place!
 
+#########################################
+### TEXT EDITORs/CONVERTERS/UTILITIES ###
+#########################################
+#EMACS
+sudo aptitude install emacs aspell-en aspell-fr aspell-it
+#Spacemacs variant
+cd; rm -rf .emacs.d; rm .emacs
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+#start in http mode, otherwise will not correctly install
+emacs --insecure
+
+
