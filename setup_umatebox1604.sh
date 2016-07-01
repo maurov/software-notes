@@ -131,11 +131,11 @@ cp /path/to/Mendeley\ Desktop.conf .
 #########################################
 #EMACS
 sudo aptitude install emacs aspell-en aspell-fr aspell-it
-#Spacemacs variant
-cd; rm -rf .emacs.d; rm .emacs
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+#Spacemacs variant -> TOO DISTRACTING // REMOVED!!!
+#cd; rm -rf .emacs.d; rm .emacs
+#git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 #start in http mode, otherwise will not correctly install
-emacs --insecure
+#emacs --insecure
 
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
@@ -147,3 +147,9 @@ sudo aptitude install inkscape xclip graphviz
 ###############
 #a sub-selection from texlive-full package
 sudo aptitude install texlive-lang-french texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers texlive-science fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-math-extra texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
+
+##################
+### QT5/PY3QT5 ###
+##################
+#QT4 not installing anymore
+sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg
