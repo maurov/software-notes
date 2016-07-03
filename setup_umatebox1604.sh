@@ -71,9 +71,9 @@ sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
 
-#############
-# Workflows #
-#############
+#########################
+# WORKFLOWS/DIRECTORIES #
+#########################
 # if migrating from existing machine/install
 # -> manually copy 'WinLinShare' to DATA partition
 # Links with VirtualBox shared folders
@@ -84,6 +84,8 @@ sudo chown mauro /media/sf_WinLinShare/
 #ln -s /home/mauro/utils /media/sf_WinLinShare/utils
 #ln -s /home/mauro/utils /media/sf_WinLinShare/ownClowd/WORKtmp WORKtmp
 #ln -s /home/mauro/WORK* /media/sf_WinLinShare/WORK*
+#local software repository -> $MYLOCAL
+cd; mkdir local
 
 #############
 # PACKAGING #
@@ -93,7 +95,7 @@ sudo apt-get install aptitude synaptic gdebi-core
 ###############
 # BUILD TOOLS #
 ###############
-sudo aptitude install gfortran
+sudo aptitude install gfortran cython cython3 cython-doc
 
 #################
 # GIT & FRIENDS #
@@ -153,3 +155,85 @@ sudo aptitude install texlive-lang-french texlive-science-doc texlive-generic-re
 ##################
 #QT4 not installing anymore
 sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg
+
+#######################################
+### PYTHON3.5 : VIRTUAL ENVIRONMENT ###
+#######################################
+cd; cd $MYLOCAL
+python3.5 -m venv py35 --clear --without-pip --system-site-packages
+source py35/bin/activate
+cd py35; wget https://bootstrap.pypa.io/get-pip.py
+python get-pip.py
+pip install --upgrade pip setuptools distribute
+
+#Numpy
+sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
+pip install -U numpy 
+#check version: python -> import numpy -> numpy.version.version
+
+#Scipy
+pip install -U scipy
+#check version: python -> import scipy -> scipy.version.version
+
+#Sympy
+pip install -U sympy
+
+#Bottlechest
+#NOTE: pip install does not work, better directly from sources
+git clone https://github.com/biolab/bottlechest
+cd bottlechest
+python setup.py install
+cd ..
+
+#Matplotlib
+#NOTE: the packages are to solve a known bug in building matplolib from pip
+sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
+pip install -U matplotlib
+#check version: python -> import matplotlib -> matplotlib.__version__
+
+#IPython & friends
+pip install -U pygments pyzmq ipython qtconsole jupyter
+
+#Pandas
+pip install -U pandas
+
+#H5py
+sudo aptitude install libhdf5-dev
+pip install -U h5py
+
+#Utils
+pip install -U six sqlalchemy palettable termcolor seaborn
+
+#LARCH (http://xraypy.github.io/xraylarch)
+#build/install for python3
+cd; cd local
+#(using personal fork)
+git clone https://github.com/maurov/xraylarch.git
+#NOTE: wxPython is not supported for python3 (plotting functionalities
+#      will not be available in Larch, this is to use it as library)
+python setup.py build
+python setup.py install
+# Link larch plugins directory (optional)
+cd ~/.larch/
+rm -rf plugins
+ln -s your_larch_plugins_dir plugins
+
+#PyMca5
+cd; cd ~/local/
+# fisx (it will be done at pymca setup!)
+#(using personal fork)
+git clone https://github.com/maurov/pymca.git
+cd pymca
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install --fisx
+#build documentation
+python setup.py build_doc
+
+#Silx
+cd; cd ~/local/
+# fisx (it will be done at pymca setup!)
+#(using personal fork)
+git clone https://github.com/maurov/silx.git
+cd silx
+python setup.py 
+#build documentation
+python setup.py build_doc
