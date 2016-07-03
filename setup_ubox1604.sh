@@ -24,7 +24,7 @@ fi
 
 # BASH VARIABLES
 # ==============
-# see: mydotbashrcUM1604
+# see: mydotbashrcU1604.sh
 
 # SSH WITHOUT PASSWORD
 # ====================
@@ -66,7 +66,7 @@ ssh-copy-id -i <file.pub generated before> -p 1234 user@host
 ##################
 
 # To install Guest Additions on a fresh linux virtual machine
-sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool
+sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
@@ -86,6 +86,7 @@ sudo chown mauro /media/sf_WinLinShare/
 #ln -s /home/mauro/WORK* /media/sf_WinLinShare/WORK*
 #local software repository -> $MYLOCAL
 cd; mkdir local
+export MYLOCAL=~/local/
 
 #############
 # PACKAGING #
@@ -150,10 +151,32 @@ sudo aptitude install inkscape xclip graphviz
 #a sub-selection from texlive-full package
 sudo aptitude install texlive-lang-french texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers texlive-science fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-math-extra texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
 
+#give you the rights on texlive
+sudo chown -R mauro.users /usr/share/texlive
+#install non free fonts
+wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+sudo texlua ./install-getnonfreefonts -a
+getnonfreefonts -a
+
 ##################
-### QT5/PY3QT5 ###
+### MULTIMEDIA ###
 ##################
-#QT4 not installing anymore
+#encoders
+sudo aptitude install ffmpeg mencoder
+#VLC & FRIENDS ###
+sudo aptitude install vlc avidemux openshot
+#jdownloader: http://jdownloader.org/
+#https://launchpad.net/~jd-team/+archive/ubuntu/jdownloader
+sudo add-apt-repository ppa:jd-team/jdownloader
+sudo apt-get update
+sudo apt-get install jdownloader-installer
+
+##########
+### QT ###
+##########
+#QT4
+sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
+#QT5
 sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg
 
 #######################################
@@ -237,3 +260,49 @@ cd silx
 python setup.py 
 #build documentation
 python setup.py build_doc
+
+# Orange
+pip install -U chardet nose Jinja2 Sphinx recommonmark numpydoc beautifulsoup4 xlrd
+pip install -U orange-canvas-core orange-widget-core
+
+# Xraylib
+#(https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+wget https://github.com/tschoonj/xraylib/archive/xraylib-3.1.0.tar.gz
+tar xvfz xraylib-3.1.0.tar.gz
+cd xraylib-3.1.0
+autoreconf -i
+./configure --enable-python --enable-python-integration PYTHON=`which python`
+make
+export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
+cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
+cp python/xraylib.py $PYTHON_SITE_PACKAGES 
+cp python/.libs/xraylib_np.so  $PYTHON_SITE_PACKAGES
+cp python/.libs/_xraylib.so  $PYTHON_SITE_PACKAGES
+cp python/xraymessages.py  $PYTHON_SITE_PACKAGES 
+cd ..
+
+#SRxraylib
+cd; cd local
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+python setup.py install
+cd ..
+
+### SHADOW3 (with python 3.4)
+cd; cd local
+git clone https://github.com/srio/shadow3.git
+cd shadow3
+python setup.py build
+python setup.py develop
+
+#ShadowOui
+#(https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+git clone https://github.com/lucarebuffi/oasys1
+cd oasys1
+python setup.py develop
+cd ..
+git clone https://github.com/lucarebuffi/shadowOui
+cd shadowOui
+python setup.py develop
+cd ..
+
