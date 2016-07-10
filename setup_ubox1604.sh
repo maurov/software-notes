@@ -88,6 +88,11 @@ sudo chown mauro /media/sf_WinLinShare/
 cd; mkdir local
 export MYLOCAL=~/local/
 
+################
+# COLOR THEMES #
+################
+sudo apt-get install gnome-color-chooser
+
 #############
 # PACKAGING #
 #############
@@ -177,7 +182,7 @@ sudo apt-get install jdownloader-installer
 #QT4
 sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
 #QT5
-sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg
+sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg python3-pyqt5.qtwebkit
 
 #######################################
 ### PYTHON3.5 : VIRTUAL ENVIRONMENT ###
