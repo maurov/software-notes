@@ -36,6 +36,11 @@ projects (usually hosted on Github), so here I write down some notes.
   pull-request a name, fill in details of what changes you made, click submit
   button.  you're done!!
 
+- once the pull request accepted/rejected you can delete your branch
+
+ : git branch --delete your_branch_name      #locally
+ : git push origin --delete your_branch_name #remotely
+
 *** Useful links
     - [[https://gun.io/blog/how-to-github-fork-branch-and-pull-request/][Tutorial at gun.io]]
     - [[http://stackoverflow.com/questions/14680711/how-to-do-a-github-pull-request][Pull request made easy at StackOverflow]]
