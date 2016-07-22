@@ -26,6 +26,9 @@ export NO_PROXY="localhost,127.0.0.1"
 #add .local/bin to PATH
 export PATH=$HOME/.local/bin:$PATH
 
+#pymca within virtualenv
+alias pymca='source $MYLOCAL/py35/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
+
 # ---------------------------------------------------------------------- #
 # DEFAULT PART // TAKEN FROM SYSTEM .bashrc
 # ---------------------------------------------------------------------- #
