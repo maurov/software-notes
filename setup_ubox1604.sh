@@ -182,7 +182,18 @@ sudo apt-get install jdownloader-installer
 #QT4
 sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
 #QT5
-sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python3-pyqt5.qtsvg python3-pyqt5.qtwebkit
+sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit
+
+###################################
+### PYTHON2.7 : SYSTEM PACKAGES ###
+###################################
+sudo aptitude install python-numpy python-scipy python-matplotlib python-pytools python-pyopencl
+
+###################################
+### PYTHON3.5 : SYSTEM PACKAGES ###
+###################################
+sudo aptitude install python3-pytools python3-pyopencl
+
 
 #######################################
 ### PYTHON3.5 : VIRTUAL ENVIRONMENT ###
@@ -230,7 +241,7 @@ sudo aptitude install libhdf5-dev
 pip install -U h5py
 
 #Utils
-pip install -U six sqlalchemy palettable termcolor seaborn
+pip install -U six sqlalchemy palettable termcolor seaborn pytools
 
 #LARCH (http://xraypy.github.io/xraylarch)
 #build/install for python3
