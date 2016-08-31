@@ -322,3 +322,10 @@ cd shadowOui
 python setup.py develop
 cd ..
 
+### CRYSTAL
+cd; cd local
+git clone https://github.com/srio/CRYSTAL.git
+cd CRYSTAL
+make
+#insert this in .bashrc
+export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat

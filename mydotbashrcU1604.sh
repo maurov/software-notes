@@ -29,6 +29,9 @@ export PATH=$HOME/.local/bin:$PATH
 #pymca within virtualenv
 alias pymca='source $MYLOCAL/py35/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
 
+#CRYSTAL
+export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
+ 
 # ---------------------------------------------------------------------- #
 # DEFAULT PART // TAKEN FROM SYSTEM .bashrc
 # ---------------------------------------------------------------------- #
