@@ -13,10 +13,11 @@ else
 fi
 #######################################################
 
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
-# umatebox1606 setup                                                  #
-# umatebox1604 is Ubuntu Mate 16.04 VirtuaBox guest in a Windows host #
-# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+# ubox1604 is XUbuntu 16.04 VirtuaBox guest in a Windows host #
+# +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #
+
+# /!\ the best Ubuntu flavor is XUbuntu /!\ #
 
 #####################
 ### FRESH INSTALL ###
@@ -64,7 +65,6 @@ ssh-copy-id -i <file.pub generated before> -p 1234 user@host
 ##################
 ### VIRTUALBOX ###
 ##################
-
 # To install Guest Additions on a fresh linux virtual machine
 sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
@@ -80,13 +80,18 @@ sudo m-a prepare
 # sudo mkdir /media/sf_WinLinShare
 sudo chown mauro /media/sf_WinLinShare/
 # symbolic link everything in $HOME
-#ln -s /home/mauro/biblio /media/sf_WinLinShare/biblio
-#ln -s /home/mauro/utils /media/sf_WinLinShare/utils
-#ln -s /home/mauro/utils /media/sf_WinLinShare/ownClowd/WORKtmp WORKtmp
-#ln -s /home/mauro/WORK* /media/sf_WinLinShare/WORK*
-#local software repository -> $MYLOCAL
+cd $HOME
+ln -s /media/sf_WinLinShare/biblio biblio
+ln -s /media/sf_WinLinShare/utils utils
+#ln -s /media/sf_WinLinShare/ownClowd/WORKtmp WORKtmp
+ln -s /media/sf_WinLinShare/Dropbox/WORKtmp WORKtmp
+ln -s /media/sf_WinLinShare/WORK* WORK*
+#local software -> $MYLOCAL
 cd; mkdir local
 export MYLOCAL=~/local/
+#devel software -> $MYDEVEL
+cd; mkdir devel
+export MYDEVEL=~/devel/
 
 ################
 # COLOR THEMES #
@@ -114,6 +119,8 @@ sudo aptitude install git meld gftp subversion rsync curl
 sudo aptitude install thunderbird thunderbird-globalmenu
 # to keep local config, link .thunderbird -> /media/sf_WinLinShare/dotThunderbird
 # mail dir is '/media/sf_WinLinShare/MailThunderbird
+# NOTE: Thunderbirb works much better under Windows (calendaring is broken under Linux)
+#       to show the conf directory go to Help -> troubleshooting ...
 
 ##########################################
 ### REFERENCE MANAGER: MENDELEY/ZOTERO ###
@@ -139,11 +146,7 @@ cp /path/to/Mendeley\ Desktop.conf .
 #########################################
 #EMACS
 sudo aptitude install emacs aspell-en aspell-fr aspell-it
-#Spacemacs variant -> TOO DISTRACTING // REMOVED!!!
-#cd; rm -rf .emacs.d; rm .emacs
-#git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-#start in http mode, otherwise will not correctly install
-#emacs --insecure
+#ln -s mydotemacs24U1604.el .emacs
 
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
@@ -155,7 +158,6 @@ sudo aptitude install inkscape xclip graphviz
 ###############
 #a sub-selection from texlive-full package
 sudo aptitude install texlive-lang-french texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers texlive-science fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-math-extra texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
-
 #give you the rights on texlive
 sudo chown -R mauro.users /usr/share/texlive
 #install non free fonts
@@ -181,7 +183,7 @@ sudo apt-get install jdownloader-installer
 ##########
 #QT4
 sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
-#QT5
+#QT5 (preferred)
 sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit
 
 ###################################
@@ -193,7 +195,6 @@ sudo aptitude install python-numpy python-scipy python-matplotlib python-pytools
 ### PYTHON3.5 : SYSTEM PACKAGES ###
 ###################################
 sudo aptitude install python3-pytools python3-pyopencl
-
 
 #######################################
 ### PYTHON3.5 : VIRTUAL ENVIRONMENT ###
@@ -217,6 +218,12 @@ pip install -U scipy
 #Sympy
 pip install -U sympy
 
+#Matplotlib
+#NOTE: the packages are to solve a known bug in building matplolib from pip
+sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
+pip install -U matplotlib
+#check version: python -> import matplotlib -> matplotlib.__version__
+
 #Bottlechest
 #NOTE: pip install does not work, better directly from sources
 git clone https://github.com/biolab/bottlechest
@@ -224,30 +231,32 @@ cd bottlechest
 python setup.py install
 cd ..
 
-#Matplotlib
-#NOTE: the packages are to solve a known bug in building matplolib from pip
-sudo apt-get install libfreetype6-dev libxft-dev libpng-dev
-pip install -U matplotlib
-#check version: python -> import matplotlib -> matplotlib.__version__
-
 #IPython & friends
 pip install -U pygments pyzmq ipython qtconsole jupyter
-
-#Pandas
-pip install -U pandas
 
 #H5py
 sudo aptitude install libhdf5-dev
 pip install -U h5py
+
+#Pandas
+pip install -U pandas
+
+#Sphinx
+pip install -U sphinx
 
 #Utils
 pip install -U six sqlalchemy palettable termcolor seaborn pytools
 
 #LARCH (http://xraypy.github.io/xraylarch)
 #build/install for python3
-cd; cd local
+pip install -U lmfit nose
 #(using personal fork)
+cd; cd devel
 git clone https://github.com/maurov/xraylarch.git
+cd xraylarch
+git remote add --track master upstream https://github.com/xraypy/xraylarch.git
+git fetch upstream
+git merge upstream/master
 #NOTE: wxPython is not supported for python3 (plotting functionalities
 #      will not be available in Larch, this is to use it as library)
 python setup.py build
@@ -258,24 +267,28 @@ rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
 #PyMca5
-cd; cd ~/local/
-# fisx (it will be done at pymca setup!)
+pip install -U fisx
 #(using personal fork)
+cd; cd devel
 git clone https://github.com/maurov/pymca.git
 cd pymca
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --fisx
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #build documentation
 python setup.py build_doc
 
 #Silx
-cd; cd ~/local/
-# fisx (it will be done at pymca setup!)
+pip install -U fisx
 #(using personal fork)
+cd; cd devel
 git clone https://github.com/maurov/silx.git
 cd silx
-python setup.py 
+git remote add --track master upstream https://github.com/silx-kit/silx.git
+git fetch upstream
+git merge upstream/master
+python setup.py install
 #build documentation
 python setup.py build_doc
+#to run the tests: python -> import silx.test -> silx.test.run_tests()
 
 # Orange
 pip install -U chardet nose Jinja2 Sphinx recommonmark numpydoc beautifulsoup4 xlrd
