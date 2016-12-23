@@ -2,9 +2,9 @@
 ;; ------------------------------------------------------------
 ;; Mauro Rovezzi's EMACS config file <mauro.rovezzi@gmail.com>
 ;; MIT License
-;; Current version: optimized for Ubuntu Mate 16.04 (umatebox1604)
+;; Current version: optimized for XUbuntu 16.04 (ubox1604)
 ;; Previous version: mydotemacs (mydotemacs24U1404)
-;; ~/.emacs -> ~/utils/software-notes/mydotemacs24UM1604
+;; ~/.emacs -> ~/devel/software-notes/mydotemacs24U1604
 ;; ------------------------------------------------------------
 ;; System packages required:
 ;; emacs
@@ -46,7 +46,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 
-;; Frame title
+;; Frame title showing current file name and [directory]
 ;;http://www.emacswiki.org/emacs/FrameTitle
 (setq frame-title-format
       '((:eval (if (buffer-file-name)
@@ -128,3 +128,53 @@
 
 ;;; Use Python mode with LARCH files
 (add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))
+
+;; --------------------------------------------------------------------------------
+;; #### ELPA: Emacs Lisp Package Archive (http://www.emacswiki.org/emacs/ELPA) ####
+;; --------------------------------------------------------------------------------
+(load "package")
+(package-initialize)
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa" . "https://melpa.org/packages/")))
+;; *Additional Repositories*
+(add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;Org-mode
+
+(defvar my_pkgs '(org
+		  sphinx-doc
+		  sphinx-mode
+		  writegood-mode)
+  "My default packages")
+
+;; When Emacs boots, check to make sure all of the packages defined in
+;; my_pkgs are installed. If not, have ELPA take care of it.
+;; (defun maupackages-installed-p ()
+;;   (loop for pkg in my_pkgs
+;;         when (not (package-installed-p pkg)) do (return nil)
+;;         finally (return t)))
+
+;; (unless (maupackages-installed-p)
+;;   (message "%s" "Refreshing package database...")
+;;   (package-refresh-contents)
+;;   (dolist (pkg my_pkgs)
+;;     (when (not (package-installed-p pkg))
+;;       (package-install pkg))))
+
+;; ------------------------------------------------------------
+
+;; org-babel
+(require 'ob)
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (ditaa . t)
+   (python . t)
+   (matlab . t)
+   (perl . t)
+   (dot . t)
+   (css . t)
+   (gnuplot . t)
+   (sh . t)
+   (latex . t))
+ )
