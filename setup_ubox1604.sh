@@ -112,6 +112,8 @@ sudo aptitude install gfortran cython cython3 cython-doc
 # GIT & FRIENDS #
 #################
 sudo aptitude install git meld gftp subversion rsync curl
+#git config --global user.name "Mauro Rovezzi"
+#git config --global user.email "mauro.rovezzi@gmail.com"
 
 ########################
 # EMAIL -> THUNDERBIRD #
