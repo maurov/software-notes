@@ -365,6 +365,8 @@ pip install --upgrade oauth2client
 #Google Python API
 #https://developers.google.com/sheets/api/quickstart/python
 pip install --upgrade google-api-python-client
-#simpler to work with gspread
-#https://github.com/burnash/gspread
-#NOT WORKING YET!!!
+#simpler to work with pygsheets: https://github.com/nithinmurali/pygsheets
+#(was gspread: https://github.com/burnash/gspread)
+#
+cd; cd local
+git clone https://github.com/nithinmurali/pygsheets
