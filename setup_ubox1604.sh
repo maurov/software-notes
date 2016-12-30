@@ -355,3 +355,16 @@ cd CRYSTAL
 make
 #insert this in .bashrc
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
+
+### PYTHON WRAPPERS FOR CLOUD APIs ###
+https://github.com/realpython/list-of-python-api-wrappers
+#common
+sudo aptitude install python3-openssl #installing by pip fails at cryptography!!!
+pip install --upgrade oauth2client
+
+#Google Python API
+#https://developers.google.com/sheets/api/quickstart/python
+pip install --upgrade google-api-python-client
+#simpler to work with gspread
+#https://github.com/burnash/gspread
+#NOT WORKING YET!!!
