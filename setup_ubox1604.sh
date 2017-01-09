@@ -285,6 +285,7 @@ pip install -U fisx
 cd; cd devel
 git clone https://github.com/maurov/pymca.git
 cd pymca
+git remote add --track master upstream https://github.com/vasole/pymca.git
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #build documentation
 python setup.py build_doc
