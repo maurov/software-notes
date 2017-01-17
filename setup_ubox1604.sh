@@ -175,6 +175,8 @@ sudo chown -R mauro.users /usr/share/texlive
 wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
 sudo texlua ./install-getnonfreefonts -a
 getnonfreefonts -a
+#lyx
+sudo aptitude install lyx fonts-lyx elyxer
 
 ##################
 ### MULTIMEDIA ###
