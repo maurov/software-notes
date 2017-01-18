@@ -149,6 +149,11 @@ cp /path/to/Mendeley\ Desktop.conf .
 #EMACS
 sudo aptitude install emacs aspell-en aspell-fr aspell-it
 #ln -s mydotemacs24U1604.el .emacs
+#
+sudo add-apt-repository ppa:ubuntu-elisp/ppa
+sudo apt-get update
+sudo apt-get install emacs-snapshot
+sudo update-alternatives --config emacs #select emacs-snapshot
 
 ##############
 ### OFFICE ###
