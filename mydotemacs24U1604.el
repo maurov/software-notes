@@ -141,6 +141,8 @@
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;Org-mode
 
 (defvar my_pkgs '(org
+		  org-ref
+		  json-mode
 		  sphinx-doc
 		  sphinx-mode
 		  writegood-mode)
@@ -162,6 +164,9 @@
 
 ;; ------------------------------------------------------------
 
+;; wraps the lines in org-mode
+(setq org-startup-truncated nil)
+
 ;; org-babel
 (require 'ob)
 
@@ -177,4 +182,18 @@
    (gnuplot . t)
    (sh . t)
    (latex . t))
+ )
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (json-mode org-ref sphinx-mode sphinx-doc speck org))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  )
