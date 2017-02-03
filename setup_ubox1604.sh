@@ -162,6 +162,15 @@ sudo apt-add-repository ppa:libreoffice/ppa
 sudo apt-get update
 sudo apt-get install libreoffice-calc libreoffice-dmaths libreoffice-draw libreoffice-math libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr libreoffice-script-provider-python libreoffice-style-tango libreoffice-templates libreoffice-voikko libreoffice-wiki-publisher libreoffice-writer libreoffice-writer2latex myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice openclipart2-libreoffice pstoedit imagemagick libpaper-utils
 
+########################################################
+### PRODUCTIVITY - TIME TRACKING - TOGGL.COM DESKTOP ###
+########################################################
+# From GITHUB, build instructions at: https://github.com/toggl/toggldesktop
+# /!\ FOR LIVE SERVERS /!\ : https://github.com/toggl/toggldesktop/wiki/Building-Toggl-Desktop-from-source-for-usage-with-live-servers
+#cd; cd local
+#git clone https://github.com/toggl/toggldesktop
+# FROZEN: still not conviced the desktop application is better than the web one...
+
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
 ####################################
