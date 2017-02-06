@@ -213,7 +213,7 @@ sudo apt-get install jdownloader-installer
 #QT4
 sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
 #QT5 (preferred)
-sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit
+sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit python3-pyqt5.qtopengl libqt5opengl5-dev
 
 ###################################
 ### PYTHON2.7 : SYSTEM PACKAGES ###
@@ -223,7 +223,7 @@ sudo aptitude install python-numpy python-scipy python-matplotlib python-pytools
 ###################################
 ### PYTHON3.5 : SYSTEM PACKAGES ###
 ###################################
-sudo aptitude install python3-pytools python3-pyopencl
+sudo aptitude install python3-pytools python3-pyopencl python3-opengl
 
 #######################################
 ### PYTHON3.5 : VIRTUAL ENVIRONMENT ###
