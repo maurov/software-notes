@@ -31,8 +31,10 @@
 ;;(global-hl-line-mode 1); Highlight current row
 (show-paren-mode 1); Matches parentheses and such in every mode
 (setq calendar-week-start-day 1); Calender should start on Monday
-(add-to-list 'default-frame-alist '(height . 50)); Default frame height.
-(add-to-list 'default-frame-alist '(width . 200)); Default frame height.
+(add-to-list 'default-frame-alist '(left . 0)); Default frame position left
+(add-to-list 'default-frame-alist '(top . 5)); Default frame position top
+(add-to-list 'default-frame-alist '(height . 45)); Default frame window height
+(add-to-list 'default-frame-alist '(width . 174)); Default frame window width
 (setq echo-keystrokes 0.1)
 (setq visible-bell t); Flashes on error
 (setq column-number-mode t)
