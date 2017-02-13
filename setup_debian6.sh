@@ -44,5 +44,9 @@ git fetch upstream
 git merge upstream/master
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
 
-
+##############################################
+### TEXT EDITORs/CONVERTERS/UTILITIES/IDES ###
+##############################################
+#geany ide (useful for Spec macros editing)
+sudo apt-get install geany
 
