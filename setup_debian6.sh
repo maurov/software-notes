@@ -50,3 +50,11 @@ SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
 #geany ide (useful for Spec macros editing)
 sudo apt-get install geany
 
+### GEDIT ###
+# use python syntax highlight with SPEC files (.mac extension)
+cd
+mkdir .local/share/gtksourceview-2.0
+mkdir .local/share/gtksourceview-2.0/language-specs
+cp /usr/share/gtksourceview-2.0/language-specs/python.lang .local/share/gtksourceview-2.0/language-specs/
+#edit python.lang by adding the line
+#<property name="globs">.mac</property>
