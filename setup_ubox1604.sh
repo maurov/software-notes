@@ -310,6 +310,10 @@ git remote add --track master upstream https://github.com/vasole/pymca.git
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #build documentation
 python setup.py build_doc
+#
+#TOOLTIP COLOR FIX: the tooltips will appear black on black, this is
+# fixed by using `gnome-color-chooser` to set the tooltip color to a
+# readable one!
 
 #Silx
 pip install -U fisx
