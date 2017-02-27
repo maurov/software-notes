@@ -39,10 +39,25 @@ cd fisx
 python setup.py install --user
 # install pymca from forked version (link to upstream for pairing versions)
 git clone https://github.com/maurov/pymca
+cd pymca
 git remote add --track master upstream https://github.com/vasole/pymca.git
 git fetch upstream
 git merge upstream/master
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
+
+#####################################
+### PYTHON IN VIRTUAL ENVIRONMENT ###
+#####################################
+su -; apt-get install python-virtualenv
+cd; cd GIT
+virtualenv py26
+source py26/bin/activate
+cd py26
+wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate
+python get-pip.py
+pip install --upgrade pip setuptools distribute
+#pip install --upgrade numpy ### NOT WORKING -> STUCK!!! ###
+
 
 ##############################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES/IDES ###
