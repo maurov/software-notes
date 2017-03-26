@@ -344,48 +344,62 @@ pip install -U orange-canvas-core orange-widget-core
 
 # Xraylib
 #(https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
-wget https://github.com/tschoonj/xraylib/archive/xraylib-3.1.0.tar.gz
-tar xvfz xraylib-3.1.0.tar.gz
-cd xraylib-3.1.0
-autoreconf -i
-./configure --enable-python --enable-python-integration PYTHON=`which python`
-make
-export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
-cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
-cp python/xraylib.py $PYTHON_SITE_PACKAGES 
-cp python/.libs/xraylib_np.so  $PYTHON_SITE_PACKAGES
-cp python/.libs/_xraylib.so  $PYTHON_SITE_PACKAGES
-cp python/xraymessages.py  $PYTHON_SITE_PACKAGES 
-cd ..
+pip install http://ftp.esrf.eu/pub/scisoft/Oasys/pip/xraylib-3.1.tar.gz
+
+#NOT WORKING!!!
+#https://github.com/srio/oasys-installation-scripts/blob/master/update_xraylib_from_github.sh
+#export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
+#git clone https://github.com/tschoonj/xraylib
+#cd xraylib
+#autoreconf -i 
+#./configure --enable-python --enable-python-integration PYTHON=`which python`
+#make
+#cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
+#cp python/xraylib.py $PYTHON_SITE_PACKAGES 
+#cp python/.libs/xraylib_np.so $PYTHON_SITE_PACKAGES
+#cp python/.libs/_xraylib.so $PYTHON_SITE_PACKAGES
+#cp python/xraymessages.py $PYTHON_SITE_PACKAGES 
+#cd ..
 
 #SRxraylib
 cd; cd local
 git clone https://github.com/lucarebuffi/srxraylib
 cd srxraylib
-python setup.py install
+pip install -e . --no-binary :all:
 cd ..
 
-### SHADOW3 (with python 3.4)
+### SHADOW3
 cd; cd local
-git clone https://github.com/srio/shadow3.git
+git clone https://github.com/srio/shadow3
 cd shadow3
 python setup.py build
-python setup.py develop
+pip install -e . --no-binary :all:
+cd ..
 
-#ShadowOui
-#(https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_virtual_environment.sh)
+#Syned
+echo "Installing Oasys dependency syned"
+git clone https://github.com/lucarebuffi/syned
+cd syned
+pip install -e . --no-binary :all:
+cd ..
+
+#Wofry
+echo "Installing Oasys dependency wofry"
+git clone https://github.com/lucarebuffi/wofry
+cd wofry
+pip install -e . --no-binary :all:
+cd ..
+
+#Oasys
+echo "Installing Oasys from github"
 git clone https://github.com/lucarebuffi/oasys1
 cd oasys1
-python setup.py develop
-cd ..
-git clone https://github.com/lucarebuffi/shadowOui
-cd shadowOui
-python setup.py develop
+pip install -e . --no-binary :all:
 cd ..
 
 ### CRYSTAL
 cd; cd local
-git clone https://github.com/srio/CRYSTAL.git
+git clone https://github.com/srio/CRYSTAL
 cd CRYSTAL
 make
 #insert this in .bashrc
