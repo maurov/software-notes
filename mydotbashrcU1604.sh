@@ -29,6 +29,9 @@ export PATH=$HOME/.local/bin:$PATH
 #pymca within virtualenv
 alias pymca='source $MYLOCAL/py35/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
 
+#oasys
+alias oasys='source $MYLOCAL/py35/bin/activate; python -m oasys.canvas -l4 --force-discovery'
+
 #CRYSTAL
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
  

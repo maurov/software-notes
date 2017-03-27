@@ -368,7 +368,7 @@ cd srxraylib
 pip install -e . --no-binary :all:
 cd ..
 
-### SHADOW3
+#SHADOW3
 cd; cd local
 git clone https://github.com/srio/shadow3
 cd shadow3
@@ -376,26 +376,27 @@ python setup.py build
 pip install -e . --no-binary :all:
 cd ..
 
-#Syned
-echo "Installing Oasys dependency syned"
+#Syned (Oasys dependency)
+cd; cd local
 git clone https://github.com/lucarebuffi/syned
 cd syned
 pip install -e . --no-binary :all:
-cd ..
 
-#Wofry
-echo "Installing Oasys dependency wofry"
+#Wofry (Oasys dependency)
+cd; cd local
 git clone https://github.com/lucarebuffi/wofry
 cd wofry
 pip install -e . --no-binary :all:
-cd ..
 
 #Oasys
-echo "Installing Oasys from github"
+cd; cd local
 git clone https://github.com/lucarebuffi/oasys1
 cd oasys1
 pip install -e . --no-binary :all:
 cd ..
+#insert this in .bashrc
+#alias oasys='source $MYLOCAL/py35/bin/activate; python -m oasys.canvas -l4 --force-discovery'
+
 
 ### CRYSTAL
 cd; cd local
