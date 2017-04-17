@@ -225,9 +225,9 @@ sudo apt-get install jdownloader-installer
 ### QT ###
 ##########
 #QT4
-sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl
+sudo aptitude install python3-pyqt4 qt4-dev-tools libqt4-dev libqt4-opengl qt4-designer
 #QT5 (preferred)
-sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit python3-pyqt5.qtopengl libqt5opengl5-dev
+sudo aptitude install qt5-default qt5-doc qttools5-dev-tools qtcreator pyqt5-dev pyqt5-doc pyqt5-examples pyqt5-dev-tools python-pyqt5 python3-pyqt5 python-pyqt5.qtsvg python-pyqt5.qtwebkit python3-pyqt5.qtsvg python3-pyqt5.qtwebkit python3-pyqt5.qtopengl libqt5opengl5-dev qtcreator
 
 ###################################
 ### PYTHON2.7 : SYSTEM PACKAGES ###
