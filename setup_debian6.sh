@@ -33,10 +33,12 @@ fi
 cd; cd GIT
 # update matplotlib to a working version
 apt-get install -t squeeze-backports python-matplotlib
+#1) ### FISX ###
 # install fisx as user
 git clone https://github.com/vasole/fisx
 cd fisx
 python setup.py install --user
+#2) ### PYMCA5 ###
 # install pymca from forked version (link to upstream for pairing versions)
 git clone https://github.com/maurov/pymca
 cd pymca
@@ -44,6 +46,15 @@ git remote add --track master upstream https://github.com/vasole/pymca.git
 git fetch upstream
 git merge upstream/master
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
+#3) ### SILX ###
+git clone https://github.com/maurov/silx.git
+cd silx
+git remote add --track master upstream https://github.com/silx-kit/silx.git
+git fetch upstream
+git merge upstream/master
+python setup.py install --user
+#to run the tests: python -> import silx.test -> silx.test.run_tests()
+
 
 #####################################
 ### PYTHON IN VIRTUAL ENVIRONMENT ###
