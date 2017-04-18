@@ -27,10 +27,23 @@ fi
 # - use python2
 # - GIT sources are in /user_home/GIT
 
+###############################
+### PYTHON 2.7 IN MINICONDA ###
+###############################
+cd; wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+#installed in $HOME/miniconda2
+source miniconda2/bin/activate root
+conda create --name py27 --clone root
+source deactivate
+source miniconda2/bin/activate py27
+conda install numpy scipy matplotlib ipython jupyter h5py pandas
+
+pip install fisx
+
 #######################
 ### PYMCA & FRIENDS ###
 #######################
-cd; cd GIT
+cd; source miniconda2/bin/activate py27; cd GIT
 # update matplotlib to a working version
 apt-get install -t squeeze-backports python-matplotlib
 #1) ### FISX ###
@@ -54,20 +67,6 @@ git fetch upstream
 git merge upstream/master
 python setup.py install --user
 #to run the tests: python -> import silx.test -> silx.test.run_tests()
-
-
-#####################################
-### PYTHON IN VIRTUAL ENVIRONMENT ###
-#####################################
-su -; apt-get install python-virtualenv
-cd; cd GIT
-virtualenv py26
-source py26/bin/activate
-cd py26
-wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate
-python get-pip.py
-pip install --upgrade pip setuptools distribute
-#pip install --upgrade numpy ### NOT WORKING -> STUCK!!! ###
 
 
 ##############################################

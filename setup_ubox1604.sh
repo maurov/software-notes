@@ -420,3 +420,26 @@ pip install --upgrade google-api-python-client
 #
 cd; cd local
 git clone https://github.com/nithinmurali/pygsheets
+
+##############################
+### PYTHON 3.6 : MINICONDA ###
+##############################
+#https://conda.io/docs/test-drive.html#conda-test-drive-milestones
+cd; cd $MYLOCAL
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+#installed in /home/mauro/local/miniconda3
+#not included in .bashrc
+#to activate the `root` environment
+source /home/mauro/local/miniconda3/bin/activate
+conda install numpy
+conda install scipy
+conda install matplotlib
+conda install ipython jupyter
+
+##################################
+### PYTHON 2.7 : MINICONDA ENV ###
+##################################
+#from conda (root) create another environment with python2.7
+conda create --name py27 python=2.7
+source /home/mauro/local/miniconda3/bin/activate py27
+#https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
