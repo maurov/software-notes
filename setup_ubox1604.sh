@@ -157,8 +157,11 @@ sudo update-alternatives --config emacs #select emacs-snapshot
 #
 #geany ide (useful for Spec macros editing)
 sudo apt-get install geany
-#PDF utilities
+#
+# PDF utilities
 sudo apt-get install pdftk
+# scan utilities
+sudo apt-get install gscan2pdf
 
 ##############
 ### OFFICE ###
