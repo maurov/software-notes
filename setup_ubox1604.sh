@@ -131,17 +131,22 @@ sudo aptitude install thunderbird thunderbird-globalmenu
 sudo apt-get install libqtwebkit4 libqtsvg4-perl
 wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
 sudo dpkg -i mendeleydesktop-latest
+#Initial setup by simply profiding your login details
 mendeleydesktop
-# Mendeley does not like to work with a link, have to make a copy!
-# configure your account, then enable your local version by the following
+#Quit and TRANSFER YOUR LOCAL VERSION
+#NOTE: Mendeley does not like to work with links, one have to make a real copy!
+#1) copy database
 cd; cd .local/share/data/Mendeley\ Ltd.
 rm -rf Mendeley\ Desktop
 # assuming your database directory is 'MendeleyDB'
 cp -r /path/to/MendeleyDB Mendeley\ Desktop
+#2) copy settings file
 # assuming your configuration file is 'Mendeley\ Desktop.conf'
 cd; cd .config/Mendeley\ Ltd.
 cp /path/to/Mendeley\ Desktop.conf .
-# start Mendeley and everything should be in place!
+#3) remove cache
+rm -rf .cache/Mendeley\ Ltd.
+#4) start Mendeley and everything should be in place!
 
 #########################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES ###
@@ -163,21 +168,12 @@ sudo apt-get install pdftk
 # scan utilities
 sudo apt-get install gscan2pdf
 
-##############
-### OFFICE ###
-##############
+###################
+### LIBREOFFICE ###
+###################
 sudo apt-add-repository ppa:libreoffice/ppa
 sudo apt-get update
 sudo apt-get install libreoffice-calc libreoffice-dmaths libreoffice-draw libreoffice-math libreoffice-pdfimport libreoffice-l10n-en-gb myspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr libreoffice-script-provider-python libreoffice-style-tango libreoffice-templates libreoffice-voikko libreoffice-wiki-publisher libreoffice-writer libreoffice-writer2latex myspell-fr hyphen-fr mythes-fr libreoffice-l10n-it myspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice openclipart2-libreoffice pstoedit imagemagick libpaper-utils
-
-########################################################
-### PRODUCTIVITY - TIME TRACKING - TOGGL.COM DESKTOP ###
-########################################################
-# From GITHUB, build instructions at: https://github.com/toggl/toggldesktop
-# /!\ FOR LIVE SERVERS /!\ : https://github.com/toggl/toggldesktop/wiki/Building-Toggl-Desktop-from-source-for-usage-with-live-servers
-#cd; cd local
-#git clone https://github.com/toggl/toggldesktop
-# FROZEN: still not conviced the desktop application is better than the web one...
 
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
@@ -194,10 +190,10 @@ sudo apt-get install gimp
 wget http://registry.gimp.org/files/arrow.scm
 #
 
-
-###############
-### TEXLIVE ###
-###############
+####################
+### TEXLIVE 2016 ###
+####################
+sudo add-apt-repository ppa:jonathonf/texlive
 #a sub-selection from texlive-full package
 sudo aptitude install texlive-lang-french texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers texlive-science fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-math-extra texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
 #give you the rights on texlive
@@ -223,6 +219,34 @@ sudo apt-get update
 sudo apt-get install jdownloader-installer
 #if the first run fails, download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
+
+
+##############################
+### PYTHON 3.6 : MINICONDA ###
+##############################
+#https://conda.io/docs/test-drive.html#conda-test-drive-milestones
+cd; cd $MYLOCAL
+wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
+#installed in /home/mauro/local/miniconda3
+#not included in .bashrc
+#to activate the `root` environment
+source /home/mauro/local/miniconda3/bin/activate
+conda install numpy
+conda install scipy
+conda install matplotlib
+conda install ipython jupyter
+
+##################################
+### PYTHON 2.7 : MINICONDA ENV ###
+##################################
+#from conda (root) create another environment with python2.7
+conda create --name py27 python=2.7
+source /home/mauro/local/miniconda3/bin/activate py27
+#https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+
+
+
+
 
 ##########
 ### QT ###
@@ -424,25 +448,11 @@ pip install --upgrade google-api-python-client
 cd; cd local
 git clone https://github.com/nithinmurali/pygsheets
 
-##############################
-### PYTHON 3.6 : MINICONDA ###
-##############################
-#https://conda.io/docs/test-drive.html#conda-test-drive-milestones
-cd; cd $MYLOCAL
-wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#installed in /home/mauro/local/miniconda3
-#not included in .bashrc
-#to activate the `root` environment
-source /home/mauro/local/miniconda3/bin/activate
-conda install numpy
-conda install scipy
-conda install matplotlib
-conda install ipython jupyter
-
-##################################
-### PYTHON 2.7 : MINICONDA ENV ###
-##################################
-#from conda (root) create another environment with python2.7
-conda create --name py27 python=2.7
-source /home/mauro/local/miniconda3/bin/activate py27
-#https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+########################################################
+### PRODUCTIVITY - TIME TRACKING - TOGGL.COM DESKTOP ###
+########################################################
+# From GITHUB, build instructions at: https://github.com/toggl/toggldesktop
+# /!\ FOR LIVE SERVERS /!\ : https://github.com/toggl/toggldesktop/wiki/Building-Toggl-Desktop-from-source-for-usage-with-live-servers
+#cd; cd local
+#git clone https://github.com/toggl/toggldesktop
+# FROZEN: still not conviced the desktop application is better than the web one...
