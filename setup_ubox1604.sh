@@ -121,10 +121,18 @@ sudo aptitude install git meld gftp subversion rsync curl
 # EMAIL -> THUNDERBIRD #
 ########################
 sudo aptitude install thunderbird thunderbird-globalmenu
-# to keep local config, link .thunderbird -> /media/sf_WinLinShare/dotThunderbird
-# mail dir is '/media/sf_WinLinShare/MailThunderbird
-# NOTE: Thunderbirb works much better under Windows (calendaring is broken under Linux)
-#       to show the conf directory go to Help -> troubleshooting ...
+#WORKFLOW (Linux):
+#- to keep local config, link .thunderbird -> /media/sf_WinLinShare/dotThunderbird
+#- mail dir is '/media/sf_WinLinShare/MailThunderbird
+#- calendaring seems broken under Linux!
+#- better to create new profiles, run with "thunderbird -p"
+#- MIGRATE TO NEW PROFILE: http://kb.mozillazine.org/Transferring_data_to_a_new_profile_-_Thunderbird
+#- prefer Maildir format instead of Mbox:
+#  menu -> preferences -> preferences -> advanced (general tab) -> Message Store Type for new accounts (Maildir)
+#WORKFLOW (Windows):
+#- Thunderbirb seems to work better under Windows
+#- to show the conf directory go to Help -> troubleshooting ...
+#
 #TO SHOW CONFIG EDITOR:
 #menu -> preferences -> preferences -> advanced (general tab) -> config editor
 #some useful settings:
