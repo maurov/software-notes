@@ -211,6 +211,12 @@ getnonfreefonts -a
 #lyx
 sudo aptitude install lyx fonts-lyx elyxer
 
+### CONVERT LaTeX to MS Word
+#1) latex2rft (best)
+sudo apt-get install latex2rtf latex2rtf-doc
+#2) pandoc (alternative)
+sudo apt-get install pandoc pandoc-citeproc pandoc-data python-pandocfilters python3-pandocfilters
+
 ##################
 ### MULTIMEDIA ###
 ##################
