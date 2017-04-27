@@ -86,6 +86,8 @@ ln -s /media/sf_WinLinShare/utils utils
 #ln -s /media/sf_WinLinShare/ownClowd/WORKtmp WORKtmp
 ln -s /media/sf_WinLinShare/Dropbox/WORKtmp WORKtmp
 ln -s /media/sf_WinLinShare/WORK* WORK*
+export $MYMENDELEYLOCAL=/media/sf_WinLinShare/MendeleyLocal
+
 #local software -> $MYLOCAL
 cd; mkdir local
 export MYLOCAL=~/local/
@@ -123,6 +125,14 @@ sudo aptitude install thunderbird thunderbird-globalmenu
 # mail dir is '/media/sf_WinLinShare/MailThunderbird
 # NOTE: Thunderbirb works much better under Windows (calendaring is broken under Linux)
 #       to show the conf directory go to Help -> troubleshooting ...
+#TO SHOW CONFIG EDITOR:
+#menu -> preferences -> preferences -> advanced (general tab) -> config editor
+#some useful settings:
+#opening external links
+#network.protocol-handler.expose.* (True)
+#network.protocol-handler.warn-external.* (True)
+#enable threaded view by default
+#mailnews.default_view_flags (1)
 
 ##########################################
 ### REFERENCE MANAGER: MENDELEY/ZOTERO ###
@@ -136,16 +146,12 @@ mendeleydesktop
 #Quit and TRANSFER YOUR LOCAL VERSION
 #NOTE: Mendeley does not like to work with links, one have to make a real copy!
 #1) copy database
-cd; cd .local/share/data/Mendeley\ Ltd.
-rm -rf Mendeley\ Desktop
-# assuming your database directory is 'MendeleyDB'
-cp -r /path/to/MendeleyDB Mendeley\ Desktop
+rsync -avz --delete $MYMENDELEYLOCAL/dotLocalShareData/ $HOME/.local/share/data/Mendeley\ Ltd./
+rsync -avz --delete $MYMENDELEYLOCAL/dotLocalShare/ $HOME/.local/share/Mendeley\ Ltd./
 #2) copy settings file
-# assuming your configuration file is 'Mendeley\ Desktop.conf'
-cd; cd .config/Mendeley\ Ltd.
-cp /path/to/Mendeley\ Desktop.conf .
-#3) remove cache
-rm -rf .cache/Mendeley\ Ltd.
+rsync -avz --delete $MYMENDELEYLOCAL/dotConfig/ $HOME/.config/Mendeley\ Ltd./
+#3) copy cache
+rsync -avz --delete $MYMENDELEYLOCAL/dotCache/ $HOME/.cache/Mendeley\ Ltd./
 #4) start Mendeley and everything should be in place!
 
 #########################################
