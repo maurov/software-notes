@@ -243,33 +243,38 @@ sudo apt-get install jdownloader-installer
 #if the first run fails, download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
 
-
-##############################
-### PYTHON 3.6 : MINICONDA ###
-##############################
+##################################
+### PYTHON 3.6 : MINICONDA ENV ###
+##################################
 #https://conda.io/docs/test-drive.html#conda-test-drive-milestones
 cd; cd $MYLOCAL
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
-#installed in /home/mauro/local/miniconda3
+bash Miniconda3-latest-Linux-x86_64.sh
+#installed in /home/mauro/local/conda
 #not included in .bashrc
 #to activate the `root` environment
-source /home/mauro/local/miniconda3/bin/activate
-conda install numpy
-conda install scipy
-conda install matplotlib
-conda install ipython jupyter
+source $MYLOCAL/conda/bin/activate root
+conda create --name py36 --clone root
+source deactivate
+source $MYLOCAL/conda/bin/activate py36
+conda install cython numpy scipy matplotlib ipython jupyter h5py pandas
 
 ##################################
 ### PYTHON 2.7 : MINICONDA ENV ###
 ##################################
+#if miniconda not yet installed:
+#wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+#bash Miniconda2-latest-Linux-x86_64.sh
+#install it in $MYLOCAL/conda and do not include in .bashrc
+#source $MYLOCAL/conda/bin/activate root
 #from conda (root) create another environment with python2.7
 conda create --name py27 python=2.7
-source /home/mauro/local/miniconda3/bin/activate py27
-#https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
+source $MYLOCAL/conda/bin/activate py27
 
 
-
-
+##################################################################################
+# DEPRECATED: in my current workflow all QT, Python & friends is done with CONDA #
+##################################################################################
 
 ##########
 ### QT ###
