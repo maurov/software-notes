@@ -142,6 +142,9 @@ sudo aptitude install thunderbird thunderbird-globalmenu
 #enable threaded view by default
 #mailnews.default_view_flags (1)
 
+### UTILTS ###
+sudo apt-get install mb2md
+
 ##########################################
 ### REFERENCE MANAGER: MENDELEY/ZOTERO ###
 ##########################################
