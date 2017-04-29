@@ -243,9 +243,9 @@ sudo apt-get install jdownloader-installer
 #if the first run fails, download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
 
-##################################
-### PYTHON 3.6 : MINICONDA ENV ###
-##################################
+################################
+### PYTHON 3.5 MINICONDA ENV ###
+################################
 #https://conda.io/docs/test-drive.html#conda-test-drive-milestones
 cd; cd $MYLOCAL
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -253,15 +253,14 @@ bash Miniconda3-latest-Linux-x86_64.sh
 #installed in /home/mauro/local/conda
 #not included in .bashrc
 #to activate the `root` environment
-source $MYLOCAL/conda/bin/activate root
-conda create --name py36 --clone root
+source $MYLOCAL/conda/bin/activate
+conda create --name py35 python=3.5
 source deactivate
-source $MYLOCAL/conda/bin/activate py36
-conda install cython numpy scipy matplotlib ipython jupyter h5py pandas
+source $MYLOCAL/conda/bin/activate py35
 
-##################################
-### PYTHON 2.7 : MINICONDA ENV ###
-##################################
+################################
+### PYTHON 2.7 MINICONDA ENV ###
+################################
 #if miniconda not yet installed:
 #wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 #bash Miniconda2-latest-Linux-x86_64.sh
@@ -271,6 +270,78 @@ conda install cython numpy scipy matplotlib ipython jupyter h5py pandas
 conda create --name py27 python=2.7
 source $MYLOCAL/conda/bin/activate py27
 
+##################
+# CONDA PACKAGES #
+##################
+#The following are valid both `py35` and `py27` conda environments
+conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pyopengl pyopengl-accelerate pillow yaml
+
+#py27-only
+conda install wxpython
+
+######################################################
+# PYTHON LIBRARIES INSTALLED UNDER CONDA ENVIROMENTS #
+######################################################
+#first activate one of the conda enviroment:
+#source $MYLOCAL/conda/bin/activate py35
+#source $MYLOCAL/conda/bin/activate py27
+
+#PyMca5
+sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
+pip install -U fisx
+#(using personal fork)
+cd; cd devel
+git clone https://github.com/maurov/pymca.git
+cd pymca
+git remote add --track master upstream https://github.com/vasole/pymca.git
+git fetch upstream
+git merge upstream/master
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+#build documentation
+python setup.py build_doc
+#
+#TOOLTIP COLOR FIX: the tooltips will appear black on black, this is
+# fixed by using `gnome-color-chooser` to set the tooltip color to a
+# readable one!
+
+#Silx
+pip install -U fisx
+#(using personal fork)
+cd; cd devel
+git clone https://github.com/maurov/silx.git
+cd silx
+git remote add --track master upstream https://github.com/silx-kit/silx.git
+git fetch upstream
+git merge upstream/master
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+#build documentation
+python setup.py build_doc
+#to run the tests: python -> import silx.test -> silx.test.run_tests()
+
+#LARCH (http://xraypy.github.io/xraylarch)
+pip install -U lmfit nose termcolor
+pip install -U wxmplot wxutils #py27 ONLY
+#(using personal fork)
+cd; cd devel
+git clone https://github.com/maurov/xraylarch.git
+cd xraylarch
+git remote add --track master upstream https://github.com/xraypy/xraylarch.git
+git fetch upstream
+git merge upstream/master
+#NOTE: wxPython is not (yet) fully supported for python3 (plotting
+#      functionalities will not be available in Larch, this is to use
+#      it as library)
+python setup.py build
+python setup.py install
+# Link larch plugins directory (optional)
+cd ~/.larch/
+rm -rf plugins
+ln -s your_larch_plugins_dir plugins
+
+#XAFSmass (https://github.com/kklmn/XAFSmass)
+cd $MYLOCAL
+git clone https://github.com/kklmn/XAFSmass.git
+#simpy run it via `python XAFSmassQt.py`
 
 ##################################################################################
 # DEPRECATED: in my current workflow all QT, Python & friends is done with CONDA #
