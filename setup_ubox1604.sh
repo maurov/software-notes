@@ -165,6 +165,11 @@ rsync -avz --delete $MYMENDELEYLOCAL/dotConfig/ $HOME/.config/Mendeley\ Ltd./
 rsync -avz --delete $MYMENDELEYLOCAL/dotCache/ $HOME/.cache/Mendeley\ Ltd./
 #4) start Mendeley and everything should be in place!
 
+### ZOTERO ###
+#install the firefox extension
+#synchronize files using webDAV (owncloud has this option, use the link you get in `settings` tab from the web interface)
+
+
 #########################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES ###
 #########################################
@@ -181,7 +186,7 @@ sudo update-alternatives --config emacs #select emacs-snapshot
 sudo apt-get install geany
 #
 # PDF utilities
-sudo apt-get install pdftk
+sudo apt-get install pdftk xpdf xpdf-utils
 # scan utilities
 sudo apt-get install gscan2pdf
 
