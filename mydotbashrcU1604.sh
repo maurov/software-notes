@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------- #
 # my local dir && utils
 export MYLOCAL=$HOME/local
-export PYTHONPATH=$HOME/utils:$PYTHONPATH
+#export PYTHONPATH=$HOME/utils:$PYTHONPATH
 
 #PROXY SETTINGS AT ESRF
 export http_proxy=http://proxy.esrf.fr:3128/
@@ -26,14 +26,21 @@ export NO_PROXY="localhost,127.0.0.1"
 #add .local/bin to PATH
 export PATH=$HOME/.local/bin:$PATH
 
-#pymca within virtualenv
-alias pymca='source $MYLOCAL/py35/bin/activate; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
-
-#oasys
-alias oasys='source $MYLOCAL/py35/bin/activate; python -m oasys.canvas -l4 --force-discovery'
-
 #CRYSTAL
 export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
+
+### ALIASES ###
+#Conda envs
+alias py35='source $MYLOCAL/conda/bin/activate py35'
+alias py27='source $MYLOCAL/conda/bin/activate py27'
+alias py35qt4='source $MYLOCAL/conda/bin/activate py35qt4'
+
+#pymca within Conda env
+alias pymca='source $MYLOCAL/conda/bin/activate py35; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
+
+#oasys within Conda env
+alias oasys='source $MYLOCAL/conda/bin/activate py35qt4; python -m oasys.canvas -l4 --force-discovery'
+
  
 # ---------------------------------------------------------------------- #
 # DEFAULT PART // TAKEN FROM SYSTEM .bashrc
