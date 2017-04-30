@@ -348,6 +348,59 @@ cd $MYLOCAL
 git clone https://github.com/kklmn/XAFSmass.git
 #simpy run it via `python XAFSmassQt.py`
 
+##################################
+# OASYS IN A DEDICATED CONDA ENV #
+##################################
+#https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_miniconda.sh
+#Conda dedicated environment
+conda create --name py35qt4 python=3.5
+source deactivate
+source $MYLOCAL/conda/bin/activate py35qt4
+conda install --yes pyqt=4 numpy scipy matplotlib=1.4.3 python-dateutil pytz pyparsing nose swig
+#xraylib
+curl -O http://lvserver.ugent.be/xraylib/xraylib-3.2.0.tar.gz
+tar xvfz xraylib-3.2.0.tar.gz
+cd xraylib-3.2.0
+./configure --enable-python --enable-python-integration PYTHON=`which python`
+make
+export PYTHON_SITE_PACKAGES=/home/mauro/local/conda/envs/py35qt4/lib/python3.5/site-packages/
+cp python/.libs/_xraylib.so $PYTHON_SITE_PACKAGES
+cp python/xrayhelp.py $PYTHON_SITE_PACKAGES
+cp python/xraylib.py $PYTHON_SITE_PACKAGES
+cp python/xraymessages.py $PYTHON_SITE_PACKAGES
+cd ..
+# srxraylib
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+pip install -e . --no-binary :all:
+cd ..
+#shadow3
+git clone https://github.com/srio/shadow3
+cd shadow3
+python setup.py build
+pip install -e . --no-binary :all:
+cd ..
+# fisx
+git clone https://github.com/vasole/fisx
+cd fisx
+python setup.py install
+cd ..
+#pymca
+pip install PyMca5
+# git clone https://github.com/vasole/pymca
+# cd pymca
+# python setup.py install
+# cd ..
+pip install oasys
+
+#- start ShadowOui with this command:
+#    source $MYLOCAL/conda/bin/activate py35qt4
+#    python -m oasys.canvas -l4 --force-discovery
+#- click on Add-Ons"
+#- check next to ShadowOui (options: OASYS-XRayServer & OASYS-XOPPY)"
+#- click OK button"
+#- wait for installation"
+#- restart oasys"
 ##################################################################################
 # DEPRECATED: in my current workflow all QT, Python & friends is done with CONDA #
 ##################################################################################
