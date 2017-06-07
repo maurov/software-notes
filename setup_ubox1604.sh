@@ -204,9 +204,10 @@ sudo add-apt-repository ppa:inkscape.dev/stable
 sudo apt-get update
 sudo apt-get install inkscape xclip graphviz
 
-############
-### GIMP ###
-############
+#PINTA
+sudo apt-get install pinta
+
+#GIMP
 sudo apt-get install gimp
 #cd in .gimp-XX/scripts/
 wget http://registry.gimp.org/files/arrow.scm

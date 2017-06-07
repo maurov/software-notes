@@ -83,3 +83,9 @@ mkdir .local/share/gtksourceview-2.0/language-specs
 cp /usr/share/gtksourceview-2.0/language-specs/python.lang .local/share/gtksourceview-2.0/language-specs/
 #edit python.lang by adding the line
 #<property name="globs">.mac</property>
+
+################
+### GRAPHICS ###
+################
+#PINTA
+sudo apt-get install pinta
