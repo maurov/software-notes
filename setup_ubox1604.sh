@@ -167,7 +167,8 @@ rsync -avz --delete $MYMENDELEYLOCAL/dotCache/ $HOME/.cache/Mendeley\ Ltd./
 
 ### ZOTERO ###
 #install the firefox extension
-#synchronize files using webDAV (owncloud has this option, use the link you get in `settings` tab from the web interface)
+#synchronize files using webDAV
+#(owncloud has this option, use the link you get in `settings` tab from the web interface)
 
 
 #########################################
@@ -249,9 +250,9 @@ sudo apt-get install jdownloader-installer
 #if the first run fails, download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
 
-################################
-### PYTHON 3.5 MINICONDA ENV ###
-################################
+##############################
+### PYTHON 3 MINICONDA ENV ###
+##############################
 #https://conda.io/docs/test-drive.html#conda-test-drive-milestones
 cd; cd $MYLOCAL
 wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
@@ -260,13 +261,14 @@ bash Miniconda3-latest-Linux-x86_64.sh
 #not included in .bashrc
 #to activate the `root` environment
 source $MYLOCAL/conda/bin/activate
-conda create --name py35 python=3.5
+conda create --name py36 python=3.6 #current as for June 2017
+#conda create --name py35 python=3.5
 source deactivate
 source $MYLOCAL/conda/bin/activate py35
 
-################################
-### PYTHON 2.7 MINICONDA ENV ###
-################################
+##############################
+### PYTHON 2 MINICONDA ENV ###
+##############################
 #if miniconda not yet installed:
 #wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 #bash Miniconda2-latest-Linux-x86_64.sh
@@ -279,8 +281,8 @@ source $MYLOCAL/conda/bin/activate py27
 ##################
 # CONDA PACKAGES #
 ##################
-#The following are valid both `py35` and `py27` conda environments
-conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pyopengl pyopengl-accelerate pillow yaml
+#The following are valid both `py36`, `py35` and `py27` conda environments
+conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pyopengl pyopengl-accelerate pillow yaml requests
 
 #py27-only
 conda install wxpython
@@ -292,7 +294,9 @@ conda install wxpython
 #source $MYLOCAL/conda/bin/activate py35
 #source $MYLOCAL/conda/bin/activate py27
 
-#PyMca5
+#---------------------------------------
+#PyMca5 (http://github.com/vasole/pymca)
+#---------------------------------------
 sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
 pip install -U fisx
 #(using personal fork)
@@ -310,7 +314,9 @@ python setup.py build_doc
 # fixed by using `gnome-color-chooser` to set the tooltip color to a
 # readable one!
 
-#Silx
+#--------------------------
+#Silx (http://www.silx.org)
+#--------------------------
 pip install -U fisx
 #(using personal fork)
 cd; cd devel
@@ -324,7 +330,9 @@ SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 python setup.py build_doc
 #to run the tests: python -> import silx.test -> silx.test.run_tests()
 
+#-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
+#-----------------------------------------
 pip install -U lmfit nose termcolor
 pip install -U wxmplot wxutils #py27 ONLY
 #(using personal fork)
