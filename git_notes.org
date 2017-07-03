@@ -28,6 +28,10 @@ projects (usually hosted on Github), so here I write down some notes.
   : git checkout your_branch_name
   : git branch -a #(this will show all the branches and put * on working one)
 
+- if the working branch exists already remotely
+
+  : git checkout your_remote_branch
+
 - push your local changes to a remote branch
 
   : git push origin your_branch_name
