@@ -36,7 +36,7 @@ source miniconda2/bin/activate root
 conda create --name py27 --clone root
 source deactivate
 source miniconda2/bin/activate py27
-conda install numpy scipy matplotlib ipython jupyter h5py pandas
+conda install numpy scipy matplotlib ipython jupyter h5py pandas spyder anaconda
 
 pip install fisx
 

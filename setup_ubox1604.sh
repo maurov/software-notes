@@ -284,6 +284,9 @@ source $MYLOCAL/conda/bin/activate py27
 #The following are valid both `py36`, `py35` and `py27` conda environments
 conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pyopengl pyopengl-accelerate pillow yaml requests
 
+#utils
+conda install anaconda spyder
+
 #py27-only
 conda install wxpython
 
