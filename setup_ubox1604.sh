@@ -71,6 +71,9 @@ sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
 
+#GUIDE: How to configure network in the guest OS in order to work with VPN
+#https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
+
 #########################
 # WORKFLOWS/DIRECTORIES #
 #########################
@@ -282,10 +285,15 @@ source $MYLOCAL/conda/bin/activate py27
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pyopengl pyopengl-accelerate pillow yaml requests
+conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml requests
 
-#utils
-conda install anaconda spyder
+#TODO: pyopenGL / pyopenCL
+#conda install pyopengl pyopengl-accelerate
+#currently the only way I have found to correctly run openGL under ubuntu VMs is using the virtual machine coming with Kivy
+#https://kivy.org/#download
+
+#UPDT: installing anaconda will create a BIG MESS!!!
+#conda install anaconda spyder
 
 #py27-only
 conda install wxpython
