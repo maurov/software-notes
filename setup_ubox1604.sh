@@ -287,10 +287,10 @@ source $MYLOCAL/conda/bin/activate py27
 #The following are valid both `py36`, `py35` and `py27` conda environments
 conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml requests
 
-#TODO: pyopenGL / pyopenCL
-#conda install pyopengl pyopengl-accelerate
-#currently the only way I have found to correctly run openGL under ubuntu VMs is using the virtual machine coming with Kivy
-#https://kivy.org/#download
+#pyopenGL
+conda install pyopengl pyopengl-accelerate
+#pyopenCL (NOT WORKING YET!)
+#conda install -c conda-forge pyopencl
 
 #UPDT: installing anaconda will create a BIG MESS!!!
 #conda install anaconda spyder
