@@ -285,7 +285,7 @@ source $MYLOCAL/conda/bin/activate py27
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml requests
+conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests spyder nose
 
 #pyopenGL
 conda install pyopengl pyopengl-accelerate
@@ -304,6 +304,11 @@ conda install wxpython
 #first activate one of the conda enviroment:
 #source $MYLOCAL/conda/bin/activate py35
 #source $MYLOCAL/conda/bin/activate py27
+
+#-------------------------------------
+#Fisx (https://github.com/vasole/fisx)
+#-------------------------------------
+cd; cd M
 
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
