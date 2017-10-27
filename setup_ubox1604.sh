@@ -292,11 +292,14 @@ conda install pyopengl pyopengl-accelerate
 #pyopenCL (NOT WORKING YET!)
 #conda install -c conda-forge pyopencl
 
-#UPDT: installing anaconda will create a BIG MESS!!!
-#conda install anaconda spyder
+#UPDT: installing anaconda will create a BIG MESS!!! DO NOT DO IT!!!
+#conda install anaconda
 
 #py27-only
 conda install wxpython
+
+#packages installed from conda-forge channel
+conda install -c conda-forge lmfit
 
 ######################################################
 # PYTHON LIBRARIES INSTALLED UNDER CONDA ENVIROMENTS #
@@ -308,15 +311,17 @@ conda install wxpython
 #-------------------------------------
 #Fisx (https://github.com/vasole/fisx)
 #-------------------------------------
-cd; cd M
+cd; cd $MYLOCAL
+git clone https://github.com/vasole/fisx
+cd fisx
+python setup.py install
 
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
 #---------------------------------------
 sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
-pip install -U fisx
 #(using personal fork)
-cd; cd devel
+cd; cd $MYDEVEL
 git clone https://github.com/maurov/pymca.git
 cd pymca
 git remote add --track master upstream https://github.com/vasole/pymca.git
@@ -333,9 +338,7 @@ python setup.py build_doc
 #--------------------------
 #Silx (http://www.silx.org)
 #--------------------------
-pip install -U fisx
-#(using personal fork)
-cd; cd devel
+cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
 cd silx
 git remote add --track master upstream https://github.com/silx-kit/silx.git
@@ -349,10 +352,8 @@ python setup.py build_doc
 #-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
-pip install -U lmfit nose termcolor
-pip install -U wxmplot wxutils #py27 ONLY
 #(using personal fork)
-cd; cd devel
+cd; cd $MYDEVEL
 git clone https://github.com/maurov/xraylarch.git
 cd xraylarch
 git remote add --track master upstream https://github.com/xraypy/xraylarch.git
