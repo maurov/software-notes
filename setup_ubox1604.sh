@@ -285,7 +285,10 @@ source $MYLOCAL/conda/bin/activate py27
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
+conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
 
+#gcc from conda generates this error => libstdc++.so.6: version `CXXABI_1.3.9' not found 
+#conda install gcc
 
 #pyopenGL
 conda install pyopengl pyopengl-accelerate
