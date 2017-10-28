@@ -285,7 +285,7 @@ source $MYLOCAL/conda/bin/activate py27
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests spyder nose
+
 
 #pyopenGL
 conda install pyopengl pyopengl-accelerate
@@ -294,6 +294,9 @@ conda install pyopengl pyopengl-accelerate
 
 #UPDT: installing anaconda will create a BIG MESS!!! DO NOT DO IT!!!
 #conda install anaconda
+
+#/!\ spyder can MESS things with QT!!!
+#conda install spyder
 
 #py27-only
 conda install wxpython
