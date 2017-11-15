@@ -267,7 +267,7 @@ source $MYLOCAL/conda/bin/activate
 conda create --name py36 python=3.6 #current as for June 2017
 #conda create --name py35 python=3.5
 source deactivate
-source $MYLOCAL/conda/bin/activate py35
+source $MYLOCAL/conda/bin/activate py36
 
 ##############################
 ### PYTHON 2 MINICONDA ENV ###
@@ -290,7 +290,8 @@ conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqla
 #pyopenGL
 conda install pyopengl pyopengl-accelerate
 #pyopenCL (NOT WORKING YET!)
-#conda install -c conda-forge pyopencl
+#pip install -U pyopencl
+#conda install -c conda-forge pyopencl (NOT WORKING!)
 
 #UPDT: installing anaconda will create a BIG MESS!!!
 #conda install anaconda spyder
@@ -302,7 +303,7 @@ conda install wxpython
 # PYTHON LIBRARIES INSTALLED UNDER CONDA ENVIROMENTS #
 ######################################################
 #first activate one of the conda enviroment:
-#source $MYLOCAL/conda/bin/activate py35
+#source $MYLOCAL/conda/bin/activate py36
 #source $MYLOCAL/conda/bin/activate py27
 
 #---------------------------------------
@@ -328,7 +329,7 @@ python setup.py build_doc
 #--------------------------
 #Silx (http://www.silx.org)
 #--------------------------
-pip install -U fisx
+pip install -U fisx hdf5plugin
 #(using personal fork)
 cd; cd devel
 git clone https://github.com/maurov/silx.git
