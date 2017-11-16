@@ -27,47 +27,12 @@ fi
 # - use python2
 # - GIT sources are in /user_home/GIT
 
-###############################
-### PYTHON 2.7 IN MINICONDA ###
-###############################
-cd; wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
-#installed in $HOME/miniconda2
-source miniconda2/bin/activate root
-conda create --name py27 --clone root
-source deactivate
-source miniconda2/bin/activate py27
-conda install numpy scipy matplotlib ipython jupyter h5py pandas spyder anaconda
+########################
+### PYTHON & FRIENDS ###
+########################
 
-pip install fisx
-
-#######################
-### PYMCA & FRIENDS ###
-#######################
-cd; source miniconda2/bin/activate py27; cd GIT
-# update matplotlib to a working version
-apt-get install -t squeeze-backports python-matplotlib
-#1) ### FISX ###
-# install fisx as user
-git clone https://github.com/vasole/fisx
-cd fisx
-python setup.py install --user
-#2) ### PYMCA5 ###
-# install pymca from forked version (link to upstream for pairing versions)
-git clone https://github.com/maurov/pymca
-cd pymca
-git remote add --track master upstream https://github.com/vasole/pymca.git
-git fetch upstream
-git merge upstream/master
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install --user
-#3) ### SILX ###
-git clone https://github.com/maurov/silx.git
-cd silx
-git remote add --track master upstream https://github.com/silx-kit/silx.git
-git fetch upstream
-git merge upstream/master
-python setup.py install --user
-#to run the tests: python -> import silx.test -> silx.test.run_tests()
-
+# Python-related software is installed via Conda environments
+# => setup_conda_envs.sh
 
 ##############################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES/IDES ###
