@@ -58,7 +58,7 @@ source $MYLOCAL/conda/bin/activate py27
 conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
 
 #gcc from conda generates this error
-# => libstdc++.so.6: version `CXXABI_1.3.9' not found 
+# => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #conda install gcc
 
 #pyopenGL (STILL WORK IN PROGRESS!!!)
