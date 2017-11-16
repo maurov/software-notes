@@ -55,19 +55,28 @@ source $MYLOCAL/conda/bin/activate py27
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install gcc cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml requests
+conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
 
-#pyopenGL
+#gcc from conda generates this error
+# => libstdc++.so.6: version `CXXABI_1.3.9' not found 
+#conda install gcc
+
+#pyopenGL (STILL WORK IN PROGRESS!!!)
 conda install pyopengl pyopengl-accelerate
 #pyopenCL (NOT WORKING YET!)
-#pip install -U pyopencl
-#conda install -c conda-forge pyopencl (NOT WORKING!)
+#conda install -c conda-forge pyopencl
 
-#UPDT: installing anaconda will create a BIG MESS!!!
-#conda install anaconda spyder
+#UPDT: installing anaconda will create a BIG MESS!!! DO NOT DO IT!!!
+#conda install anaconda
+
+#/!\ spyder can MESS things with QT!!!
+#conda install spyder
 
 #py27-only
 conda install wxpython
+
+#packages installed from conda-forge channel
+conda install -c conda-forge lmfit
 
 #######################################################
 # PYTHON LIBRARIES INSTALLED UNDER CONDA ENVIRONMENTS #
@@ -76,13 +85,21 @@ conda install wxpython
 #source $MYLOCAL/conda/bin/activate py36
 #source $MYLOCAL/conda/bin/activate py27
 
+#-------------------------------------
+#Fisx (https://github.com/vasole/fisx)
+#-------------------------------------
+cd; cd $MYLOCAL
+git clone https://github.com/vasole/fisx
+cd fisx
+python setup.py install
+
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
 #---------------------------------------
-sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
-pip install -U fisx
+#sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
+#make sure fisx is installed
 #(using personal fork)
-cd; cd devel
+cd; cd $MYDEVEL
 git clone https://github.com/maurov/pymca.git
 cd pymca
 git remote add --track master upstream https://github.com/vasole/pymca.git
@@ -99,9 +116,8 @@ python setup.py build_doc
 #--------------------------
 #Silx (http://www.silx.org)
 #--------------------------
-pip install -U fisx hdf5plugin
 #(using personal fork)
-cd; cd devel
+cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
 cd silx
 git remote add --track master upstream https://github.com/silx-kit/silx.git
@@ -115,6 +131,9 @@ python setup.py build_doc
 #-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
+#(using personal fork)
+cd; cd $MYDEVEL
+
 pip install -U lmfit nose termcolor
 pip install -U wxmplot wxutils #py27 ONLY
 #(using personal fork)
