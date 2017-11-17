@@ -51,11 +51,32 @@ conda create --name py27 python=2.7
 source $MYLOCAL/conda/bin/activate py27
 #add alias in .bashrc
 
+
+######################
+### DEBIAN6 ISSUES ###
+######################
+
+# if glibc < 2.12 one gets a GLIBC ERROR with PyQt
+# $ ldd --version
+# ldd (Debian EGLIBC 2.11.3-3) 2.11.3
+# /lib/libpthread.so.0: version `GLIBC_2.12' not found (required by
+# /nobackup/sienne/fame/conda/envs/py27/lib/python2.7/site-packages/PyQt5/../../.././libglib-2.0.so.0)
+
+
+# possible solution 
+# conda install -c asmeurer glibc
+# DOES NOT WORK!!!
+
 ##################
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install cython numpy scipy matplotlib ipython jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
+conda install numpy scipy matplotlib ipython
+
+conda install jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
+
+#cython may generate errors
+#conda install cython 
 
 #gcc from conda generates this error
 # => libstdc++.so.6: version `CXXABI_1.3.9' not found
