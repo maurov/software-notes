@@ -41,7 +41,8 @@ conda create --name py36 python=3.6 #current as for June 2017
 #conda create --name py35 python=3.5
 source deactivate
 source $MYLOCAL/conda/bin/activate py36
-#add alias in .bashrc
+#add alias in .bashrc:
+#alias py36='unset PYTHONPATH; $MYLOCAL/conda/bin activate py36'
 
 ##############################
 ### PYTHON 2 MINICONDA ENV ###
@@ -49,8 +50,8 @@ source $MYLOCAL/conda/bin/activate py36
 #from conda root (see `MINICONDA INSTALL`)
 conda create --name py27 python=2.7
 source $MYLOCAL/conda/bin/activate py27
-#add alias in .bashrc
-
+#add alias in .bashrc:
+#alias py27='unset PYTHONPATH; $MYLOCAL/conda/bin activate py27'
 
 ######################
 ### DEBIAN6 ISSUES ###
@@ -61,19 +62,15 @@ source $MYLOCAL/conda/bin/activate py27
 # ldd (Debian EGLIBC 2.11.3-3) 2.11.3
 # /lib/libpthread.so.0: version `GLIBC_2.12' not found (required by
 # /nobackup/sienne/fame/conda/envs/py27/lib/python2.7/site-packages/PyQt5/../../.././libglib-2.0.so.0)
-
-
-# possible solution 
-# conda install -c asmeurer glibc
-# DOES NOT WORK!!!
+# => SOLVED => install py27 with Miniconda2
 
 ##################
 # CONDA PACKAGES #
 ##################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install numpy scipy matplotlib ipython
+conda install numpy matplotlib ipython
 
-conda install jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
+conda install scipy zmq ipykernel jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
 
 #cython may generate errors
 #conda install cython 
@@ -83,7 +80,7 @@ conda install jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml term
 #conda install gcc
 
 #pyopenGL (STILL WORK IN PROGRESS!!!)
-conda install pyopengl pyopengl-accelerate
+#conda install pyopengl pyopengl-accelerate
 #pyopenCL (NOT WORKING YET!)
 #conda install -c conda-forge pyopencl
 
@@ -114,6 +111,21 @@ git clone https://github.com/vasole/fisx
 cd fisx
 python setup.py install
 
+#--------------------------
+#Silx (http://www.silx.org)
+#--------------------------
+#(using personal fork)
+cd; cd $MYDEVEL
+git clone https://github.com/maurov/silx.git
+cd silx
+git remote add --track master upstream https://github.com/silx-kit/silx.git
+git fetch upstream
+git merge upstream/master
+SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+#build documentation
+python setup.py build_doc
+#to run the tests: python -> import silx.test -> silx.test.run_tests()
+
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
 #---------------------------------------
@@ -134,29 +146,12 @@ python setup.py build_doc
 # fixed by using `gnome-color-chooser` to set the tooltip color to a
 # readable one!
 
-#--------------------------
-#Silx (http://www.silx.org)
-#--------------------------
-#(using personal fork)
-cd; cd $MYDEVEL
-git clone https://github.com/maurov/silx.git
-cd silx
-git remote add --track master upstream https://github.com/silx-kit/silx.git
-git fetch upstream
-git merge upstream/master
-SPECFILE_USE_GNU_SOURCE=1 python setup.py install
-#build documentation
-python setup.py build_doc
-#to run the tests: python -> import silx.test -> silx.test.run_tests()
-
 #-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
 #(using personal fork)
 cd; cd $MYDEVEL
-
-pip install -U lmfit nose termcolor
-pip install -U wxmplot wxutils #py27 ONLY
+pip install wxmplot wxutils #py27 ONLY
 #(using personal fork)
 cd; cd devel
 git clone https://github.com/maurov/xraylarch.git
