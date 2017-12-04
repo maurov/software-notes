@@ -64,13 +64,11 @@ source $MYLOCAL/conda/bin/activate py27
 # /nobackup/sienne/fame/conda/envs/py27/lib/python2.7/site-packages/PyQt5/../../.././libglib-2.0.so.0)
 # => SOLVED => install py27 with Miniconda2
 
-##################
-# CONDA PACKAGES #
-##################
+################################
+# PACKAGES INSTALLED VIA CONDA #
+################################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install numpy matplotlib ipython
-
-conda install scipy zmq ipykernel jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
+conda install numpy matplotlib ipython scipy pyzmq ipykernel jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
 
 #cython may generate errors
 #conda install cython 
@@ -94,11 +92,31 @@ conda install scipy zmq ipykernel jupyter h5py pandas sqlalchemy sphinx bottlech
 conda install wxpython
 
 #packages installed from conda-forge channel
-conda install -c conda-forge lmfit
 
-#######################################################
-# PYTHON LIBRARIES INSTALLED UNDER CONDA ENVIRONMENTS #
-#######################################################
+
+##############################
+# PACKAGES INSTALLED VIA PIP #
+##############################
+#first activate one of the conda enviroment:
+#source $MYLOCAL/conda/bin/activate py36
+#source $MYLOCAL/conda/bin/activate py27
+
+#-----------------------------------------
+#Lmfit (https://github.com/lmfit/lmfit-py)
+#-----------------------------------------
+#conda install -c conda-forge lmfit
+pip install lmfit
+
+#---------------------------------------------
+#Wxmplot (https://github.com/newville/wxmplot)
+#Wxutils (https://github.com/newville/wxutils)
+#---------------------------------------------
+#pip install wxmplot wxutils => see Larch (py27 only)
+
+
+##################################
+# PACKAGES INSTALLED FROM SOURCE #
+##################################
 #first activate one of the conda enviroment:
 #source $MYLOCAL/conda/bin/activate py36
 #source $MYLOCAL/conda/bin/activate py27
