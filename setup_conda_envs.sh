@@ -187,10 +187,13 @@ cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
+#--------------------------------------------
 #XAFSmass (https://github.com/kklmn/XAFSmass)
+#--------------------------------------------
 cd $MYLOCAL
 git clone https://github.com/kklmn/XAFSmass.git
 #simpy run it via `python XAFSmassQt.py`
+
 
 ##################################
 # OASYS IN A DEDICATED CONDA ENV #
@@ -207,7 +210,8 @@ tar xvfz xraylib-3.2.0.tar.gz
 cd xraylib-3.2.0
 ./configure --enable-python --enable-python-integration PYTHON=`which python`
 make
-export PYTHON_SITE_PACKAGES=/home/mauro/local/conda/envs/py35qt4/lib/python3.5/site-packages/
+export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
+#export PYTHON_SITE_PACKAGES=/home/mauro/local/conda/envs/py35qt4/lib/python3.5/site-packages/
 cp python/.libs/_xraylib.so $PYTHON_SITE_PACKAGES
 cp python/xrayhelp.py $PYTHON_SITE_PACKAGES
 cp python/xraylib.py $PYTHON_SITE_PACKAGES
