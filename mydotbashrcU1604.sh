@@ -17,11 +17,11 @@ export MYLOCAL=$HOME/local
 export http_proxy=http://proxy.esrf.fr:3128/
 export https_proxy=https://proxy.esrf.fr:3128/
 export ftp_proxy=http://proxy.esrf.fr:3128/
-export no_proxy="localhost,127.0.0.1"
+export no_proxy="localhost,127.0.0.1,.esrf.fr"
 export HTTP_PROXY=http://proxy.esrf.fr:3128/
 export HTTPS_PROXY=https://proxy.esrf.fr:3128/
 export FTP_PROXY=http://proxy.esrf.fr:3128/
-export NO_PROXY="localhost,127.0.0.1"
+export NO_PROXY="localhost,127.0.0.1,.esrf.fr"
 
 #add .local/bin to PATH
 export PATH=$HOME/.local/bin:$PATH
