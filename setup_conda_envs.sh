@@ -32,6 +32,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 #not included in .bashrc
 #to activate the `root` environment
 source $MYLOCAL/conda/bin/activate
+conda update --yes conda pip python
 
 ##############################
 ### PYTHON 3 MINICONDA ENV ###
@@ -68,31 +69,32 @@ source $MYLOCAL/conda/bin/activate py27
 # PACKAGES INSTALLED VIA CONDA #
 ################################
 #The following are valid both `py36`, `py35` and `py27` conda environments
-conda install numpy matplotlib ipython scipy pyzmq ipykernel jupyter h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose
-
-#cython may generate errors
-#conda install cython 
-
-#gcc from conda generates this error
-# => libstdc++.so.6: version `CXXABI_1.3.9' not found
-#conda install gcc
-
-#pyopenGL (STILL WORK IN PROGRESS!!!)
-#conda install pyopengl pyopengl-accelerate
-#pyopenCL (NOT WORKING YET!)
-#conda install -c conda-forge pyopencl
-
-#UPDT: installing anaconda will create a BIG MESS!!! DO NOT DO IT!!!
-#conda install anaconda
-
-#/!\ spyder can MESS things with QT!!!
-#conda install spyder
+conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
 
 #py27-only
 conda install wxpython
 
-#packages installed from conda-forge channel
+#WARNING:
+#- cython may generate errors
+#- gcc from conda is NOT RECOMMENDED it may generate many errors
+#  => libstdc++.so.6: version `CXXABI_1.3.9' not found
+#- spyder may generate errors with QT
+#- anaconda will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
 
+#WORK IN PROGRESS:
+#- pyopenGL
+#  conda install pyopengl pyopengl-accelerate
+#- pyopenCL
+#  conda install -c conda-forge pyopencl
+
+#########################################################
+# PACKAGES INSTALLED VIA CONDA FROM CONDA-FORGE CHANNEL #
+#########################################################
+
+#---------------------------------------------
+#Xraylib (https://github.com/tschoonj/xraylib)
+#---------------------------------------------
+conda install -c conda-forge xraylib
 
 ##############################
 # PACKAGES INSTALLED VIA PIP #
@@ -124,14 +126,20 @@ pip install lmfit
 #-------------------------------------
 #Fisx (https://github.com/vasole/fisx)
 #-------------------------------------
+#REQUIREMENTS:
+#- numpy
 cd; cd $MYLOCAL
 git clone https://github.com/vasole/fisx
 cd fisx
+python setup.py clean
 python setup.py install
 
 #--------------------------
 #Silx (http://www.silx.org)
 #--------------------------
+#REQUIREMENTS:
+#- numpy
+#- fisx
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
@@ -147,8 +155,10 @@ python setup.py build_doc
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
 #---------------------------------------
-#sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev
-#make sure fisx is installed
+#REQUIREMENTS:
+#- numpy
+#- fisx
+#(NOT MANDATORY: sudo apt-get install mesa-common-dev libgl1-mesa-dev libglu1-mesa-dev)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/pymca.git
@@ -156,6 +166,7 @@ cd pymca
 git remote add --track master upstream https://github.com/vasole/pymca.git
 git fetch upstream
 git merge upstream/master
+python setup.py clean
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #build documentation
 python setup.py build_doc
@@ -167,6 +178,12 @@ python setup.py build_doc
 #-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
+#REQUIREMENTS:
+#- numpy
+#- scipy
+#- lmfit
+#OPTIONAL:
+#- wx
 #(using personal fork)
 cd; cd $MYDEVEL
 pip install wxmplot wxutils #py27 ONLY
@@ -188,65 +205,78 @@ rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
 #--------------------------------------------
+#Shadow3 (https://github.com/srio/shadow3)
+#--------------------------------------------
+#REQUIREMENTS:
+#- gfortran
+#- xraylib
+cd $MYLOCAL
+git clone https://github.com/srio/shadow3
+cd shadow3
+python setup.py clean
+python setup.py build
+pip install --no-deps -e . --no-binary :all:
+
+#--------------------------------------------
+#Oasys (https://github.com/srio/shadow3)
+#--------------------------------------------
+#REQUIREMENTS:
+#- numpy (conda - standard way)
+#- matplotlib (conda - standard way)
+#- scipy (conda - standard way)
+#- fisx (from source - standard way)
+#- pymca (from source - standard way)
+#- silx (from source - standard way)
+#- xraylib (conda-forge - standard way)
+#- shadow3 (from source - standard way)
+
+#srxraylib
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+pip install -e . --no-binary :all:
+cd ..
+
+#syned
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/syned
+cd syned
+python setup.py build
+pip install --no-deps -e . --no-binary :all:
+cd ..
+
+#wofry
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/wofry
+cd wofry
+python setup.py build
+pip install --no-deps -e . --no-binary :all:
+cd ..
+
+#orange
+pip install oasys-canvas-core oasys-widget-core
+
+#oasys
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/oasys1
+cd oasys1
+python setup.py build
+python setup.py develop
+cd ..
+
+#- start OASYS with this command:
+#    source $MYLOCAL/conda/bin/activate py36
+#    python -m oasys.canvas -l4 --force-discovery
+#- install all Add-Ons:
+#  OASYS1-WISE
+#  OASYS1-XRayServer
+#  OASYS1-XOPPY
+#  OASYS1-ShadowOui
+#- restart oasys
+
+#--------------------------------------------
 #XAFSmass (https://github.com/kklmn/XAFSmass)
 #--------------------------------------------
 cd $MYLOCAL
 git clone https://github.com/kklmn/XAFSmass.git
 #simpy run it via `python XAFSmassQt.py`
-
-
-##################################
-# OASYS IN A DEDICATED CONDA ENV #
-##################################
-#https://github.com/srio/oasys-installation-scripts/blob/master/install_oasys_using_miniconda.sh
-#Conda dedicated environment
-conda create --name py35qt4 python=3.5
-source deactivate
-source $MYLOCAL/conda/bin/activate py35qt4
-conda install --yes pyqt=4 numpy scipy matplotlib=1.4.3 python-dateutil pytz pyparsing nose swig
-#xraylib
-curl -O http://lvserver.ugent.be/xraylib/xraylib-3.2.0.tar.gz
-tar xvfz xraylib-3.2.0.tar.gz
-cd xraylib-3.2.0
-./configure --enable-python --enable-python-integration PYTHON=`which python`
-make
-export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
-#export PYTHON_SITE_PACKAGES=/home/mauro/local/conda/envs/py35qt4/lib/python3.5/site-packages/
-cp python/.libs/_xraylib.so $PYTHON_SITE_PACKAGES
-cp python/xrayhelp.py $PYTHON_SITE_PACKAGES
-cp python/xraylib.py $PYTHON_SITE_PACKAGES
-cp python/xraymessages.py $PYTHON_SITE_PACKAGES
-cd ..
-# srxraylib
-git clone https://github.com/lucarebuffi/srxraylib
-cd srxraylib
-pip install -e . --no-binary :all:
-cd ..
-#shadow3
-git clone https://github.com/srio/shadow3
-cd shadow3
-python setup.py build
-pip install -e . --no-binary :all:
-cd ..
-# fisx
-git clone https://github.com/vasole/fisx
-cd fisx
-python setup.py install
-cd ..
-#pymca
-pip install PyMca5
-# git clone https://github.com/vasole/pymca
-# cd pymca
-# python setup.py install
-# cd ..
-pip install oasys
-
-#- start ShadowOui with this command:
-#    source $MYLOCAL/conda/bin/activate py35qt4
-#    python -m oasys.canvas -l4 --force-discovery
-#- click on Add-Ons"
-#- check next to ShadowOui (options: OASYS-XRayServer & OASYS-XOPPY)"
-#- click OK button"
-#- wait for installation"
-#- restart oasys"
-
