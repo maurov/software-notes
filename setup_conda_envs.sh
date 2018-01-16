@@ -68,11 +68,9 @@ source $MYLOCAL/conda/bin/activate py27
 ################################
 # PACKAGES INSTALLED VIA CONDA #
 ################################
-#The following are valid both `py36`, `py35` and `py27` conda environments
-conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
 
-#py27-only
-conda install wxpython
+#BASE: the following packages are my base distribution, valid for all `py36*` and `py27*` conda environments
+conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
 
 #WARNING:
 #- cython may generate errors
@@ -80,6 +78,14 @@ conda install wxpython
 #  => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #- spyder may generate errors with QT
 #- anaconda will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
+
+#WXPYTHON: py27 only
+conda install wxpython
+
+#ORANGE3 (https://orange.biolab.si/)
+conda install orange3
+#test if it works: `orange-canvas -l 4`
+
 
 #WORK IN PROGRESS:
 #- pyopenGL
