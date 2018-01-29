@@ -70,7 +70,7 @@ source $MYLOCAL/conda/bin/activate py27
 ################################
 
 #BASE: the following packages are my base distribution, valid for all `py36*` and `py27*` conda environments
-conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
+conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx sphinxcontrib bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
 
 #WARNING:
 #- cython may generate errors
@@ -121,6 +121,15 @@ pip install lmfit
 #---------------------------------------------
 #pip install wxmplot wxutils => see Larch (py27 only)
 
+#---------------------------------------------
+#Sphinx-related
+#---------------------------------------------
+#
+#TIP: there is a bug in sphinxcontrib-googleanalytics
+pip install robpol86-sphinxcontrib-googleanalytics
+#
+#https://github.com/ryan-roemer/sphinx-bootstrap-theme
+pip install sphinx_bootstrap_theme
 
 ##################################
 # PACKAGES INSTALLED FROM SOURCE #
