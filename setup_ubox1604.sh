@@ -169,6 +169,10 @@ rsync -avz --delete $MYMENDELEYLOCAL/dotCache/ $HOME/.cache/Mendeley\ Ltd./
 #4) start Mendeley and everything should be in place!
 
 ### ZOTERO ###
+#using qnotero repository
+sudo add-apt-repository ppa:smathot/cogscinl
+sudo apt-get update
+sudo apt-get install zotero-standalone
 #install the firefox extension
 #synchronize files using webDAV
 #(owncloud has this option, use the link you get in `settings` tab from the web interface)
