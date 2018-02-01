@@ -82,11 +82,6 @@ conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyte
 #WXPYTHON: py27 only
 conda install wxpython
 
-#ORANGE3 (https://orange.biolab.si/)
-conda install orange3
-#test if it works: `orange-canvas -l 4`
-
-
 #WORK IN PROGRESS:
 #- pyopenGL
 #  conda install pyopengl pyopengl-accelerate
@@ -102,12 +97,25 @@ conda install orange3
 #---------------------------------------------
 conda install -c conda-forge xraylib
 
+#---------------------------------------------
+#ORANGE3 (https://orange.biolab.si/)
+#---------------------------------------------
+conda install -c conda-forge orange3
+#test if it works: `orange-canvas -l 4`
+
+
 ##############################
 # PACKAGES INSTALLED VIA PIP #
 ##############################
 #first activate one of the conda enviroment:
 #source $MYLOCAL/conda/bin/activate py36
 #source $MYLOCAL/conda/bin/activate py27
+
+#--------------------------------------------
+#Shadow3 (https://github.com/srio/shadow3)
+#--------------------------------------------
+#NOTE: CURRENTLY DOES NOT WORK WITH PYTHON 3.6!!!
+pip install shadow3
 
 #-----------------------------------------
 #Lmfit (https://github.com/lmfit/lmfit-py)
@@ -219,18 +227,24 @@ cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
+
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
+#
+#WARNING: WEIRD BEHAVIOUR WHEN BUILT FROM SOURCE!!!
+#         => USE `pip install shadow3`
+#
 #REQUIREMENTS:
 #- gfortran
+#- python <= 3.5
 #- xraylib
-cd $MYLOCAL
-git clone https://github.com/srio/shadow3
-cd shadow3
-python setup.py clean
-python setup.py build
-pip install --no-deps -e . --no-binary :all:
+#cd $MYLOCAL
+#git clone https://github.com/srio/shadow3
+#cd shadow3
+#python setup.py clean
+#python setup.py build
+#pip install --no-deps -e . --no-binary :all:
 
 #--------------------------------------------
 #Oasys (https://github.com/srio/shadow3)
