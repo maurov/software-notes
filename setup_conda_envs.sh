@@ -69,20 +69,29 @@ source $MYLOCAL/conda/bin/activate py27
 # PACKAGES INSTALLED VIA CONDA #
 ################################
 
-#BASE: the following packages are my base distribution, valid for all `py36*` and `py27*` conda environments
-conda install cython pyqt numpy scipy matplotlib spyder ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx sphinxcontrib bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
+#----
+#BASE
+#----
+#the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
+conda install pyqt numpy scipy matplotlib ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx sphinxcontrib bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
 
-#WARNING:
-#- cython may generate errors
-#- gcc from conda is NOT RECOMMENDED it may generate many errors
-#  => libstdc++.so.6: version `CXXABI_1.3.9' not found
-#- spyder may generate errors with QT
-#- anaconda will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
-
+#-------------------
 #WXPYTHON: py27 only
+#-------------------
 conda install wxpython
 
-#WORK IN PROGRESS:
+#-------------------
+#OPTIONAL / WARNINGS
+#-------------------
+#- cython   : may generate errors
+#- gcc      : from conda is NOT RECOMMENDED it may generate many errors
+#             => libstdc++.so.6: version `CXXABI_1.3.9' not found
+#- spyder   : may generate errors with QT
+#- anaconda : will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
+
+#----------------
+#WORK IN PROGRESS
+#----------------
 #- pyopenGL
 #  conda install pyopengl pyopengl-accelerate
 #- pyopenCL
@@ -91,6 +100,8 @@ conda install wxpython
 #########################################################
 # PACKAGES INSTALLED VIA CONDA FROM CONDA-FORGE CHANNEL #
 #########################################################
+#first activate one conda enviroment
+#source $MYLOCAL/conda/bin/activate <your_environment_name>
 
 #---------------------------------------------
 #Xraylib (https://github.com/tschoonj/xraylib)
@@ -103,13 +114,11 @@ conda install -c conda-forge xraylib
 conda install -c conda-forge orange3
 #test if it works: `orange-canvas -l 4`
 
-
 ##############################
 # PACKAGES INSTALLED VIA PIP #
 ##############################
-#first activate one of the conda enviroment:
-#source $MYLOCAL/conda/bin/activate py36
-#source $MYLOCAL/conda/bin/activate py27
+#first activate one conda enviroment
+#source $MYLOCAL/conda/bin/activate <your_environment_name>
 
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
@@ -142,9 +151,8 @@ pip install sphinx_bootstrap_theme
 ##################################
 # PACKAGES INSTALLED FROM SOURCE #
 ##################################
-#first activate one of the conda enviroment:
-#source $MYLOCAL/conda/bin/activate py36
-#source $MYLOCAL/conda/bin/activate py27
+#first activate one conda enviroment
+#source $MYLOCAL/conda/bin/activate <your_environment_name>
 
 #-------------------------------------
 #Fisx (https://github.com/vasole/fisx)
@@ -309,3 +317,14 @@ cd ..
 cd $MYLOCAL
 git clone https://github.com/kklmn/XAFSmass.git
 #simpy run it via `python XAFSmassQt.py`
+
+#----------------------------------
+#XRT (https://github.com/kklmn/xrt)
+#----------------------------------
+#REQUIREMENTS:
+#- spyder
+cd $MYLOCAL
+git clone https://github.com/kklmn/xrt.git
+#DO NOT INSTALL VIA setup.py, simply -> sys.path.append()
+
+
