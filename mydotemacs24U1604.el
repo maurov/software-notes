@@ -144,6 +144,8 @@
 
 (defvar my_pkgs '(org
 		  org-ref
+		  ox-mediawiki
+		  ox-rst
 		  json-mode
 		  sphinx-doc
 		  sphinx-mode
