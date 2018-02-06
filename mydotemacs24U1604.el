@@ -146,6 +146,7 @@
 		  org-ref
 		  ox-mediawiki
 		  ox-rst
+		  ob-ipython
 		  json-mode
 		  sphinx-doc
 		  sphinx-mode
@@ -176,15 +177,15 @@
 
 (org-babel-do-load-languages
  'org-babel-load-languages
- '((sh . t)
-   (ditaa . t)
+ '((ditaa . t)
    (python . t)
+   (ipython . t)
    (matlab . t)
    (perl . t)
    (dot . t)
    (css . t)
    (gnuplot . t)
-   (sh . t)
+   (shell . t)
    (latex . t))
  )
 (custom-set-variables
