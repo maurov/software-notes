@@ -11,7 +11,7 @@
 # ---------------------------------------------------------------------- #
 # my local dir && utils
 export MYLOCAL=$HOME/local
-#export PYTHONPATH=$HOME/utils:$PYTHONPATH
+export MYDEVEL=$HOME/devel
 
 #PROXY SETTINGS AT ESRF
 export http_proxy=http://proxy.esrf.fr:3128/
@@ -31,15 +31,17 @@ export DIFFPAT_EXEC=$MYLOCAL/CRYSTAL/diff_pat
 
 ### ALIASES ###
 #Conda envs
-alias py35='source $MYLOCAL/conda/bin/activate py35'
-alias py27='source $MYLOCAL/conda/bin/activate py27'
-alias py35qt4='source $MYLOCAL/conda/bin/activate py35qt4'
+alias py35='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate py35'
+alias py27='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate py27'
+alias py35qt4='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate py35qt4'
 
 #pymca within Conda env
-alias pymca='source $MYLOCAL/conda/bin/activate py35; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
+#DO NOT USE FOLLOWING ALIAS, JUST ACTIVATE CONDA AND RUN `pymca`
+#alias pymca='source $MYLOCAL/conda/bin/activate py35; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
 
 #oasys within Conda env
-alias oasys='source $MYLOCAL/conda/bin/activate py35qt4; python -m oasys.canvas -l4 --force-discovery'
+#first manually activate the conda environment
+alias oasys='python -m oasys.canvas -l4 --force-discovery'
 
  
 # ---------------------------------------------------------------------- #
