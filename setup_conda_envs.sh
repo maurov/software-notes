@@ -30,7 +30,7 @@ wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
 #installed in /home/mauro/local/conda
 #not included in .bashrc
-#to activate the `root` environment
+#to activate the `base` (AKA `root`) environment
 source $MYLOCAL/conda/bin/activate
 conda update --yes conda pip python
 
@@ -73,7 +73,17 @@ source $MYLOCAL/conda/bin/activate py27
 #BASE
 #----
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
-conda install pyqt numpy scipy matplotlib ipython ipykernel jupyter pyzmq h5py pandas sqlalchemy sphinx sphinxcontrib bottlechest pillow yaml termcolor requests nose swig pyparsing pytz python-dateutil
+conda install -c defaults pyqt=5 qt
+
+conda install numpy scipy matplotlib pyparsing pytz python-dateutil
+
+conda install ipython ipykernel jupyter
+
+conda install pyzmq h5py pandas sqlalchemy
+
+conda install sphinx sphinxcontrib
+
+conda install bottlechest pillow yaml termcolor requests nose swig
 
 #-------------------
 #WXPYTHON: py27 only
@@ -120,11 +130,23 @@ conda install -c conda-forge orange3
 #first activate one conda enviroment
 #source $MYLOCAL/conda/bin/activate <your_environment_name>
 
+#-------------------------------------
+#Fisx (https://github.com/vasole/fisx)
+#PyMca5 (http://github.com/vasole/pymca)
+#Silx (http://www.silx.org)
+#-------------------------------------
+pip install fisx PyMca5 silx
+
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
 #NOTE: CURRENTLY DOES NOT WORK WITH PYTHON 3.6!!!
 pip install shadow3
+
+#---------------------------------------------
+#Orange/Oasys-related
+#---------------------------------------------
+pip install oasys-canvas-core oasys-widget-core
 
 #-----------------------------------------
 #Lmfit (https://github.com/lmfit/lmfit-py)
@@ -154,23 +176,117 @@ pip install sphinx_bootstrap_theme
 #first activate one conda enviroment
 #source $MYLOCAL/conda/bin/activate <your_environment_name>
 
-#-------------------------------------
-#Fisx (https://github.com/vasole/fisx)
-#-------------------------------------
+#---------------------------------------------------------------
+#Oasys (https://github.com/srio/oasys-installation-scripts/wiki)
+#---------------------------------------------------------------
+#REQUIREMENTS:
+#- numpy             (=> conda base)
+#- matplotlib        (=> conda base)
+#- scipy             (=> conda base)
+#- xraylib           (=> conda-forge)
+#- fisx              (=> pip)
+#- pymca             (=> pip)
+#- silx              (=> pip)
+#- shadow3           (=> pip)
+#- oasys-canvas-core (=> pip)
+#- oasys-widget-core (=> pip)
+
+#srxraylib
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/srxraylib
+cd srxraylib
+pip install -e . --no-binary :all:
+cd ..
+
+#syned
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/syned
+cd syned
+python setup.py build
+pip install --no-deps -e . --no-binary :all:
+cd ..
+
+#wofry
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/wofry
+cd wofry
+python setup.py build
+pip install --no-deps -e . --no-binary :all:
+cd ..
+
+#oasys
+cd $MYLOCAL
+git clone https://github.com/lucarebuffi/oasys1
+cd oasys1
+python setup.py build
+python setup.py develop
+cd ..
+
+#- start OASYS with this command:
+#    source $MYLOCAL/conda/bin/activate pyOasys
+#    python -m oasys.canvas -l4 --force-discovery
+#- install all Add-Ons:
+#  OASYS1-WISE
+#  OASYS1-XRayServer
+#  OASYS1-XOPPY
+#  OASYS1-ShadowOui
+#- restart oasys
+
+#-----------------------------------------
+#LARCH (http://xraypy.github.io/xraylarch)
+#-----------------------------------------
 #REQUIREMENTS:
 #- numpy
-cd; cd $MYLOCAL
-git clone https://github.com/vasole/fisx
-cd fisx
-python setup.py clean
+#- scipy
+#- lmfit
+#OPTIONAL:
+#- wx
+#(using personal fork)
+cd; cd $MYDEVEL
+pip install wxmplot wxutils #py27 ONLY
+#(using personal fork)
+cd; cd devel
+git clone https://github.com/maurov/xraylarch.git
+cd xraylarch
+git remote add --track master upstream https://github.com/xraypy/xraylarch.git
+git fetch upstream
+git merge upstream/master
+#NOTE: wxPython is not (yet) fully supported for python3 (plotting
+#      functionalities will not be available in Larch, this is to use
+#      it as library)
+python setup.py build
 python setup.py install
+# Link larch plugins directory (optional)
+cd ~/.larch/
+rm -rf plugins
+ln -s your_larch_plugins_dir plugins
+
+#--------------------------------------------
+#XAFSmass (https://github.com/kklmn/XAFSmass)
+#--------------------------------------------
+cd $MYLOCAL
+git clone https://github.com/kklmn/XAFSmass.git
+#simpy run it via `python XAFSmassQt.py`
+
+#----------------------------------
+#XRT (https://github.com/kklmn/xrt)
+#----------------------------------
+#REQUIREMENTS:
+#- spyder
+cd $MYLOCAL
+git clone https://github.com/kklmn/xrt.git
+#DO NOT INSTALL VIA setup.py, simply -> sys.path.append()
+
+#######################
+### OPTIONAL METHOD ###
+#######################
 
 #--------------------------
 #Silx (http://www.silx.org)
 #--------------------------
 #REQUIREMENTS:
-#- numpy
-#- fisx
+#- numpy (=> conda base)
+#- fisx (=> pip)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
@@ -206,36 +322,6 @@ python setup.py build_doc
 # fixed by using `gnome-color-chooser` to set the tooltip color to a
 # readable one!
 
-#-----------------------------------------
-#LARCH (http://xraypy.github.io/xraylarch)
-#-----------------------------------------
-#REQUIREMENTS:
-#- numpy
-#- scipy
-#- lmfit
-#OPTIONAL:
-#- wx
-#(using personal fork)
-cd; cd $MYDEVEL
-pip install wxmplot wxutils #py27 ONLY
-#(using personal fork)
-cd; cd devel
-git clone https://github.com/maurov/xraylarch.git
-cd xraylarch
-git remote add --track master upstream https://github.com/xraypy/xraylarch.git
-git fetch upstream
-git merge upstream/master
-#NOTE: wxPython is not (yet) fully supported for python3 (plotting
-#      functionalities will not be available in Larch, this is to use
-#      it as library)
-python setup.py build
-python setup.py install
-# Link larch plugins directory (optional)
-cd ~/.larch/
-rm -rf plugins
-ln -s your_larch_plugins_dir plugins
-
-
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
@@ -253,78 +339,4 @@ ln -s your_larch_plugins_dir plugins
 #python setup.py clean
 #python setup.py build
 #pip install --no-deps -e . --no-binary :all:
-
-#--------------------------------------------
-#Oasys (https://github.com/srio/shadow3)
-#--------------------------------------------
-#REQUIREMENTS:
-#- numpy (conda - standard way)
-#- matplotlib (conda - standard way)
-#- scipy (conda - standard way)
-#- fisx (from source - standard way)
-#- pymca (from source - standard way)
-#- silx (from source - standard way)
-#- xraylib (conda-forge - standard way)
-#- shadow3 (from source - standard way)
-
-#srxraylib
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/srxraylib
-cd srxraylib
-pip install -e . --no-binary :all:
-cd ..
-
-#syned
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/syned
-cd syned
-python setup.py build
-pip install --no-deps -e . --no-binary :all:
-cd ..
-
-#wofry
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/wofry
-cd wofry
-python setup.py build
-pip install --no-deps -e . --no-binary :all:
-cd ..
-
-#orange
-pip install oasys-canvas-core oasys-widget-core
-
-#oasys
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/oasys1
-cd oasys1
-python setup.py build
-python setup.py develop
-cd ..
-
-#- start OASYS with this command:
-#    source $MYLOCAL/conda/bin/activate py36
-#    python -m oasys.canvas -l4 --force-discovery
-#- install all Add-Ons:
-#  OASYS1-WISE
-#  OASYS1-XRayServer
-#  OASYS1-XOPPY
-#  OASYS1-ShadowOui
-#- restart oasys
-
-#--------------------------------------------
-#XAFSmass (https://github.com/kklmn/XAFSmass)
-#--------------------------------------------
-cd $MYLOCAL
-git clone https://github.com/kklmn/XAFSmass.git
-#simpy run it via `python XAFSmassQt.py`
-
-#----------------------------------
-#XRT (https://github.com/kklmn/xrt)
-#----------------------------------
-#REQUIREMENTS:
-#- spyder
-cd $MYLOCAL
-git clone https://github.com/kklmn/xrt.git
-#DO NOT INSTALL VIA setup.py, simply -> sys.path.append()
-
 
