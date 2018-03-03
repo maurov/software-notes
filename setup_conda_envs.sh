@@ -73,17 +73,17 @@ source $MYLOCAL/conda/bin/activate py27
 #BASE
 #----
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
-conda install -c defaults pyqt=5 qt
+conda install --yes -c defaults pyqt=5 qt
 
-conda install numpy scipy matplotlib pyparsing pytz python-dateutil
+conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil
 
-conda install ipython ipykernel jupyter
+conda install --yes ipython ipykernel jupyter
 
-conda install pyzmq h5py pandas sqlalchemy
+conda install --yes pyzmq h5py pandas sqlalchemy
 
-conda install sphinx sphinxcontrib
+conda install --yes sphinx sphinxcontrib
 
-conda install bottlechest pillow yaml termcolor requests nose swig
+conda install --yes bottlechest pillow yaml termcolor requests nose swig
 
 #-------------------
 #WXPYTHON: py27 only
@@ -121,7 +121,8 @@ conda install -c conda-forge xraylib
 #---------------------------------------------
 #ORANGE3 (https://orange.biolab.si/)
 #---------------------------------------------
-conda install -c conda-forge orange3
+#NOTE: **conficts** with OASYS1!!!
+#conda install -c conda-forge orange3
 #test if it works: `orange-canvas -l 4`
 
 ##############################
@@ -146,7 +147,7 @@ pip install shadow3
 #---------------------------------------------
 #Orange/Oasys-related
 #---------------------------------------------
-pip install oasys-canvas-core oasys-widget-core
+pip install oasys-canvas-core oasys-widget-core oasys1
 
 #-----------------------------------------
 #Lmfit (https://github.com/lmfit/lmfit-py)
@@ -190,47 +191,27 @@ pip install sphinx_bootstrap_theme
 #- shadow3           (=> pip)
 #- oasys-canvas-core (=> pip)
 #- oasys-widget-core (=> pip)
+#- oasys1            (=> pip)
 
-#srxraylib
+# wofryshadow
 cd $MYLOCAL
-git clone https://github.com/lucarebuffi/srxraylib
-cd srxraylib
-pip install -e . --no-binary :all:
+git clone https://github.com/srio/wofryshadow
+cd wofryshadow
+pip install -e . --no-deps --no-binary :all:
 cd ..
 
-#syned
+#shadowOui
 cd $MYLOCAL
-git clone https://github.com/lucarebuffi/syned
-cd syned
-python setup.py build
-pip install --no-deps -e . --no-binary :all:
-cd ..
-
-#wofry
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/wofry
-cd wofry
-python setup.py build
-pip install --no-deps -e . --no-binary :all:
-cd ..
-
-#oasys
-cd $MYLOCAL
-git clone https://github.com/lucarebuffi/oasys1
-cd oasys1
-python setup.py build
+git clone https://github.com/lucarebuffi/shadowOui
+cd shadowOui
+pip install -e . --no-deps --no-binary :all:
 python setup.py develop
-cd ..
+cd
 
 #- start OASYS with this command:
-#    source $MYLOCAL/conda/bin/activate pyOasys
+#    source $MYLOCAL/conda/bin/activate py35
 #    python -m oasys.canvas -l4 --force-discovery
-#- install all Add-Ons:
-#  OASYS1-WISE
-#  OASYS1-XRayServer
-#  OASYS1-XOPPY
-#  OASYS1-ShadowOui
-#- restart oasys
+#- DO NOT install Add-Ons, they should be already there!!!
 
 #-----------------------------------------
 #LARCH (http://xraypy.github.io/xraylarch)
@@ -339,4 +320,3 @@ python setup.py build_doc
 #python setup.py clean
 #python setup.py build
 #pip install --no-deps -e . --no-binary :all:
-
