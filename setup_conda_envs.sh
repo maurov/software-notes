@@ -75,11 +75,14 @@ source $MYLOCAL/conda/bin/activate py27
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
 conda install --yes -c defaults pyqt=5 qt
 
-conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil
+conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py
 
+#-----
+#BASE+
+#-----
 conda install --yes ipython ipykernel jupyter
 
-conda install --yes pyzmq h5py pandas sqlalchemy
+conda install --yes pyzmq pandas sqlalchemy
 
 conda install --yes sphinx sphinxcontrib
 
@@ -94,7 +97,7 @@ conda install wxpython
 #OPTIONAL / WARNINGS
 #-------------------
 #- cython   : may generate errors
-#- gcc      : from conda is NOT RECOMMENDED it may generate many errors
+#- gcc      : it may generate errors (reported below what seen so far)
 #             => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #- spyder   : may generate errors with QT
 #- anaconda : will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
@@ -136,7 +139,7 @@ conda install -c conda-forge xraylib
 #PyMca5 (http://github.com/vasole/pymca)
 #Silx (http://www.silx.org)
 #-------------------------------------
-pip install fisx PyMca5 silx
+pip install fisx PyMca5 silx fabio hdf5plugin
 
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
@@ -147,7 +150,7 @@ pip install shadow3
 #---------------------------------------------
 #Orange/Oasys-related
 #---------------------------------------------
-pip install oasys-canvas-core oasys-widget-core oasys1
+pip install oasys-canvas-core oasys-widget-core oasys1 srxraylib syned wofry
 
 #-----------------------------------------
 #Lmfit (https://github.com/lmfit/lmfit-py)
@@ -192,6 +195,9 @@ pip install sphinx_bootstrap_theme
 #- oasys-canvas-core (=> pip)
 #- oasys-widget-core (=> pip)
 #- oasys1            (=> pip)
+#- srxraylib         (=> pip) 
+#- syned	     (=> pip) 
+#- wofry	     (=> pip) 
 
 # wofryshadow
 cd $MYLOCAL
