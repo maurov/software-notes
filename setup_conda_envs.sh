@@ -38,12 +38,11 @@ conda update --yes conda pip python
 ### PYTHON 3 MINICONDA ENV ###
 ##############################
 #from conda root (see `MINICONDA INSTALL`)
-conda create --name py36 python=3.6 #current as for June 2017
-#conda create --name py35 python=3.5
+conda create --name py35 python=3.5 #current as for Mars 2018
 source deactivate
-source $MYLOCAL/conda/bin/activate py36
+source $MYLOCAL/conda/bin/activate py35
 #add alias in .bashrc:
-#alias py36='unset PYTHONPATH; $MYLOCAL/conda/bin activate py36'
+#alias py35='unset PYTHONPATH; $MYLOCAL/conda/bin activate py35'
 
 ##############################
 ### PYTHON 2 MINICONDA ENV ###
@@ -74,18 +73,14 @@ source $MYLOCAL/conda/bin/activate py27
 #----
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
 conda install --yes -c defaults pyqt=5 qt
-
 conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py
 
 #-----
 #BASE+
 #-----
 conda install --yes ipython ipykernel jupyter
-
 conda install --yes pyzmq pandas sqlalchemy
-
 conda install --yes sphinx sphinxcontrib
-
 conda install --yes bottlechest pillow yaml termcolor requests nose swig
 
 #-------------------
@@ -145,7 +140,9 @@ pip install fisx PyMca5 silx fabio hdf5plugin
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
 #NOTE: CURRENTLY DOES NOT WORK WITH PYTHON 3.6!!!
-pip install shadow3
+#pip install shadow3 (not always working, better use the wheel below!!!)
+wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
+pip install shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
 
 #---------------------------------------------
 #Orange/Oasys-related
@@ -167,7 +164,6 @@ pip install lmfit
 #---------------------------------------------
 #Sphinx-related
 #---------------------------------------------
-#
 #TIP: there is a bug in sphinxcontrib-googleanalytics
 pip install robpol86-sphinxcontrib-googleanalytics
 #
