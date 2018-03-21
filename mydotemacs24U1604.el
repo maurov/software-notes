@@ -135,7 +135,7 @@
 ;; #### ELPA: Emacs Lisp Package Archive (http://www.emacswiki.org/emacs/ELPA) ####
 ;; --------------------------------------------------------------------------------
 (load "package")
-(package-initialize)
+;;(package-initialize) ;;not required anymore
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
 			 ("marmalade" . "https://marmalade-repo.org/packages/")
 			 ("melpa" . "https://melpa.org/packages/")))
