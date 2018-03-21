@@ -73,20 +73,8 @@ source $MYLOCAL/conda/bin/activate py27
 #----
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
 conda install --yes -c defaults pyqt=5 qt
-conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py
-
-#-----
-#BASE+
-#-----
-conda install --yes ipython ipykernel jupyter
-conda install --yes pyzmq pandas sqlalchemy
-conda install --yes sphinx sphinxcontrib
-conda install --yes bottlechest pillow yaml termcolor requests nose swig
-
-#-------------------
-#WXPYTHON: py27 only
-#-------------------
-conda install wxpython
+conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py pillow requests sqlalchemy
+conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib bottlechest yaml termcolor nose swig
 
 #-------------------
 #OPTIONAL / WARNINGS
@@ -96,6 +84,7 @@ conda install wxpython
 #             => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #- spyder   : may generate errors with QT
 #- anaconda : will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
+#- wxpython : still UNSTABLE under python3!!!
 
 #----------------
 #WORK IN PROGRESS
@@ -123,6 +112,22 @@ conda install -c conda-forge xraylib
 #conda install -c conda-forge orange3
 #test if it works: `orange-canvas -l 4`
 
+#-----------------------------------------
+#Larch-related
+#-----------------------------------------
+#peakutils
+#lmfit (https://github.com/lmfit/lmfit-py)
+#asteval
+#psutil
+#wxpython
+#wxmplot (https://github.com/newville/wxmplot)
+#wxutils (https://github.com/newville/wxutils)
+#-----------------------------------------
+conda install -c conda-forge peakutils lmfit asteval psutil
+
+#NOTE: py27 only / OPTIONAL
+#conda install -c conda-forge wxpython wxmplot wxutils 
+
 ##############################
 # PACKAGES INSTALLED VIA PIP #
 ##############################
@@ -148,18 +153,6 @@ pip install shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
 #Orange/Oasys-related
 #---------------------------------------------
 pip install oasys-canvas-core oasys-widget-core oasys1 srxraylib syned wofry
-
-#-----------------------------------------
-#Lmfit (https://github.com/lmfit/lmfit-py)
-#-----------------------------------------
-#conda install -c conda-forge lmfit
-pip install lmfit
-
-#---------------------------------------------
-#Wxmplot (https://github.com/newville/wxmplot)
-#Wxutils (https://github.com/newville/wxutils)
-#---------------------------------------------
-#pip install wxmplot wxutils => see Larch (py27 only)
 
 #---------------------------------------------
 #Sphinx-related
@@ -219,16 +212,23 @@ cd
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
 #REQUIREMENTS:
-#- numpy
-#- scipy
-#- lmfit
-#OPTIONAL:
-#- wx
+#- numpy      (=> conda)
+#- scipy      (=> conda)
+#- matplotlib (=> conda)
+#- sqlalchemy (=> conda)
+#- h5py       (=> conda)
+#- pillow     (=> conda)
+#- requests   (=> conda)
+#- lmfit      (=> conda-forge)
+#- peakutils  (=> conda-forge)
+#- asteval    (=> conda-forge)
+#- psutil     (=> conda-forge)
+#OPTIONAL (NOT FULLY WORKING YET):
+#- wxpython   (=> conda-forge)
+#- wxmplot    (=> conda-forge)
+#- wxutils    (=> conda-forge)
 #(using personal fork)
 cd; cd $MYDEVEL
-pip install wxmplot wxutils #py27 ONLY
-#(using personal fork)
-cd; cd devel
 git clone https://github.com/maurov/xraylarch.git
 cd xraylarch
 git remote add --track master upstream https://github.com/xraypy/xraylarch.git
