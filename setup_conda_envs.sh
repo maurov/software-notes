@@ -38,11 +38,11 @@ conda update --yes conda pip python
 ### PYTHON 3 MINICONDA ENV ###
 ##############################
 #from conda root (see `MINICONDA INSTALL`)
-conda create --name py35 python=3.5 #current as for Mars 2018
+conda create --name py36 python=3.6 #current as for 2018-03-22
 source deactivate
-source $MYLOCAL/conda/bin/activate py35
+source $MYLOCAL/conda/bin/activate py36
 #add alias in .bashrc:
-#alias py35='unset PYTHONPATH; $MYLOCAL/conda/bin activate py35'
+#alias py35='unset PYTHONPATH; $MYLOCAL/conda/bin activate py36'
 
 ##############################
 ### PYTHON 2 MINICONDA ENV ###
@@ -75,6 +75,7 @@ source $MYLOCAL/conda/bin/activate py27
 conda install --yes -c defaults pyqt=5 qt
 conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py pillow requests sqlalchemy
 conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib bottlechest yaml termcolor nose swig
+conda install --yes wxpython
 
 #-------------------
 #OPTIONAL / WARNINGS
@@ -84,7 +85,6 @@ conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib 
 #             => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #- spyder   : may generate errors with QT
 #- anaconda : will create a BIG MESS!!! DO NOT DO INSTALL IT!!!
-#- wxpython : still UNSTABLE under python3!!!
 
 #----------------
 #WORK IN PROGRESS
@@ -119,20 +119,21 @@ conda install -c conda-forge xraylib
 #lmfit (https://github.com/lmfit/lmfit-py)
 #asteval
 #psutil
-#wxpython
-#wxmplot (https://github.com/newville/wxmplot)
-#wxutils (https://github.com/newville/wxutils)
+#pytest
 #-----------------------------------------
-conda install -c conda-forge peakutils lmfit asteval psutil
-
-#NOTE: py27 only / OPTIONAL
-#conda install -c conda-forge wxpython wxmplot wxutils 
+conda install -c conda-forge peakutils lmfit asteval psutil pytest
 
 ##############################
 # PACKAGES INSTALLED VIA PIP #
 ##############################
 #first activate one conda enviroment
 #source $MYLOCAL/conda/bin/activate <your_environment_name>
+
+#-----------------------------------------
+#wxmplot (https://github.com/newville/wxmplot)
+#wxutils (https://github.com/newville/wxutils)
+#-----------------------------------------
+pip install wxmplot wxutils
 
 #-------------------------------------
 #Fisx (https://github.com/vasole/fisx)
@@ -144,9 +145,9 @@ pip install fisx PyMca5 silx fabio hdf5plugin
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
-#NOTE: CURRENTLY DOES NOT WORK WITH PYTHON 3.6!!!
 #pip install shadow3 (not always working, better use the wheel below!!!)
-wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
+wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl #py35
+wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp36-cp36m-linux_x86_64.whl #py36
 pip install shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
 
 #---------------------------------------------
@@ -186,7 +187,7 @@ pip install sphinx_bootstrap_theme
 #- oasys1            (=> pip)
 #- srxraylib         (=> pip) 
 #- syned	     (=> pip) 
-#- wofry	     (=> pip) 
+#- wofry	     (=> pip)
 
 # wofryshadow
 cd $MYLOCAL
