@@ -220,14 +220,19 @@ cd
 #- h5py       (=> conda)
 #- pillow     (=> conda)
 #- requests   (=> conda)
+#- wxpython   (=> conda)
 #- lmfit      (=> conda-forge)
 #- peakutils  (=> conda-forge)
 #- asteval    (=> conda-forge)
 #- psutil     (=> conda-forge)
-#OPTIONAL (NOT FULLY WORKING YET):
-#- wxpython   (=> conda-forge)
-#- wxmplot    (=> conda-forge)
-#- wxutils    (=> conda-forge)
+#- pytest     (=> conda-forge)
+#- wxmplot    (=> pip)
+#- wxutils    (=> pip)
+#- fisx       (=> pip)
+#- silx       (=> pip)
+#- PyMca5     (=> pip)
+#- fabio      (=> pip)
+#- hdf5plugin (=> pip)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/xraylarch.git
