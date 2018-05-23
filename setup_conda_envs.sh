@@ -73,8 +73,8 @@ source $MYLOCAL/conda/bin/activate py27
 #----
 #the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
 conda install --yes -c defaults pyqt=5 qt
-conda install --yes numpy scipy matplotlib pyparsing pytz python-dateutil h5py pillow requests sqlalchemy
-conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib bottlechest yaml termcolor nose swig
+conda install --yes numpy scipy matplotlib scikit-learn pyparsing pytz python-dateutil h5py pillow requests sqlalchemy
+conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib bottlechest yaml pyyaml termcolor nose swig
 conda install --yes wxpython
 
 #-------------------
@@ -120,8 +120,9 @@ conda install -c conda-forge xraylib
 #asteval
 #psutil
 #pytest
+#uncertainties
 #-----------------------------------------
-conda install -c conda-forge peakutils lmfit asteval psutil pytest
+conda install -c conda-forge peakutils lmfit asteval psutil pytest uncertainties
 
 ##############################
 # PACKAGES INSTALLED VIA PIP #
@@ -140,7 +141,7 @@ pip install wxmplot wxutils
 #PyMca5 (http://github.com/vasole/pymca)
 #Silx (http://www.silx.org)
 #-------------------------------------
-pip install fisx PyMca5 silx fabio hdf5plugin
+pip install fisx PyMca5 silx fabio hdf5plugin pyFAI PyCifRW
 
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
@@ -213,26 +214,29 @@ cd
 #LARCH (http://xraypy.github.io/xraylarch)
 #-----------------------------------------
 #REQUIREMENTS:
-#- numpy      (=> conda)
-#- scipy      (=> conda)
-#- matplotlib (=> conda)
-#- sqlalchemy (=> conda)
-#- h5py       (=> conda)
-#- pillow     (=> conda)
-#- requests   (=> conda)
-#- wxpython   (=> conda)
-#- lmfit      (=> conda-forge)
-#- peakutils  (=> conda-forge)
-#- asteval    (=> conda-forge)
-#- psutil     (=> conda-forge)
-#- pytest     (=> conda-forge)
-#- wxmplot    (=> pip)
-#- wxutils    (=> pip)
-#- fisx       (=> pip)
-#- silx       (=> pip)
-#- PyMca5     (=> pip)
-#- fabio      (=> pip)
-#- hdf5plugin (=> pip)
+#- numpy         (=> conda)
+#- scipy         (=> conda)
+#- matplotlib    (=> conda)
+#- sqlalchemy    (=> conda)
+#- h5py          (=> conda)
+#- pillow        (=> conda)
+#- requests      (=> conda)
+#- wxpython      (=> conda)
+#- pyyaml        (=> conda)
+#- lmfit         (=> conda-forge)
+#- peakutils     (=> conda-forge)
+#- asteval       (=> conda-forge)
+#- psutil        (=> conda-forge)
+#- pytest        (=> conda-forge)
+#- wxmplot       (=> pip)
+#- wxutils       (=> pip)
+#- fisx          (=> pip)
+#- silx          (=> pip)
+#- PyMca5        (=> pip)
+#- fabio         (=> pip)
+#- hdf5plugin    (=> pip)
+#- PyCifRW       (=> pip)
+#- uncertainties (=> pip)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/xraylarch.git
