@@ -80,7 +80,8 @@ conda install --yes wxpython
 #-------------------
 #OPTIONAL / WARNINGS
 #-------------------
-#- cython   : may generate errors
+conda install cython
+#- cython   : may generate errors / NOTE: required to build silx from source
 #- gcc      : it may generate errors (reported below what seen so far)
 #             => libstdc++.so.6: version `CXXABI_1.3.9' not found
 #- spyder   : may generate errors with QT
@@ -278,8 +279,9 @@ git clone https://github.com/kklmn/xrt.git
 #Silx (http://www.silx.org)
 #--------------------------
 #REQUIREMENTS:
-#- numpy (=> conda base)
-#- fisx (=> pip)
+#- cython (=> conda)
+#- numpy  (=> conda base)
+#- fisx   (=> pip)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
