@@ -1,4 +1,4 @@
-;; -*- emacs-lisp -*-
+-lisp -*-
 ;; ------------------------------------------------------------
 ;; Mauro Rovezzi's EMACS config file <mauro.rovezzi@gmail.com>
 ;; MIT License
@@ -127,6 +127,13 @@
 (add-hook 'LaTeX-mode-hook
 	  (lambda () (flyspell-buffer 1)))
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
+
+;; ------------------------------------------------------------
+;; PYTHON
+;; ------------------------------------------------------------
+(add-hook 'python-mode-hook (lambda ()
+                                  (require 'sphinx-doc)
+                                  (sphinx-doc-mode t)))
 
 ;;; Use Python mode with LARCH files
 (add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))
