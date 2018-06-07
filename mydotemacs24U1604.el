@@ -128,26 +128,18 @@
 	  (lambda () (flyspell-buffer 1)))
 (setq flyspell-issue-welcome-flag nil) ;; fix flyspell problem
 
-;; ------------------------------------------------------------
-;; PYTHON
-;; ------------------------------------------------------------
-(add-hook 'python-mode-hook (lambda ()
-                                  (require 'sphinx-doc)
-                                  (sphinx-doc-mode t)))
-
-;;; Use Python mode with LARCH files
-(add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))
-
 ;; --------------------------------------------------------------------------------
 ;; #### ELPA: Emacs Lisp Package Archive (http://www.emacswiki.org/emacs/ELPA) ####
 ;; --------------------------------------------------------------------------------
 (load "package")
 ;;(package-initialize) ;;not required anymore
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-			 ("marmalade" . "https://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+			 ("marmalade" . "https://marmalade-repo.org/packages/")))
+
 ;; *Additional Repositories*
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t) ;Org-mode
+(add-to-list 'package-archives '("melpa-stable"
+				 . "https://stable.melpa.org/packages/"))
 
 (defvar my_pkgs '(org
 		  org-ref
@@ -157,7 +149,8 @@
 		  json-mode
 		  sphinx-doc
 		  sphinx-mode
-		  writegood-mode)
+		  writegood-mode
+		  zotxt)
   "My default packages")
 
 ;; When Emacs boots, check to make sure all of the packages defined in
@@ -176,6 +169,51 @@
 
 ;; ------------------------------------------------------------
 
+;; ------------------------------------------------------------
+;; #### EL-GET (https://github.com/dimitri/el-get)
+;; ------------------------------------------------------------
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
+
+;; ------------------------------------------------------------
+;; yasnippet (https://github.com/joaotavora/yasnippet)
+;; ------------------------------------------------------------
+;; installed via el-get
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"                 ;; personal snippets
+        ))
+(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+(yas-reload-all)
+(add-hook 'prog-mode-hook #'yas-minor-mode)
+
+;; ------------------------------------------------------------
+;; PYTHON
+;; ------------------------------------------------------------
+(add-hook 'python-mode-hook (lambda ()
+                                  (require 'sphinx-doc)
+                                  (sphinx-doc-mode t)))
+
+;;; Use Python mode with LARCH files
+(add-to-list 'auto-mode-alist '("\\.lar$" . python-mode))
+
+;;; yasnippet-numpy-style (https://github.com/marubu/yasnippet-numpy-style)
+;;; copy `defwithdoc` and `parameters` to ~/.emacs.d/snippets/python-mode/
+;;; "defwithdoc" redifined as "def"
+(setq yas-triggers-in-field t)
+
+;; ------------------------------------------------------------
+;; ORG-MODE
+;; ------------------------------------------------------------
 ;; wraps the lines in org-mode
 (setq org-startup-truncated nil)
 
