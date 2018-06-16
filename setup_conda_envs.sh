@@ -106,6 +106,11 @@ conda install cython
 #---------------------------------------------
 conda install -c conda-forge xraylib
 
+#----------------------------------------------
+#ASE (https://wiki.fysik.dtu.dk/ase/index.html)
+#----------------------------------------------
+conda install -c conda-forge ase
+
 #---------------------------------------------
 #ORANGE3 (https://orange.biolab.si/)
 #---------------------------------------------
@@ -124,6 +129,17 @@ conda install -c conda-forge xraylib
 #uncertainties
 #-----------------------------------------
 conda install -c conda-forge peakutils lmfit asteval psutil pytest uncertainties
+
+#######################################################
+# PACKAGES INSTALLED VIA CONDA FROM SPECIFIC CHANNELS #
+#######################################################
+#first activate one conda enviroment
+#source $MYLOCAL/conda/bin/activate <your_environment_name>
+
+#------------------------
+# pymatgen (pymatgen.org)
+#------------------------
+conda install --channel matsci pymatgen
 
 ##############################
 # PACKAGES INSTALLED VIA PIP #
