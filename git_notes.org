@@ -54,6 +54,12 @@ projects (usually hosted on Github), so here I write down some notes.
 
 ** Tips
 
+*** Pull from a given remote branch 
+
+    [[https://stackoverflow.com/questions/1709177/git-pull-a-certain-branch-from-github][From StackOverflow]]
+
+    : git pull origin other-branch
+
 *** Overwrite any local changes on pull
 
     [[http://stackoverflow.com/questions/1125968/force-git-to-overwrite-local-files-on-pull][From stackoverflow]]
