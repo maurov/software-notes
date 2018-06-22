@@ -68,13 +68,18 @@ source $MYLOCAL/conda/bin/activate py27
 # PACKAGES INSTALLED VIA CONDA #
 ################################
 
-#----
-#BASE
-#----
-#the following packages are my conda base distribution, valid for all `py3*` and `py27*` environments
+#-----------
+#BASE/COMMON
+#-----------
+#base/common distribution, valid for all `py3*` and `py27*` environments
+#level0
 conda install --yes -c defaults pyqt=5 qt
-conda install --yes numpy scipy matplotlib scikit-learn pyparsing pytz python-dateutil h5py pillow requests sqlalchemy
-conda install --yes ipython ipykernel jupyter pyzmq pandas sphinx sphinxcontrib bottlechest yaml pyyaml termcolor nose swig
+conda install --yes numpy scipy matplotlib pillow six bottlechest
+conda install --yes ipython ipykernel jupyter pyzmq pandas pyyaml h5py
+#level1
+conda install --yes pytz python-dateutil requests termcolor nose swig dill
+conda install --yes scikit-learn pyparsing  sqlalchemy
+conda install --yes sphinx sphinxcontrib 
 conda install --yes wxpython
 
 #-------------------
@@ -156,17 +161,20 @@ pip install wxmplot wxutils
 #-------------------------------------
 #Fisx (https://github.com/vasole/fisx)
 #PyMca5 (http://github.com/vasole/pymca)
+#PyCifRW (https://www.iucr.org/resources/cif/software/pycifrw)
 #Silx (http://www.silx.org)
 #-------------------------------------
-pip install fisx PyMca5 silx fabio hdf5plugin pyFAI PyCifRW
+pip install fisx PyMca5
+pip install hdf5plugin PyCifRW
+pip install fabio hdf5plugin pyFAI
+#pip install silx #currently the source install is preferred (see below)
 
 #--------------------------------------------
 #Shadow3 (https://github.com/srio/shadow3)
 #--------------------------------------------
 #pip install shadow3 (not always working, better use the wheel below!!!)
-wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl #py35
-wget http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp36-cp36m-linux_x86_64.whl #py36
-pip install shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl
+pip install http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp35-cp35m-linux_x86_64.whl #py35
+pip install http://ftp.esrf.eu/pub/scisoft/shadow3/wheels/shadow3-18.1.24-cp36-cp36m-linux_x86_64.whl #py36
 
 #---------------------------------------------
 #Orange/Oasys-related
@@ -295,9 +303,10 @@ git clone https://github.com/kklmn/xrt.git
 #Silx (http://www.silx.org)
 #--------------------------
 #REQUIREMENTS:
-#- cython (=> conda)
-#- numpy  (=> conda base)
-#- fisx   (=> pip)
+#- numpy   (=> conda)
+#- h5py    (=> conda)
+#- ipython (=> conda)
+#- fisx    (=> pip)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/silx.git
@@ -305,10 +314,12 @@ cd silx
 git remote add --track master upstream https://github.com/silx-kit/silx.git
 git fetch upstream
 git merge upstream/master
+python setup.py build --no-cython
 SPECFILE_USE_GNU_SOURCE=1 python setup.py install
 #build documentation
-python setup.py build_doc
+#python setup.py build_doc
 #to run the tests: python -> import silx.test -> silx.test.run_tests()
+cd; silx test --no-opengl --no-opencl
 
 #---------------------------------------
 #PyMca5 (http://github.com/vasole/pymca)
