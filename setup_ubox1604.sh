@@ -148,6 +148,40 @@ sudo aptitude install thunderbird thunderbird-globalmenu
 ### UTILTS ###
 sudo apt-get install mb2md
 
+### IMAPSYNC ###
+#http://imapsync.lamiral.info/INSTALL.d/INSTALL.Ubuntu.txt
+#From: https://www.jverdeyen.be/ubuntu/imapsync-on-ubuntu-16.04/
+#Install and use imapsync on Ubuntu 16.04
+#Published on October 10, 2016 by Joeri Verdeyen
+#What is imapsync?
+# The purpose of imapsync is to migrate IMAP accounts or to backup
+# IMAP accounts. IMAP is one of the three current standard protocols
+# to access mailboxes, the two other are POP3 and HTTP with webmails
+# (often tied to an IMAP server).
+#
+#Install dependencies
+sudo apt-get install makepasswd rcs perl-doc libio-tee-perl git libmail-imapclient-perl libdigest-md5-file-perl libterm-readkey-perl libfile-copy-recursive-perl build-essential make automake libunicode-string-perl libauthen-ntlm-perl libcrypt-ssleay-perl libdigest-hmac-perl libfile-copy-recursive-perl libio-compress-perl libio-socket-inet6-perl libio-socket-ssl-perl libio-tee-perl libmodule-scandeps-perl libnet-ssleay-perl libpar-packer-perl libreadonly-perl libterm-readkey-perl libtest-pod-perl libtest-simple-perl libunicode-string-perl liburi-perl cpanminus libcrypt-openssl-random-perl libcrypt-openssl-rsa-perl
+#
+#Install modules from CPAN
+sudo cpanm "Dist::CheckConflicts JSON::WebToken::Crypt::RSA Sys::MemInfo Test::NoWarnings Test::Deep"
+#
+#Clone git repository
+cd $MYLOCAL
+git clone git://github.com/imapsync/imapsync.git
+#
+#Build and install
+cd imapsync
+sudo make install
+#
+#it could fail if all previous Perl modules are not installed, carefully check them
+#When everything above went ok, you should see something like this when imapsync -v
+imapsync -v
+#1.882
+#Start syncing
+#An example syntax on how to sync from server1 on to server2, both using ssl.
+#imapsync --host1 server1 -user1 user@server1 --password1 user1password --ssl1  --host2 server2 --user2 user@server2 --password2 user2password --ssl2
+#More information can be found on the official imapsync website.
+
 ##########################################
 ### REFERENCE MANAGER: MENDELEY/ZOTERO ###
 ##########################################
