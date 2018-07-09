@@ -13,6 +13,20 @@ else
 fi
 #######################################################
 
+
+################## ################## ##################
+### DEPRECATED ### ### DEPRECATED ### ### DEPRECATED ###
+################## ################## ##################
+
+#2018-07-07: THIS FILE IS NOT UPDATED ANYMORE
+#            MOVED TO ENVIRONMENT.YML IN XRAYSLOTH
+
+#-> https://github.com/maurov/xraysloth/blob/master/environment.yml
+
+################## ################## ##################
+### DEPRECATED ### ### DEPRECATED ### ### DEPRECATED ###
+################## ################## ##################
+
 #########################
 #### TESTED MACHINES ####
 #########################
