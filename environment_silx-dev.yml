@@ -26,6 +26,6 @@ dependencies:
   - conda-forge::fabio>=0.7
   - conda-forge::nbsphinx
   - conda-forge::pyinstaller
-  - pip:
-    - fisx
+#  - pip:
+#    - fisx
 
