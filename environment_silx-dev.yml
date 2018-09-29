@@ -1,0 +1,29 @@
+#Conda Python environment for silx development (e.g. build silx from source)
+#- https://github.com/silx-kit/silx/blob/master/requirements.txt
+#- https://github.com/silx-kit/silx/blob/master/requirements-dev.txt
+#conda env create -f environment.yml
+name: silx-dev
+channels:
+  - defaults
+dependencies:
+  - python=3.6
+  - cython>=0.21.1
+  - pyopengl
+  - qt
+  - pyqt=5
+  - numpy>=1.8
+  - scipy
+  - matplotlib>=1.2.0
+  - qtconsole
+  - pillow
+  - python-dateutil
+  - h5py
+  - mako
+  - setuptools
+  - wheel
+  - sphinx
+  - conda-forge::pyopencl
+  - conda-forge::fabio>=0.7
+  - conda-forge::nbsphinx
+  - conda-forge::pyinstaller
+
