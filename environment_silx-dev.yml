@@ -2,11 +2,19 @@
 #- https://github.com/silx-kit/silx/blob/master/requirements.txt
 #- https://github.com/silx-kit/silx/blob/master/requirements-dev.txt
 #conda env create -f environment.yml
+#To build from source:
+#> python setup.py build --no-cython
+#> SPECFILE_USE_GNU_SOURCE=1 python setup.py install
+#To build documentation
+#> python setup.py build_doc
+#To run the tests:
+#> cd; silx test --no-opengl --no-opencl
 name: silx-dev
 channels:
   - defaults
 dependencies:
   - python=3.6
+  - pip=10.0.1
   - cython>=0.21.1
   - pyopengl
   - qt
@@ -22,10 +30,12 @@ dependencies:
   - setuptools
   - wheel
   - sphinx
+  - spyder
   - conda-forge::pyopencl
   - conda-forge::fabio>=0.7
   - conda-forge::nbsphinx
   - conda-forge::pyinstaller
-#  - pip:
-#    - fisx
-
+  - pip:
+    - hdf5plugin
+    - fisx
+    - PyMca5
