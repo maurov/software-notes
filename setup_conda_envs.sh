@@ -14,18 +14,14 @@ fi
 #######################################################
 
 
-################## ################## ##################
-### DEPRECATED ### ### DEPRECATED ### ### DEPRECATED ###
-################## ################## ##################
+###############
+### WARNING ###
+###############
 
-#2018-07-07: THIS FILE IS NOT UPDATED ANYMORE
-#            MOVED TO ENVIRONMENT.YML IN XRAYSLOTH
-
-#-> https://github.com/maurov/xraysloth/blob/master/environment.yml
-
-################## ################## ##################
-### DEPRECATED ### ### DEPRECATED ### ### DEPRECATED ###
-################## ################## ##################
+#2018-07-07: THIS FILE IS NOT *ACTIVELY* UPDATED ANYMORE:
+#
+#---> https://github.com/maurov/xraysloth/blob/master/environment.yml
+#---> https://github.com/maurov/xraysloth/blob/master/environment-dev.yml
 
 #########################
 #### TESTED MACHINES ####
@@ -34,6 +30,13 @@ fi
 # The following environments/procedures have been tested on:
 # - debian6: beamline machines at ESRF
 # - ubox1604: Xubuntu 16.04 guest in Windows 10 host (VirtualBox) 
+
+##########################
+#### WINDOWS MACHINES ####
+##########################
+
+#pyopencl and pyopengl should be pip installed via wheels from:
+#https://www.lfd.uci.edu/~gohlke/pythonlibs/
 
 #########################
 ### MINICONDA INSTALL ###
@@ -293,21 +296,30 @@ cd ~/.larch/
 rm -rf plugins
 ln -s your_larch_plugins_dir plugins
 
+
+#----------------------------------
+#XRT (https://github.com/kklmn/xrt)
+#----------------------------------
+#REQUIREMENTS:
+#- numpy         (=> conda)
+#- spyder        (=> conda)
+#
+#(using personal fork)
+cd; cd $MYDEVEL
+git clone https://github.com/maurov/xrt.git
+cd xrt
+git remote add --track master upstream https://github.com/kklmn/xrt.git
+git fetch upstream
+git merge upstream/master
+#DO NOT INSTALL VIA setup.py, simply -> sys.path.append()
+#latest tests in WORKtmp/_python/xrt/xrt_mytest_v1811.py
+
 #--------------------------------------------
 #XAFSmass (https://github.com/kklmn/XAFSmass)
 #--------------------------------------------
 cd $MYLOCAL
 git clone https://github.com/kklmn/XAFSmass.git
 #simpy run it via `python XAFSmassQt.py`
-
-#----------------------------------
-#XRT (https://github.com/kklmn/xrt)
-#----------------------------------
-#REQUIREMENTS:
-#- spyder
-cd $MYLOCAL
-git clone https://github.com/kklmn/xrt.git
-#DO NOT INSTALL VIA setup.py, simply -> sys.path.append()
 
 #######################
 ### OPTIONAL METHOD ###
