@@ -1,0 +1,24 @@
+* Software on Windows via Scoop
+
+** Scoop install and configuration
+
+https://github.com/lukesampson/scoop/wiki/Quick-Start
+
+[environment]::setEnvironmentVariable('SCOOP','C:\Scoop','User')
+$env:SCOOP='C:\Scoop'
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+
+scoop install curl
+scoop install curl
+scoop install git
+scoop install openssh
+
+[environment]::setenvironmentvariable('GIT_SSH', (resolve-path (scoop which ssh)), 'USER')
+
+scoop install vim
+scoop install vimtutor
+
+scoop bucket add extras
+scoop install emacs
+
+scoop install restic

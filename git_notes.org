@@ -4,6 +4,15 @@
 I do not use Git so often to remember all the steps to contribute to open-source
 projects (usually hosted on Github), so here I write down some notes.
 
+** Base configuration
+
+   : git config --global user.name "Your Name"
+   : git config --global user.email "your.email@your_provider.com"
+
+** Add upstream tracking of a forked project 
+
+   : git remote add --track master upstream https://forked_project.git
+
 ** Branching workflow
 
 - click 'fork' button on the repo you want to contribute to
