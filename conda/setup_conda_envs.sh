@@ -301,9 +301,15 @@ ln -s your_larch_plugins_dir plugins
 #XRT (https://github.com/kklmn/xrt)
 #----------------------------------
 #REQUIREMENTS:
-#- numpy         (=> conda)
-#- spyder        (=> conda)
-#
+#- qt>=5.7
+#- pyqt=5                     (=> conda)
+#- numpy>=1.8.0               (=> conda)
+#- scipy>=0.17.0              (=> conda)
+#- matplotlib>=2.0.0          (=> conda)
+#- spyder>=3.0.0              (=> conda)
+#- Sphinx>=1.6.2              (=> conda)
+#- pyopengl>=3.1.1            (=> conda)
+#- pyopengl-accelerate>=3.1.1 (=> anaconda)
 #(using personal fork)
 cd; cd $MYDEVEL
 git clone https://github.com/maurov/xrt.git
