@@ -1,13 +1,22 @@
+#+TITLE: Personal Git-related notes
+#+AUTHOR: Mauro Rovezzi
+#+EMAIL: mauro.rovezzi@gmail.com
+#+STARTUP: showall
 
-* Git(hub) raw notes
+I do not use Git so often to remember all the steps to contribute to open-source projects (usually hosted on Github), so here I write down some notes.
 
-I do not use Git so often to remember all the steps to contribute to open-source
-projects (usually hosted on Github), so here I write down some notes.
+** Configuration
 
-** Base configuration
+*** Username and email
 
-   : git config --global user.name "Your Name"
-   : git config --global user.email "your.email@your_provider.com"
+    : git config --global user.name "Your Name"
+    : git config --global user.email "your.email@your_provider.com"
+
+*** Temporary cache password
+
+    [[https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-on-github/5343146#5343146][From Stackoverflow]]
+
+    : git config --global credential.helper "cache --timeout=3600"
 
 ** Add upstream tracking of a forked project 
 
