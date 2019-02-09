@@ -41,7 +41,7 @@ I do not use Git so often to remember all the steps to contribute to open-source
   : git remote -v
 
 - make a working branch and switch to it
-
+  
   : git branch your_branch_name
   : git checkout your_branch_name
   : git branch -a #(this will show all the branches and put * on working one)
@@ -69,6 +69,23 @@ I do not use Git so often to remember all the steps to contribute to open-source
     - [[http://www.pontikis.net/blog/how-to-collaborate-on-github-open-source-projects][Workflow without branch]] 
     - [[http://www.eqqon.com/index.php/Collaborative_Github_Workflow][Another collaborating workflow example]]
 
+
+** Tags
+
+   [[https://git-scm.com/book/en/v2/Git-Basics-Tagging][Explained here]]
+
+- New annotated tag
+
+  : git tag -a v1.4 -m "my version 1.4" 
+
+- List existing tags and show details
+
+  : git tag
+  : git show v1.4
+
+- Push to remote server
+
+  : git push origin v1.4
 
 ** Tips
 
