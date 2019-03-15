@@ -18,9 +18,6 @@ I do not use Git so often to remember all the steps to contribute to open-source
 
     : git config --global credential.helper "cache --timeout=3600"
 
-** Add upstream tracking of a forked project 
-
-   : git remote add --track master upstream https://forked_project.git
 
 ** Branching workflow
 
@@ -87,7 +84,16 @@ I do not use Git so often to remember all the steps to contribute to open-source
 
   : git push origin v1.4
 
-** Tips
+
+** Howtos
+
+*** Fetch a specific branch from upstream
+
+    : git fetch upstream remote_branch_name:local_brach_name  
+
+*** Add upstream tracking of a forked project 
+
+   : git remote add --track master upstream https://forked_project.git
 
 *** Pull from a given remote branch 
 
