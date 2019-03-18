@@ -31,7 +31,9 @@ export MYDEVEL=$HOME/devel
 
 ### ALIASES ###
 #Conda envs
-alias conda_base='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate'
+alias conda-base='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate'
+alias sloth-env='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-env'
+alias sloth-dev='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-dev'
 
 #pymca within Conda env
 #DO NOT USE FOLLOWING ALIAS, JUST ACTIVATE CONDA AND RUN `pymca`
