@@ -25,6 +25,58 @@ fi
 
 #Fresh install is xubuntu-18.04-desktop-amd64.iso virtual machine
 
+##################
+### VIRTUALBOX ###
+##################
+
+# Settings
+# ========
+#- bidirectional clipboard/drag'n drop
+#- 4096 MB RAM / 2 CPU
+#- 128 MB video memory / 3D acceleration enabled
+#- USB 3.0
+
+# Guest Additions
+# ===============
+sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool swig
+sudo m-a prepare
+# mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
+#sudo sh /path/to/VobLinuxAdditions.run
+
+#GUIDE: How to configure network in the guest OS in order to work with VPN
+#https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
+
+###############
+# WEB BROWSER #
+###############
+sudo apt-get install firefox
+#Add-ons installed:
+#- Ghostery (https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
+#- Clean Links (https://addons.mozilla.org/en-US/firefox/addon/clean-links-webext/)
+#- Forget me not (https://addons.mozilla.org/en-US/firefox/addon/forget_me_not) or Self destructing cookies (https://addons.mozilla.org/en-US/firefox/addon/self-destructing-cookies-webex)
+
+#################
+# GIT & FRIENDS #
+#################
+sudo apt-get install git meld gftp rsync curl
+#git config --global user.name "Mauro Rovezzi"
+#git config --global user.email "mauro.rovezzi@gmail.com"
+#git config --global credential.helper "cache --timeout=36000"
+
+#########################################
+### TEXT EDITORs/CONVERTERS/UTILITIES ###
+#########################################
+#ATOM
+wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
+sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+sudo apt-get update
+sudo apt-get install atom
+#EMACS
+sudo add-apt-repository ppa:ubuntu-elisp/ppa
+sudo apt-get update
+sudo apt-get install emacs-snapshot aspell-en aspell-fr aspell-it
+#ln -s mydotemacsU1804.el .emacs
+
 ######################
 ### PROXY SETTINGS ###
 ######################
@@ -76,44 +128,6 @@ if [ -f $file_to_load ]; then
 fi
 " >> $HOME/.bashrc
 
-##################
-### VIRTUALBOX ###
-##################
-
-# Settings
-# ========
-#- bidirectional clipboard/drag'n drop
-#- 4096 MB RAM / 2 CPU
-#- 128 MB video memory / 3D acceleration enabled
-#- USB 3.0
-
-# Guest Additions
-# ===============
-sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool swig
-sudo m-a prepare
-# mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
-#sudo sh /path/to/VobLinuxAdditions.run
-
-#GUIDE: How to configure network in the guest OS in order to work with VPN
-#https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
-
-###############
-# WEB BROWSER #
-###############
-sudo apt-get install firefox
-#Add-ons installed:
-#- Ghostery (https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
-#- Clean Links (https://addons.mozilla.org/en-US/firefox/addon/clean-links-webext/)
-#- Forget me not (https://addons.mozilla.org/en-US/firefox/addon/forget_me_not) or Self destructing cookies (https://addons.mozilla.org/en-US/firefox/addon/self-destructing-cookies-webex)
-
-#################
-# GIT & FRIENDS #
-#################
-sudo apt-get install git meld gftp rsync curl
-#git config --global user.name "Mauro Rovezzi"
-#git config --global user.email "mauro.rovezzi@gmail.com"
-#git config --global credential.helper "cache --timeout=36000"
-
 #########
 # CONDA #
 #########
@@ -129,15 +143,6 @@ conda update -q conda
 # COLOR THEMES #
 ################
 sudo apt-get install gnome-color-chooser
-
-#########################################
-### TEXT EDITORs/CONVERTERS/UTILITIES ###
-#########################################
-#ATOM
-wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt-get update
-sudo apt-get install atom
 
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
