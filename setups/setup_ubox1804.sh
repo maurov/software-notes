@@ -128,6 +128,32 @@ if [ -f $file_to_load ]; then
 fi
 " >> $HOME/.bashrc
 
+################
+### SSH KEYS ###
+################
+#NOTE: -C is only a comment to identify multiple keys
+ssh-keygen -o -t rsa -b 4096 -C "user@machine_virtual"
+#(do not enter passphrase)
+#Your identification has been saved in $HOME/.ssh/id_rsa.
+#Your public key has been saved in $HOME/.ssh/id_rsa.pub.
+
+#1) copy public key to a server
+#ssh-copy-id -i $HOME/.ssh/id_rsa.pub user@host
+## or if your server uses custom port number:
+#ssh-copy-id -i $HOME/.ssh/id_rsa.pub -p 1234 user@host
+
+#keep alive ssh connections from client side:
+#put the following in ~/.ssh/config (send null package every 100 sec)
+#ServerAliveInterval 100
+
+#2) copy to gitlab
+sudo apt-get install xclip
+xclip -sel clip < ~/.ssh/id_rsa.pub
+#paste you key in the web interface
+#test if everything works
+ssh -T git@gitlab.com
+#should get a welcome message
+
 #########
 # CONDA #
 #########
