@@ -38,7 +38,7 @@ fi
 
 # Guest Additions
 # ===============
-sudo apt-get install dkms build-essential module-assistant autoconf shtool libtool swig
+sudo apt install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
@@ -46,10 +46,15 @@ sudo m-a prepare
 #GUIDE: How to configure network in the guest OS in order to work with VPN
 #https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
 
+# Bug in missing shared library
+#https://www.virtualbox.org/ticket/18324
+sudo apt install patchelf
+sudo patchelf --add-needed libcrypt.so.1 /opt/VBoxGuestAdditions-6.0.4/lib/VBoxOGLcrutil.so
+
 ###############
 # WEB BROWSER #
 ###############
-sudo apt-get install firefox
+sudo apt install firefox
 #Add-ons installed:
 #- Ghostery (https://addons.mozilla.org/en-US/firefox/addon/ghostery/)
 #- Clean Links (https://addons.mozilla.org/en-US/firefox/addon/clean-links-webext/)
@@ -58,7 +63,7 @@ sudo apt-get install firefox
 #################
 # GIT & FRIENDS #
 #################
-sudo apt-get install git meld gftp rsync curl
+sudo apt install git meld gftp rsync curl
 #git config --global user.name "Mauro Rovezzi"
 #git config --global user.email "mauro.rovezzi@gmail.com"
 #git config --global credential.helper "cache --timeout=36000"
@@ -69,13 +74,29 @@ sudo apt-get install git meld gftp rsync curl
 #ATOM
 wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
 sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt-get update
-sudo apt-get install atom
+sudo apt update
+sudo apt install atom
 #EMACS
 sudo add-apt-repository ppa:ubuntu-elisp/ppa
-sudo apt-get update
-sudo apt-get install emacs-snapshot aspell-en aspell-fr aspell-it
+sudo apt update
+sudo apt install emacs-snapshot aspell-en aspell-fr aspell-it
 #ln -s mydotemacsU1804.el .emacs
+
+#PANDOC
+sudo apt install pandoc pandoc-citeproc pandoc-data python-pandocfilters python3-pandocfilters
+
+#########################
+### TEXLIVE & RELATED ###
+#########################
+sudo add-apt-repository ppa:jonathonf/texlive
+sudo apt update
+#A personal sub-selection from texlive-full package
+sudo apt install texlive-lang-french texlive-science texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers  fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
+#install non free fonts as user
+wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+sudo texlua ./install-getnonfreefonts -a
+getnonfreefonts -a --user
+
 
 ######################
 ### PROXY SETTINGS ###
@@ -147,7 +168,7 @@ ssh-keygen -o -t rsa -b 4096 -C "user@machine_virtual"
 #ServerAliveInterval 100
 
 #2) copy to gitlab
-sudo apt-get install xclip
+sudo apt install xclip
 xclip -sel clip < ~/.ssh/id_rsa.pub
 #paste you key in the web interface
 #test if everything works
@@ -168,11 +189,11 @@ conda update -q conda
 ################
 # COLOR THEMES #
 ################
-sudo apt-get install gnome-color-chooser
+sudo apt install gnome-color-chooser
 
 ####################################
 ### GRAPHICS: INKSCAPE & FRIENDS ###
 ####################################
 sudo add-apt-repository ppa:inkscape.dev/stable
-sudo apt-get update
-sudo apt-get install inkscape xclip graphviz
+sudo apt update
+sudo apt install inkscape xclip graphviz
