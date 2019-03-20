@@ -204,3 +204,10 @@ sudo apt install gnome-color-chooser
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo apt update
 sudo apt install inkscape xclip graphviz
+
+##################
+### MULTIMEDIA ###
+##################
+#jdownloader
+#download JD2Setup_x64.sh from their website
+#the install manually: ./JD2Setup_x64.sh (chmod +x first)
