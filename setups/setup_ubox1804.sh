@@ -29,15 +29,15 @@ fi
 ### VIRTUALBOX ###
 ##################
 
-# Settings
-# ========
+#Settings
+#========
 #- bidirectional clipboard/drag'n drop
 #- 4096 MB RAM / 2 CPU
 #- 128 MB video memory / 3D acceleration enabled
 #- USB 3.0
 
-# Guest Additions
-# ===============
+#Guest Additions
+#===============
 sudo apt install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
@@ -46,10 +46,16 @@ sudo m-a prepare
 #GUIDE: How to configure network in the guest OS in order to work with VPN
 #https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
 
-# Bug in missing shared library
+#Bug in missing shared library
+#=============================
 #https://www.virtualbox.org/ticket/18324
 sudo apt install patchelf
 sudo patchelf --add-needed libcrypt.so.1 /opt/VBoxGuestAdditions-6.0.4/lib/VBoxOGLcrutil.so
+
+#Bug with Qt
+#===========
+#https://askubuntu.com/questions/308128/failed-to-load-platform-plugin-xcb-while-launching-qt5-app-on-linux-without
+sudo apt install libqt5x11extras5
 
 ###############
 # WEB BROWSER #
@@ -80,6 +86,7 @@ sudo apt install atom
 sudo add-apt-repository ppa:ubuntu-elisp/ppa
 sudo apt update
 sudo apt install emacs-snapshot aspell-en aspell-fr aspell-it
+sudo update-alternatives --config emacs #select emacs-snapshot
 #ln -s mydotemacsU1804.el .emacs
 
 #PANDOC
