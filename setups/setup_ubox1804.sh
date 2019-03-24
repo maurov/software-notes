@@ -98,6 +98,9 @@ sudo apt install emacs-snapshot aspell-en aspell-fr aspell-it
 sudo update-alternatives --config emacs #select emacs-snapshot
 #ln -s mydotemacsU1804.el .emacs
 
+#latex2rft (best for converting LaTeX to MS Word)
+sudo apt install latex2rtf latex2rtf-doc
+
 #PANDOC
 sudo apt install pandoc pandoc-citeproc pandoc-data python-pandocfilters python3-pandocfilters
 
@@ -213,6 +216,12 @@ sudo apt install gnome-color-chooser
 sudo add-apt-repository ppa:inkscape.dev/stable
 sudo apt update
 sudo apt install inkscape xclip graphviz
+
+###################
+### LIBREOFFICE ###
+###################
+sudo apt-add-repository ppa:libreoffice/ppa
+sudo apt install libreoffice-calc libreoffice-dmaths libreoffice-draw libreoffice-math libreoffice-pdfimport libreoffice-l10n-en-gb hunspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr libreoffice-script-provider-python libreoffice-style-tango libreoffice-templates libreoffice-voikko libreoffice-wiki-publisher libreoffice-writer libreoffice-writer2latex hunspell-fr hyphen-fr mythes-fr libreoffice-l10n-it hunspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice openclipart-libreoffice pstoedit imagemagick libpaper-utils libreoffice-java-common
 
 ##################
 ### MULTIMEDIA ###
