@@ -36,13 +36,19 @@ fi
 #- 128 MB video memory / 3D acceleration enabled
 #- USB 3.0
 
-#Guest Additions
-#===============
+#Building tools
+#==============
+#basics
 sudo apt install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
+#GL library/headers
+sudo apt install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+
+#Guest Additions
+#===============
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
-
+#
 #GUIDE: How to configure network in the guest OS in order to work with VPN
 #https://superuser.com/questions/987150/virtualbox-guest-os-through-vpn/1035327
 
