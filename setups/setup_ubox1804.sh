@@ -81,6 +81,9 @@ sudo apt install git meld gftp rsync curl
 #git config --global user.name "Mauro Rovezzi"
 #git config --global user.email "mauro.rovezzi@gmail.com"
 #git config --global credential.helper "cache --timeout=36000"
+#if behind PROXY (example here at ESRF)
+#git config --global http.proxy http://proxy.esrf.fr:3128
+#git config --global https.proxy https://proxy.esrf.fr:3128
 
 #########################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES ###
@@ -121,7 +124,6 @@ wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
 sudo texlua ./install-getnonfreefonts -a
 getnonfreefonts -a --user
 
-
 ######################
 ### PROXY SETTINGS ###
 ######################
@@ -143,7 +145,7 @@ getnonfreefonts -a --user
 #Acquire::http::proxy "http://proxy.esrf.fr:3128/";
 #Acquire::ftp::proxy "ftp://proxy.esrf.fr:3128/";
 #Acquire::https::proxy "https://proxy.esrf.fr:3128/";
-
+#>>> SEE ALSO PROXY SETTING FOR SPECIFIC APPLICATIONS (e.g. git, atom)
 # *NOTE*: use 'sudo -E <command>' to export the proxy variables also to root!!!
 
 #########################

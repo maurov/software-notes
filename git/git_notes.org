@@ -18,6 +18,10 @@ I do not use Git so often to remember all the steps to contribute to open-source
 
     : git config --global credential.helper "cache --timeout=3600"
 
+*** Proxy
+
+    : git config --global http.proxy http://proxy.esrf.fr:3128
+    : git config --global https.proxy https://proxy.esrf.fr:3128
 
 ** Branching workflow
 
@@ -38,7 +42,7 @@ I do not use Git so often to remember all the steps to contribute to open-source
   : git remote -v
 
 - make a working branch and switch to it
-  
+
   : git branch your_branch_name
   : git checkout your_branch_name
   : git branch -a #(this will show all the branches and put * on working one)
@@ -63,7 +67,7 @@ I do not use Git so often to remember all the steps to contribute to open-source
 *** Useful links
     - [[https://gun.io/blog/how-to-github-fork-branch-and-pull-request/][Tutorial at gun.io]]
     - [[http://stackoverflow.com/questions/14680711/how-to-do-a-github-pull-request][Pull request made easy at StackOverflow]]
-    - [[http://www.pontikis.net/blog/how-to-collaborate-on-github-open-source-projects][Workflow without branch]] 
+    - [[http://www.pontikis.net/blog/how-to-collaborate-on-github-open-source-projects][Workflow without branch]]
     - [[http://www.eqqon.com/index.php/Collaborative_Github_Workflow][Another collaborating workflow example]]
 
 
@@ -73,7 +77,7 @@ I do not use Git so often to remember all the steps to contribute to open-source
 
 - New annotated tag
 
-  : git tag -a v1.4 -m "my version 1.4" 
+  : git tag -a v1.4 -m "my version 1.4"
 
 - List existing tags and show details
 
@@ -89,13 +93,13 @@ I do not use Git so often to remember all the steps to contribute to open-source
 
 *** Fetch a specific branch from upstream
 
-    : git fetch upstream remote_branch_name:local_brach_name  
+    : git fetch upstream remote_branch_name:local_brach_name
 
-*** Add upstream tracking of a forked project 
+*** Add upstream tracking of a forked project
 
    : git remote add --track master upstream https://forked_project.git
 
-*** Pull from a given remote branch 
+*** Pull from a given remote branch
 
     [[https://stackoverflow.com/questions/1709177/git-pull-a-certain-branch-from-github][From StackOverflow]]
 
