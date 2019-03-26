@@ -33,11 +33,13 @@ fi
 #========
 #- bidirectional clipboard/drag'n drop
 #- 4096 MB RAM / 2 CPU
-#- 128 MB video memory / 3D acceleration enabled
+#- 128 MB video memory / 3D acceleration enabled / VMSVGA
 #- USB 3.0
 
 #Building tools
 #==============
+#package managers
+sudo apt install gdebi-core
 #basics
 sudo apt install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
@@ -84,12 +86,15 @@ sudo apt install git meld gftp rsync curl
 ### TEXT EDITORs/CONVERTERS/UTILITIES ###
 #########################################
 #ATOM
-wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add -
-sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt update
-sudo apt install atom
-#installed packages
+wget -O atom-amd64.deb https://atom.io/download/deb
+sudo gdebi atom-amd64.deb
+#if behind PROXY (example here at ESRF)
+#apm config set proxy "http://proxy.esrf.fr:3128"
+#apm config set https_proxy "http://proxy.esrf.fr:3128"
+#install packages
 apm install language-restructuredtext language-latex
+apm install sublime-style-column-selection column-select
+apm install autocomplete-python python-indent
 
 #EMACS
 sudo add-apt-repository ppa:ubuntu-elisp/ppa
