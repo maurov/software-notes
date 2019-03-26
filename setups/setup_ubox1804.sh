@@ -212,6 +212,29 @@ conda config --set always_yes yes
 conda update -q conda
 #conda environments are based on specific .yml files
 
+##############
+### DEVELS ###
+##############
+cd; cd devel
+#software-notes
+git clone https://github.com/maurov/software-notes.git
+#xraysloth
+git clone https://github.com/maurov/xraysloth.git
+#+others...
+#[...]
+#pymca
+git clone https://github.com/maurov/pymca.git
+cd pymca
+git remote add --track master upstream https://github.com/vasole/pymca.git
+#silx
+git clone https://github.com/maurov/silx.git
+cd silx
+git remote add --track master upstream https://github.com/silx-kit/silx.git
+#xraylarch
+git clone https://github.com/maurov/xraylarch.git
+cd xraylarch
+git remote add --track master upstream https://github.com/xraypy/xraylarch.git
+
 ################
 # COLOR THEMES #
 ################
