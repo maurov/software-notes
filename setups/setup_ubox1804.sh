@@ -112,18 +112,6 @@ sudo apt install latex2rtf latex2rtf-doc
 #PANDOC
 sudo apt install pandoc pandoc-citeproc pandoc-data python-pandocfilters python3-pandocfilters
 
-#########################
-### TEXLIVE & RELATED ###
-#########################
-sudo add-apt-repository ppa:jonathonf/texlive
-sudo apt update
-#A personal sub-selection from texlive-full package
-sudo apt install texlive-lang-french texlive-science texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers  fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
-#install non free fonts as user
-wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
-sudo texlua ./install-getnonfreefonts -a
-getnonfreefonts -a --user
-
 ######################
 ### PROXY SETTINGS ###
 ######################
@@ -252,6 +240,44 @@ sudo apt install inkscape xclip graphviz
 ###################
 sudo apt-add-repository ppa:libreoffice/ppa
 sudo apt install libreoffice-calc libreoffice-dmaths libreoffice-draw libreoffice-math libreoffice-pdfimport libreoffice-l10n-en-gb hunspell-en-gb hyphen-en-gb mythes-en-us libreoffice-help-en-gb libreoffice-l10n-fr libreoffice-script-provider-python libreoffice-style-tango libreoffice-templates libreoffice-voikko libreoffice-wiki-publisher libreoffice-writer libreoffice-writer2latex hunspell-fr hyphen-fr mythes-fr libreoffice-l10n-it hunspell-it hyphen-it mythes-it libxrender1 libgl1 openclipart-libreoffice openclipart-libreoffice pstoedit imagemagick libpaper-utils libreoffice-java-common
+
+#########################
+### TEXLIVE & RELATED ###
+#########################
+sudo add-apt-repository ppa:jonathonf/texlive
+sudo apt update
+#A personal sub-selection from texlive-full package
+sudo apt install texlive-lang-french texlive-science texlive-science-doc texlive-generic-recommended texlive-latex-extra texlive-formats-extra latexdiff texlive-binaries texlive-base texlive-latex-recommended lcdf-typetools texlive-fonts-recommended-doc texlive-pstricks-doc texlive-font-utils texlive-humanities-doc context texlive-htmlxml texlive-metapost-doc texlive-metapost texlive-pstricks purifyeps dvidvi texlive-generic-extra prosper texlive-publishers  fragmaster texlive-lang-italian texlive-fonts-recommended texlive-lang-english texlive-latex-extra-doc prerex texlive-humanities texinfo texlive-xetex texlive-fonts-extra-doc texlive-luatex feynmf texlive-fonts-extra texlive-plain-extra texlive-publishers-doc chktex texlive-extra-utils lmodern tex4ht texlive-pictures-doc psutils tex-gyre texlive-games texlive-latex-base dvipng texlive-omega latexmk lacheck tipa texlive-music texlive-latex-recommended-doc texlive-latex-base-doc texlive-pictures texlive-bibtex-extra t1utils xindy
+#install non free fonts as user
+wget -q http://tug.org/fonts/getnonfreefonts/install-getnonfreefonts
+sudo texlua ./install-getnonfreefonts -a
+getnonfreefonts -a --user
+
+#########################
+### REFERENCE MANAGER ###
+#########################
+
+#Mendeley
+#========
+cd; cd local
+wget http://www.mendeley.com/repositories/ubuntu/stable/amd64/mendeleydesktop-latest
+sudo gdebi mendeleydesktop-latest
+mendeleydesktop
+#Initial setup by simply profiding your login details
+#Quit and TRANSFER YOUR LOCAL VERSION
+cd $HOME
+ln -s /media/sf_WinLinShare/biblio biblio
+ln -s /media/sf_WinLinShare/nextCloudCNRS/mendeleyLinux mendeleyLinux
+#rsync_cloud2ubox.sh (keep synchronized/backup with cloud - here nextCloudCNRS)
+#!/bin/bash
+CLOUDDIR="/media/sf_WinLinShare/nextCloudCNRS/mendeleyLinux"
+#First sync MendeleyDB because, starting from version 1.7, it does not like the symbolic link
+rsync -avz --delete-after $CLOUDDIR/dotLocalShareData/ $HOME/.local/share/data/Mendeley\ Ltd./
+rsync -avz --delete-after $CLOUDDIR/dotLocalShare/ $HOME/.local/share/Mendeley\ Ltd./
+rsync -avz --delete-after $CLOUDDIR/dotConfig/ $HOME/.config/Mendeley\ Ltd./
+rsync -avz --delete-after $CLOUDDIR/dotCache/ $HOME/.cache/Mendeley\ Ltd./
+#PDFs & Co
+rsync -avz --delete-after $CLOUDDIR/biblio /media/sf_WinLinShare/
 
 ##################
 ### MULTIMEDIA ###

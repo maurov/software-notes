@@ -298,9 +298,9 @@ sudo apt-get install jdownloader-installer
 # Python-related software is installed via Conda environments
 # => setup_conda_envs.sh
 
-##################################################################################
-# DEPRECATED: in my current workflow all QT, Python & friends is done with CONDA #
-##################################################################################
+###########################################################
+# DEPRECATED: all QT, Python & friends is done with CONDA #
+###########################################################
 
 ##########
 ### QT ###
@@ -332,7 +332,7 @@ pip install --upgrade pip setuptools distribute
 
 #Numpy
 sudo apt-get -y install python3-dev g++ libblas-dev liblapack-dev gfortran
-pip install -U numpy 
+pip install -U numpy
 #check version: python -> import numpy -> numpy.version.version
 
 #Scipy
@@ -432,14 +432,14 @@ pip install http://ftp.esrf.eu/pub/scisoft/Oasys/pip/xraylib-3.1.tar.gz
 #export PYTHON_SITE_PACKAGES=`python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"`
 #git clone https://github.com/tschoonj/xraylib
 #cd xraylib
-#autoreconf -i 
+#autoreconf -i
 #./configure --enable-python --enable-python-integration PYTHON=`which python`
 #make
-#cp python/xrayhelp.py $PYTHON_SITE_PACKAGES 
-#cp python/xraylib.py $PYTHON_SITE_PACKAGES 
+#cp python/xrayhelp.py $PYTHON_SITE_PACKAGES
+#cp python/xraylib.py $PYTHON_SITE_PACKAGES
 #cp python/.libs/xraylib_np.so $PYTHON_SITE_PACKAGES
 #cp python/.libs/_xraylib.so $PYTHON_SITE_PACKAGES
-#cp python/xraymessages.py $PYTHON_SITE_PACKAGES 
+#cp python/xraymessages.py $PYTHON_SITE_PACKAGES
 #cd ..
 
 #SRxraylib
