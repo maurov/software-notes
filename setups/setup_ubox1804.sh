@@ -46,8 +46,16 @@ sudo m-a prepare
 #GL library/headers
 sudo apt install libglu1-mesa-dev freeglut3-dev mesa-common-dev
 
+#HWE kernel + headers
+#====================
+#https://wiki.ubuntu.com/Kernel/LTSEnablementStack
+sudo apt install --install-recommends linux-generic-hwe-18.04 xserver-xorg-hwe-18.04
+sudo apt install kernel-package u-boot-tools
+
 #Guest Additions
 #===============
+sudo apt install virtualbox-guest-dkms-hwe virtualbox-guest-utils-hwe virtualbox-guest-x11-hwe
+# ALTERNATIVELY:
 # mount the Guest Additions cdrom and run VBoxLinuxAdditions.run as root
 #sudo sh /path/to/VobLinuxAdditions.run
 #
