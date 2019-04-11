@@ -120,6 +120,9 @@ sudo apt install latex2rtf latex2rtf-doc
 #PANDOC
 sudo apt install pandoc pandoc-citeproc pandoc-data python-pandocfilters python3-pandocfilters
 
+#PYCHARM (COMMUNITY EDITION)
+sudo snap install pycharm-community --classic
+
 ######################
 ### PROXY SETTINGS ###
 ######################
@@ -165,7 +168,7 @@ export MYDEVEL=$HOME/devel/
 ### CUSTOM .bashrc ###
 ######################
 echo "
-file_to_load=$HOME/devel/software-notes/bash/mydotbashrcU1804.sh
+file_to_load="$HOME/devel/software-notes/bash/mydotbashrcU1804.sh"
 if [ -f $file_to_load ]; then
     source $file_to_load
 fi
