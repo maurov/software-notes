@@ -106,6 +106,10 @@ sudo gdebi atom-amd64.deb
 apm install language-restructuredtext language-latex
 apm install sublime-style-column-selection column-select
 apm install autocomplete-python python-indent
+#in sloth-dev
+python -m pip install 'python-language-server[all]'
+apm install atom-ide-ui
+apm install ide-python
 
 #EMACS
 sudo add-apt-repository ppa:ubuntu-elisp/ppa
