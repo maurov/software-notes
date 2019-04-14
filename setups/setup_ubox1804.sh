@@ -117,6 +117,11 @@ sudo apt update
 sudo apt install emacs-snapshot aspell-en aspell-fr aspell-it
 sudo update-alternatives --config emacs #select emacs-snapshot
 #ln -s mydotemacsU1804.el .emacs
+#starter kit
+#https://github.com/bbatsov/prelude
+#Emacs as Python IDE:
+#http://chillaranand.github.io/emacs-py-ide/
+#
 
 #latex2rft (best for converting LaTeX to MS Word)
 sudo apt install latex2rtf latex2rtf-doc
