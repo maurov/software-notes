@@ -35,6 +35,8 @@ alias conda-base='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate'
 alias sloth-env='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-env'
 alias sloth-dev='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-dev'
 
+alias sloth='sloth-env; python -m sloth.gui.daxs.application -k'
+
 #pymca within Conda env
 #DO NOT USE FOLLOWING ALIAS, JUST ACTIVATE CONDA AND RUN `pymca`
 #alias pymca='source $MYLOCAL/conda/bin/activate py35; python -m PyMca5.PyMcaGui.pymca.PyMcaMain'
