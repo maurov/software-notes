@@ -110,6 +110,8 @@ apm install autocomplete-python python-indent
 python -m pip install 'python-language-server[all]'
 apm install atom-ide-ui
 apm install ide-python
+#pip install black
+apm install atom-black
 
 #EMACS
 sudo add-apt-repository ppa:ubuntu-elisp/ppa
