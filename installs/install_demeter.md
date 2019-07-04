@@ -1,6 +1,6 @@
 # Demeter installation from source
 
-- Target sofwater: (Demeter)[https://github.com/bruceravel/demeter]
+- Target sofwater: [Demeter](https://github.com/bruceravel/demeter)
 - Last tested: 2019-07-04
 - Working on:
     - XUbuntu 18.04
