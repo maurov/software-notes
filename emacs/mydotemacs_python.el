@@ -1,6 +1,6 @@
-;; ======================================
-;; Mauro's Emacs configuration for Python
-;; ======================================
+;; ================================================
+;; Mauro's Emacs configuration for Python & friends
+;; ================================================
 
 ;; CHANGELOG
 ;; ---------
@@ -26,13 +26,13 @@
     flycheck
     magit
     material-theme
-    py-autopep8))
+    py-autopep8
+    yaml-mode))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
       (package-install package)))
       myPackages)
-
 
 ;; BASIC CUSTOMIZATION
 ;; -------------------
@@ -62,3 +62,5 @@
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; YAML
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
