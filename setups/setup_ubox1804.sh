@@ -307,3 +307,9 @@ rsync -avz --delete-after $CLOUDDIR/biblio /media/sf_WinLinShare/
 #jdownloader
 #download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
+
+#############
+### UTILS ###
+#############
+# Disk Usage Analyzer
+sudo apt install baobab
