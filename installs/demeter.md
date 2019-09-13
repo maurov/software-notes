@@ -11,7 +11,7 @@ It mainly follows [David Hughes' guide to Demeter Installation on Ubuntu](https:
 
 Basic requirements of your system:
 
-```
+```bash
 sudo apt install build-essential git gfortran gnuplot ifeffit liblocal-lib-perl libx11-dev libncurses5-dev libpng-dev libgif-dev libwxgtk3.0-dev libwx-perl libmodule-build-perl
 ```
 
