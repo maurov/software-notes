@@ -39,7 +39,7 @@ fi
 #Building tools
 #==============
 #package managers
-sudo apt install gdebi-core
+sudo apt install gdebi-core snapd
 #basics
 sudo apt install dkms build-essential module-assistant autoconf shtool libtool swig
 sudo m-a prepare
@@ -96,6 +96,17 @@ sudo apt install git meld gftp rsync curl
 #########################################
 ### TEXT EDITORs/CONVERTERS/UTILITIES ###
 #########################################
+
+#VISUAL STUDIO CODE
+sudo snap install code --classic
+# Extensions installed directly from code
+#- Python
+#- markdownlint
+#- reStructuredText
+#- kite
+#- LaTeX Workshop
+#- Awesome Emacs Keymap
+
 #ATOM
 wget -O atom-amd64.deb https://atom.io/download/deb
 sudo gdebi atom-amd64.deb

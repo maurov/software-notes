@@ -57,3 +57,7 @@ docs/_build/
 
 # Pycharm stuff
 .idea
+
+# Visual studio code
+.vscode/
+.empty/
