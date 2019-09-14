@@ -315,6 +315,11 @@ rsync -avz --delete-after $CLOUDDIR/biblio /media/sf_WinLinShare/
 ##################
 ### MULTIMEDIA ###
 ##################
+#encoders
+sudo apt install ffmpeg mencoder
+#VLC & FRIENDS ###
+sudo apt install vlc
+
 #jdownloader
 #download JD2Setup_x64.sh from their website
 #the install manually: ./JD2Setup_x64.sh (chmod +x first)
