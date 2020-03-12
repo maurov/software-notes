@@ -1,40 +1,34 @@
 # JupyterHub installation and configuration
 
 - Target sofwater: [JupyterHub](https://jupyterhub.readthedocs.io/)
-- Tested: 2019-09-13
+- Last tested: 2020-03-12
 - Working on:
-    - Debian 8
+  - Debian 8
 
 ## Description
 
 Here are collected some notes for running a JupyterHub server in order to share some notebooks and perform quick data analysis with colleagues.
 
-## Installation & running
+## Installation
 
-- Starting from the Conda environment [sloth-lab](https://github.com/maurov/xraysloth/blob/master/environment-lab.yml) created in `~/local/conda`.
-- Install `jupyterhub`
-
-    ```bash
-    pip install jupyterhub
-    ```
-- Create a dedicated running directory and start jupyterhub via `tmux`:
+- Use the Conda environment [sloth](https://github.com/maurov/xraysloth/blob/master/environment.yml) created in `~/local/conda`.
+- Add alias (usually in `~/.bash_aliases`) for activating the environment:
 
     ```bash
-    cd
-    mkdir .jupyterhub
-    cd .jupyterhub
-    tmux
-    source ~/local/
-    jupyterhub
+    alias sloth='unset PYTHONPATH; source /users/opd16/local/conda/bin/activate sloth'
     ```
-- *Note*: to attach to a running session, `tmux attach`
 
 ## Configuration
+
+- If not using HTTPS, one needs to install the HTTP proxy
+
+    ```bash
+    (sloth)> npm install -g configurable-http-proxy
 
 - Create initial default configuration `jupyterhub_config.py`
 
     ```bash
-    (sloth-lab)> jupyterhub --generate-config
+    (sloth)> jupyterhub --generate-config
     ```
 
 - Use JupyterLab interface by default
@@ -42,3 +36,24 @@ Here are collected some notes for running a JupyterHub server in order to share 
     ```python
     c.Spawner.default_url = '/lab'
     ```
+
+- No user has admin rights
+
+    ```python
+    c.Authenticator.admin_users = set()
+    ```
+
+## Running
+
+- Create a dedicated running directory and start jupyterhub via `tmux`:
+
+    ```bash
+    cd
+    mkdir .jupyterhub
+    cd .jupyterhub
+    tmux
+    sloth
+    jupyterhub
+    ```
+
+- *Note*: to attach to a running session, `tmux attach`
