@@ -31,11 +31,8 @@ export MYDEVEL=$HOME/devel
 
 ### ALIASES ###
 #Conda envs
-alias conda-base='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate'
-alias sloth-env='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-env'
-alias sloth-dev='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-dev'
-alias sloth-lab='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth-lab'
-alias sloth='sloth-env; python -m sloth.gui.daxs.application -k'
+alias base='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate'
+alias sloth='unset PYTHONPATH; source $MYLOCAL/conda/bin/activate sloth'
 
 #pymca within Conda env
 #DO NOT USE FOLLOWING ALIAS, JUST ACTIVATE CONDA AND RUN `pymca`
