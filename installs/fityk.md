@@ -55,18 +55,18 @@ On my Ubuntu machine, I have installed the following packages.
   
 * Run configure
 
-      ./configure --prefix=/home/esrf/rovezzi/.local
+        export DOTLOCAL=/home/esrf/rovezzi/.local
+        ./configure --prefix=$DOTLOCAL
  
  * Make and Install
  
-      make clean
-      make
-      make install
+        make clean
+        make
+        make install
  
-* Link created library
+* Link created library (add to `.bashrc`)
 
-      [common requirements]: sec-16-2-1
-
+        export LD_LIBRARY_PATH=$DOTLOCAL:$LD_LIBRARY_PATH
 
 ### Build fityk from source
 
@@ -83,18 +83,18 @@ On my Ubuntu machine, I have installed the following packages.
 
 * Configure
 
-      ./configure --disable-xyconvert --without-doc
+        export DOTLOCAL=/home/esrf/rovezzi/.local
+        ./configure --prefix=$DOTLOCAL --enable-python
       
-* xyconvert requires wxWidgets >= 2.9 but we have 2.8 installed (see Wx point above), we will disable it: --disable-xyconvert
-* Spinx documentation does not compile, so it is disabled --without-doc
 * Make & Install
-       $ make clean
-       $ make
-       $ sudo make install
-* Link created library
-       $ sudo ldconfig
 
-       [common requirements]: sec-16-2-1
+        make clean
+        make
+        make install
+        
+* Link created library (add to `.bashrc`)
+
+        export LD_LIBRARY_PATH=$DOTLOCAL:$LD_LIBRARY_PATH
 
 
 ## Custom FAQ
