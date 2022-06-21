@@ -47,7 +47,9 @@ In quick summary:
     git config --global http.proxy http://proxy.esrf.fr:3128
     git config --global https.proxy https://proxy.esrf.fr:3128
     ```
+## Fun stuff
 
+- Petname: a random combination of adverbs, an adjective, and an animal name `sudo apt install petname`
 
 ## NOT DONE (YET)
 
